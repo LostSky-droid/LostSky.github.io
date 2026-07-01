@@ -1,0 +1,900 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Understanding India Book MCQs</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Lato:wght@300;400;700&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --yellow: #ffcc00;
+    --yellow-light: #fff3a3;
+    --yellow-hover: #ffe033;
+    --green-dark: #1a4a1a;
+    --green-mid: #2d6a2d;
+    --sky: #3aa0e0;
+    --glass-bg: rgba(255,255,255,0.22);
+    --glass-border: rgba(255,255,255,0.45);
+    --glass-blur: blur(14px);
+    --correct: rgba(50,200,80,0.35);
+    --incorrect: rgba(220,50,50,0.35);
+    --correct-border: #28c050;
+    --incorrect-border: #e03030;
+    --text-dark: #1a2e0f;
+    --text-mid: #2d4a1a;
+    --shadow: 0 8px 32px rgba(30,80,10,0.18);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Lato', sans-serif;
+    min-height: 100vh;
+    background: url('1000642266.jpg') center center / cover fixed no-repeat;
+    overflow-x: hidden;
+  }
+
+  /* Soft overlay for readability */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: linear-gradient(160deg, rgba(30,100,180,0.10) 0%, rgba(255,220,0,0.08) 100%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* ---- HEADER ---- */
+  .header {
+    position: relative;
+    z-index: 10;
+    text-align: center;
+    padding: 52px 20px 18px;
+  }
+  .header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 5vw, 3.4rem);
+    font-weight: 900;
+    color: #fff;
+    text-shadow: 2px 3px 14px rgba(0,0,0,0.55), 0 0 40px rgba(255,200,0,0.25);
+    letter-spacing: 0.01em;
+    line-height: 1.15;
+  }
+  .header h1 span {
+    color: var(--yellow);
+    text-shadow: 1px 2px 10px rgba(0,0,0,0.4), 0 0 30px rgba(255,200,0,0.5);
+  }
+  .header .coded-by {
+    margin-top: 10px;
+    font-size: 0.98rem;
+    font-weight: 300;
+    color: rgba(255,255,255,0.88);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    text-shadow: 1px 1px 6px rgba(0,0,0,0.5);
+  }
+  .header .coded-by strong {
+    position: relative;
+    display: inline-block;
+    color: var(--yellow);
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    background: linear-gradient(90deg, var(--yellow) 0%, #fff5b0 25%, var(--yellow) 50%, #ffa500 75%, var(--yellow) 100%);
+    background-size: 220% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: none;
+    filter: drop-shadow(0 0 6px rgba(255,200,0,0.6));
+    animation: sunflowerShine 3.5s linear infinite, petalPulse 2.2s ease-in-out infinite;
+  }
+  .header .coded-by strong::before {
+    content: '🌻';
+    position: absolute;
+    left: -26px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 0.95em;
+    filter: drop-shadow(0 0 6px rgba(255,200,0,0.7));
+    animation: petalSpin 4s linear infinite;
+  }
+  @keyframes sunflowerShine {
+    0%   { background-position: 0% center; }
+    100% { background-position: -220% center; }
+  }
+  @keyframes petalPulse {
+    0%, 100% { filter: drop-shadow(0 0 6px rgba(255,200,0,0.6)); }
+    50%      { filter: drop-shadow(0 0 14px rgba(255,220,0,0.95)); }
+  }
+  @keyframes petalSpin {
+    0%   { transform: translateY(-50%) rotate(0deg); }
+    100% { transform: translateY(-50%) rotate(360deg); }
+  }
+
+  /* ---- SECTION TABS ---- */
+  .section-tabs {
+    position: relative;
+    z-index: 10;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    padding: 18px 20px 8px;
+  }
+  .tab-btn {
+    background: var(--glass-bg);
+    border: 1.5px solid var(--glass-border);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    color: #fff;
+    font-family: 'Lato', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    padding: 9px 20px;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: background 0.25s, color 0.25s, border-color 0.25s, transform 0.18s;
+    text-shadow: 1px 1px 4px rgba(0,0,0,0.4);
+  }
+  .tab-btn:hover, .tab-btn.active {
+    background: var(--yellow);
+    color: var(--green-dark);
+    border-color: var(--yellow);
+    text-shadow: none;
+    transform: translateY(-2px) scale(1.04);
+    box-shadow: 0 4px 18px rgba(255,200,0,0.35);
+  }
+
+  /* ---- MAIN WRAPPER ---- */
+  .quiz-wrapper {
+    position: relative;
+    z-index: 10;
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 18px 16px 60px;
+  }
+
+  /* ---- SECTION PANEL ---- */
+  .section-panel {
+    display: none;
+    animation: fadeUp 0.45s ease;
+  }
+  .section-panel.active { display: block; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(22px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .section-title {
+    text-align: center;
+    font-family: 'Playfair Display', serif;
+    font-size: 1.35rem;
+    color: #fff;
+    text-shadow: 2px 2px 8px rgba(0,0,0,0.55);
+    margin-bottom: 22px;
+    padding: 10px 0 4px;
+    letter-spacing: 0.03em;
+  }
+
+  /* ---- QUESTION CARD ---- */
+  .q-card {
+    background: var(--glass-bg);
+    border: 1.5px solid var(--glass-border);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    border-radius: 18px;
+    padding: 22px 26px 18px;
+    margin-bottom: 18px;
+    box-shadow: var(--shadow);
+    transition: box-shadow 0.3s;
+  }
+  .q-card:hover { box-shadow: 0 12px 40px rgba(30,80,10,0.25); }
+
+  .q-num {
+    display: inline-block;
+    background: var(--yellow);
+    color: var(--green-dark);
+    font-weight: 900;
+    font-size: 0.82rem;
+    border-radius: 8px;
+    padding: 2px 10px;
+    margin-bottom: 10px;
+    letter-spacing: 0.08em;
+  }
+
+  .q-text {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--text-dark);
+    margin-bottom: 14px;
+    line-height: 1.55;
+  }
+
+  /* ---- OPTIONS ---- */
+  .options {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+  @media (max-width: 520px) {
+    .options { grid-template-columns: 1fr; }
+    .q-card { padding: 16px 14px 14px; }
+  }
+
+  .option-label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(255,255,255,0.30);
+    border: 1.5px solid rgba(255,255,255,0.50);
+    border-radius: 12px;
+    padding: 10px 14px;
+    cursor: pointer;
+    transition: background 0.22s, border-color 0.22s, transform 0.18s, box-shadow 0.18s;
+    font-size: 0.94rem;
+    color: var(--text-dark);
+    font-weight: 400;
+    line-height: 1.4;
+    position: relative;
+    overflow: hidden;
+  }
+  .option-label::before {
+    content: '';
+    position: absolute;
+    left: -100%;
+    top: 0; bottom: 0;
+    width: 100%;
+    background: linear-gradient(90deg, rgba(255,220,0,0.18), rgba(255,240,120,0.25));
+    transition: left 0.28s ease;
+    z-index: 0;
+  }
+  .option-label:hover::before { left: 0; }
+  .option-label:hover {
+    border-color: var(--yellow);
+    transform: translateX(4px);
+    box-shadow: 0 3px 14px rgba(255,200,0,0.22);
+  }
+  .option-label input[type="radio"] {
+    accent-color: var(--green-mid);
+    width: 17px; height: 17px;
+    flex-shrink: 0;
+    position: relative; z-index: 1;
+  }
+  .option-label span { position: relative; z-index: 1; }
+  .opt-letter {
+    font-weight: 800;
+    font-size: 0.88rem;
+    color: var(--green-mid);
+    min-width: 18px;
+    position: relative; z-index: 1;
+  }
+
+  /* ---- RESULT STATES ---- */
+  .option-label.correct {
+    background: var(--correct) !important;
+    border-color: var(--correct-border) !important;
+    font-weight: 700;
+  }
+  .option-label.incorrect {
+    background: var(--incorrect) !important;
+    border-color: var(--incorrect-border) !important;
+  }
+  .option-label.correct::after {
+    content: '✓';
+    position: absolute; right: 12px;
+    color: var(--correct-border);
+    font-weight: 900; font-size: 1.1rem;
+    z-index: 2;
+  }
+  .option-label.incorrect::after {
+    content: '✗';
+    position: absolute; right: 12px;
+    color: var(--incorrect-border);
+    font-weight: 900; font-size: 1.1rem;
+    z-index: 2;
+  }
+
+  /* ---- SUBMIT & RESET ---- */
+  .btn-row {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    margin-top: 28px;
+    flex-wrap: wrap;
+  }
+  .btn-submit, .btn-reset {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.08rem;
+    font-weight: 700;
+    border: none;
+    border-radius: 50px;
+    padding: 14px 44px;
+    cursor: pointer;
+    letter-spacing: 0.06em;
+    transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
+  }
+  .btn-submit {
+    background: linear-gradient(135deg, #ffcc00 0%, #ffa500 100%);
+    color: var(--green-dark);
+    box-shadow: 0 6px 24px rgba(255,170,0,0.45);
+  }
+  .btn-submit:hover {
+    transform: translateY(-3px) scale(1.04);
+    box-shadow: 0 10px 32px rgba(255,170,0,0.6);
+    background: linear-gradient(135deg, #ffe033 0%, #ffbb00 100%);
+  }
+  .btn-reset {
+    background: rgba(255,255,255,0.22);
+    border: 2px solid rgba(255,255,255,0.5);
+    color: #fff;
+    backdrop-filter: blur(8px);
+    text-shadow: 1px 1px 4px rgba(0,0,0,0.3);
+  }
+  .btn-reset:hover {
+    background: rgba(255,255,255,0.38);
+    transform: translateY(-2px);
+  }
+
+  /* ---- SCORE CARD ---- */
+  .score-card {
+    display: none;
+    background: var(--glass-bg);
+    border: 2px solid var(--yellow);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    border-radius: 20px;
+    padding: 30px 30px 24px;
+    text-align: center;
+    margin-top: 28px;
+    box-shadow: 0 8px 40px rgba(255,180,0,0.25);
+    animation: popIn 0.4s cubic-bezier(0.34,1.56,0.64,1);
+  }
+  .score-card.show { display: block; }
+
+  @keyframes popIn {
+    from { opacity: 0; transform: scale(0.88); }
+    to   { opacity: 1; transform: scale(1); }
+  }
+
+  .score-emoji { font-size: 3rem; margin-bottom: 8px; }
+  .score-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.7rem;
+    font-weight: 900;
+    color: var(--green-dark);
+    margin-bottom: 6px;
+  }
+  .score-num {
+    font-size: 3.2rem;
+    font-weight: 900;
+    color: var(--green-mid);
+    line-height: 1.1;
+    font-family: 'Playfair Display', serif;
+  }
+  .score-num span { color: var(--yellow); }
+  .score-msg {
+    margin-top: 10px;
+    font-size: 1.02rem;
+    color: var(--text-mid);
+    font-weight: 400;
+  }
+  .score-bar-wrap {
+    background: rgba(255,255,255,0.3);
+    border-radius: 30px;
+    height: 12px;
+    margin: 14px auto 0;
+    max-width: 320px;
+    overflow: hidden;
+  }
+  .score-bar {
+    height: 100%;
+    border-radius: 30px;
+    background: linear-gradient(90deg, #28c050, #ffcc00, #ff8800);
+    transition: width 0.9s cubic-bezier(0.22,1,0.36,1);
+  }
+
+  /* ---- SUNFLOWER DECORATIONS ---- */
+  .sunflower-deco {
+    position: fixed;
+    opacity: 0.13;
+    pointer-events: none;
+    font-size: 6rem;
+    z-index: 1;
+    user-select: none;
+  }
+  .deco-tl { top: 8px; left: 8px; transform: rotate(-20deg); }
+  .deco-tr { top: 8px; right: 8px; transform: rotate(15deg); }
+  .deco-bl { bottom: 30px; left: 12px; transform: rotate(10deg); }
+  .deco-br { bottom: 30px; right: 12px; transform: rotate(-12deg); }
+
+  /* ---- PROGRESS BAR ---- */
+  .section-progress {
+    height: 5px;
+    border-radius: 10px;
+    background: rgba(255,255,255,0.2);
+    margin-bottom: 18px;
+    overflow: hidden;
+  }
+  .section-progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--yellow), #ffa500);
+    border-radius: 10px;
+    transition: width 0.6s ease;
+  }
+</style>
+</head>
+<body>
+
+<!-- Decorative sunflowers -->
+<div class="sunflower-deco deco-tl">🌻</div>
+<div class="sunflower-deco deco-tr">🌻</div>
+<div class="sunflower-deco deco-bl">🌻</div>
+<div class="sunflower-deco deco-br">🌻</div>
+
+<!-- HEADER -->
+<div class="header">
+  <h1>Understanding India Book <span>MCQ's</span></h1>
+  <p class="coded-by">Coded by ~ <strong style="margin-left:30px;">HITESH</strong></p>
+</div>
+
+<!-- SECTION TABS -->
+<div class="section-tabs" id="sectionTabs"></div>
+
+<!-- QUIZ WRAPPER -->
+<div class="quiz-wrapper" id="quizWrapper"></div>
+
+<script>
+// ====================================================
+// QUIZ DATA — 5 Sections
+// ====================================================
+const sections = [
+  {
+    id: "s1",
+    label: "🏛️ Ancient Education",
+    title: "Ancient & Colonial Education in India",
+    questions: [
+      {
+        q: "Most of the schools in ancient India were located at which place?",
+        opts: ["Forests", "Temples", "Independent Buildings", "Forts of Kings"],
+        ans: 1
+      },
+      {
+        q: "Tols related to which part of the country?",
+        opts: ["Eastern India", "North India", "South India", "Punjab"],
+        ans: 0
+      },
+      {
+        q: "Who was the author of the 19th century 'Minutes on Indian Education'?",
+        opts: ["William Jones", "Maxmuller", "Warren Hastings", "Thomas Macaulay"],
+        ans: 3
+      },
+      {
+        q: "Who was instrumental in establishment of Calcutta Madarsa?",
+        opts: ["Warren Hastings", "Lord Clive", "Maxmuller", "Lord Dalhousie"],
+        ans: 0
+      },
+      {
+        q: "Who was the founder of the Asiatic Society of Bengal?",
+        opts: ["Vincent Smith", "Cunningham", "Hastings", "William Jones"],
+        ans: 3
+      },
+      {
+        q: "Where was the Fort William College located?",
+        opts: ["Bombay", "Delhi", "Madras", "Kolkata"],
+        ans: 3
+      },
+      {
+        q: "How many universities were established by the East India Company?",
+        opts: ["One", "Five", "Zero", "Two"],
+        ans: 2
+      },
+      {
+        q: "Where was the headquarters of the University of Punjab located in 1882?",
+        opts: ["Amritsar", "Lahore", "Anandpur Sahib", "Ludhiana"],
+        ans: 1
+      },
+      {
+        q: "Name the famous scheme on education proposed by Mahatma Gandhi and Dr. Zakir Husain.",
+        opts: ["Wardha Scheme", "Sabarmati Yojana", "Nagpur Mission", "Delhi Scheme"],
+        ans: 0
+      },
+      {
+        q: "Name the place where the earliest Engineering College in India was established.",
+        opts: ["Calcutta", "Delhi", "Bombay", "Roorkee"],
+        ans: 3
+      },
+      {
+        q: "Which Committee suggested the formation of the UGC in India?",
+        opts: ["Mudaliyar Committee", "Radhakrishnan Commission", "Ranganathan Committee", "Yashpal Committee"],
+        ans: 1
+      },
+      {
+        q: "Which National Policy of Education suggested the 10+2+3 structure?",
+        opts: ["NEP 2020", "Kothari Commission", "Yashpal Committee", "NEP 1986"],
+        ans: 3
+      }
+    ]
+  },
+  {
+    id: "s2",
+    label: "🗺️ Geography & History",
+    title: "Indian Geography & Ancient History",
+    questions: [
+      {
+        q: "Which country shares the longest boundary with India?",
+        opts: ["Nepal", "Pakistan", "China", "Bangladesh"],
+        ans: 3
+      },
+      {
+        q: "At which place a Mauryan age movement has been discovered in Bangladesh?",
+        opts: ["Mahasthangarh", "Sundarban", "Nobodvip", "Dhaka"],
+        ans: 0
+      },
+      {
+        q: "Royal Bengal tiger are found at which place?",
+        opts: ["Jim Corbett National Park", "Sundar Ban", "Dalama Forests", "Betwa Wildlife Reserve"],
+        ans: 1
+      },
+      {
+        q: "Which state houses the Kaziranga National Park?",
+        opts: ["Assam", "West Bengal", "Manipur", "Mizoram"],
+        ans: 0
+      },
+      {
+        q: "Parasnath Hill is part of which state?",
+        opts: ["Odisha", "Jharkhand", "Bihar", "Uttar Pradesh"],
+        ans: 1
+      },
+      {
+        q: "Dhaulavira is famous for?",
+        opts: ["Mauryan Pillar", "Indus Valley Civilization site", "British Time Port", "Rajput King's Fort"],
+        ans: 1
+      },
+      {
+        q: "The earliest book of the country is",
+        opts: ["Rigveda", "Atharva Veda", "Kenopanishad", "Ramayana"],
+        ans: 0
+      },
+      {
+        q: "What is the approximate date of the domestication of horses?",
+        opts: ["4000 BCE", "8000 BCE", "2000 BCE", "1000 CE"],
+        ans: 0
+      },
+      {
+        q: "Name the book written by Megasthenes",
+        opts: ["Travels", "Kitabul Hind", "Indica", "Iliad"],
+        ans: 2
+      },
+      {
+        q: "Who is said to be the teacher of Indo-Greek ruler Menander or Milinda?",
+        opts: ["Nagasena", "Chanakya", "Megasthenes", "Gautam Buddha"],
+        ans: 0
+      },
+      {
+        q: "Name the famous forest of Kashmir at the time of Kanishka.",
+        opts: ["Mahavana", "Kundalvan", "Naimisharanya", "Vindhyatavi"],
+        ans: 1
+      },
+      {
+        q: "Which leader made 'Jai Hind' the official greeting of Azad Hind Fauj?",
+        opts: ["Hasrat Mohani", "Subhash Chandra Bose", "Maulana Azad", "Vallabh Bhai Patel"],
+        ans: 1
+      }
+    ]
+  },
+  {
+    id: "s3",
+    label: "📊 Economy & Health",
+    title: "Indian Economy, Health & Welfare Schemes",
+    questions: [
+      {
+        q: "Write the full form of GDP.",
+        opts: ["Gramin Desh Programme", "Gross Domestic Product", "Great Division of Profit", "General Development Position"],
+        ans: 1
+      },
+      {
+        q: "Name the author of the book 'Wealth of Nations'.",
+        opts: ["R.C. Majumdar", "Malthus", "Adam Smith", "Chanakya"],
+        ans: 2
+      },
+      {
+        q: "In which year the Five Year Plans were launched?",
+        opts: ["1950", "1951", "1975", "1992"],
+        ans: 1
+      },
+      {
+        q: "Present the full form of IRDP.",
+        opts: ["Integrated Rural Development Program", "Indian Rural Development Policy", "International Rating of Domestic Policies", "Indian Rural Democracy Policy"],
+        ans: 0
+      },
+      {
+        q: "In which year the MNREGA was rolled out?",
+        opts: ["2009", "2014", "2000", "2007"],
+        ans: 0
+      },
+      {
+        q: "In which year the Beti Bachao Beti Padhao Abhiyan was started?",
+        opts: ["2009", "2010", "2014", "2015"],
+        ans: 3
+      },
+      {
+        q: "From which year the National E-library has started?",
+        opts: ["2014", "2004", "2015", "2010"],
+        ans: 2
+      },
+      {
+        q: "Write the full Form of NDHM.",
+        opts: ["National Development Holistic Mission", "National Digital Health Mission", "National Dairy House Management", "National Development of Health Management"],
+        ans: 1
+      },
+      {
+        q: "When was the Native Medical Institution established?",
+        opts: ["1857", "1885", "1853", "1822"],
+        ans: 3
+      },
+      {
+        q: "What is the full form of NIOS?",
+        opts: ["National Institute of Open Schooling", "National Institute of Outsourcing Students", "National Institute of Studies", "Natural Indian output of students"],
+        ans: 0
+      },
+      {
+        q: "Which NEP has put extra emphasis on learning through the mother tongue?",
+        opts: ["NEP 2020", "NEP 1986", "Kothari Commission 1963", "Yashpal Committee"],
+        ans: 0
+      },
+      {
+        q: "Which year the UGC was established?",
+        opts: ["1951", "1953", "1967", "2021"],
+        ans: 1
+      },
+      {
+        q: "In which year Indian Medical Council was established?",
+        opts: ["1934", "1947", "1951", "1950"],
+        ans: 0
+      },
+      {
+        q: "Who is considered the pioneer of education for girls/women in India?",
+        opts: ["Savitribai Phule", "Sarojini Nadu", "Subhadra Kumari Chauhan", "Mahatma Gandhi"],
+        ans: 0
+      }
+    ]
+  },
+  {
+    id: "s4",
+    label: "✊ Social Reform",
+    title: "Social Reform Movements & Indian History",
+    questions: [
+      {
+        q: "Name the founder of Atmiya Sabha.",
+        opts: ["Rajaram Mohan Roy", "Vivekananda", "Ram Krishna Ashram", "Veer Savarkar"],
+        ans: 0
+      },
+      {
+        q: "Name the founder of Satyashodhak Samaj.",
+        opts: ["Veer Savarkar", "Jyotiba Phule", "Swami Vivekananda", "Dayand Saraswati"],
+        ans: 1
+      },
+      {
+        q: "Who was the writer of the book Satyarth Prakash?",
+        opts: ["Dayand Saraswati", "Amrtya Sen", "Rajaram Mohan Roy", "William Bentic"],
+        ans: 0
+      },
+      {
+        q: "Who was the leader of the Aligarh Movement?",
+        opts: ["Banarasi Das", "Maulana Azad", "Sayed Ahmad Khan", "Madan Mohan Malviya"],
+        ans: 2
+      },
+      {
+        q: "Who was the founder of Prarthana Sabha?",
+        opts: ["CR Das", "Atma Ram Pandurang", "Vivekanand", "Keshava Chandra Sen"],
+        ans: 1
+      },
+      {
+        q: "Who established the Depressed Classes Mission?",
+        opts: ["Vitthal Rao Sinde", "Naryan Guru", "Tatyan Tope", "Sarojini Naidu"],
+        ans: 0
+      },
+      {
+        q: "Who wrote the line 'Amar Sonar Bangla'?",
+        opts: ["Ravindra Nath Tagore", "Bankimchandra", "Prem Chand", "Jaishankar Prasad"],
+        ans: 0
+      },
+      {
+        q: "In which year the Bengal Province was partitioned?",
+        opts: ["1907", "1905", "1919", "1935"],
+        ans: 1
+      },
+      {
+        q: "In which year Indian National Congress was split?",
+        opts: ["1935", "1905", "1919", "1907"],
+        ans: 3
+      },
+      {
+        q: "Write the date of the Second Round Table Conference.",
+        opts: ["1919", "1931", "1997", "1950"],
+        ans: 1
+      },
+      {
+        q: "Under which Plan India was partitioned?",
+        opts: ["Mountbatten Plan", "Moti Lal Nehru Report", "Simon Commission Report", "Poona Pact"],
+        ans: 0
+      },
+      {
+        q: "Tell the date when Jharkhand was separated from Bihar.",
+        opts: ["15 August 2000", "26 January 2001", "15 November 2000", "02 October 2000"],
+        ans: 2
+      },
+      {
+        q: "Through which Act the Panchayati Raj in India has been regulated?",
+        opts: ["42nd Amendment", "73rd Amendment", "22nd Amendment", "64th Amendment"],
+        ans: 1
+      }
+    ]
+  }
+];
+
+// ====================================================
+// BUILD UI
+// ====================================================
+const tabsEl = document.getElementById('sectionTabs');
+const wrapperEl = document.getElementById('quizWrapper');
+
+sections.forEach((sec, si) => {
+  // Tab button
+  const tab = document.createElement('button');
+  tab.className = 'tab-btn' + (si === 0 ? ' active' : '');
+  tab.textContent = sec.label;
+  tab.dataset.sec = sec.id;
+  tab.onclick = () => switchSection(sec.id);
+  tabsEl.appendChild(tab);
+
+  // Section panel
+  const panel = document.createElement('div');
+  panel.className = 'section-panel' + (si === 0 ? ' active' : '');
+  panel.id = sec.id;
+
+  const pct = Math.round((si / (sections.length - 1)) * 100);
+  panel.innerHTML = `
+    <div class="section-title">🌻 ${sec.title}</div>
+    <div class="section-progress"><div class="section-progress-fill" style="width:${pct}%"></div></div>
+  `;
+
+  sec.questions.forEach((q, qi) => {
+    const card = document.createElement('div');
+    card.className = 'q-card';
+    card.id = `${sec.id}_q${qi}`;
+
+    const optHTML = q.opts.map((opt, oi) => {
+      const letter = ['a','b','c','d'][oi];
+      return `
+        <label class="option-label" id="${sec.id}_q${qi}_opt${oi}">
+          <input type="radio" name="${sec.id}_q${qi}" value="${oi}" />
+          <span class="opt-letter">(${letter})</span>
+          <span>${opt}</span>
+        </label>`;
+    }).join('');
+
+    card.innerHTML = `
+      <div class="q-num">Q${qi + 1}</div>
+      <div class="q-text">${q.q}</div>
+      <div class="options">${optHTML}</div>
+    `;
+    panel.appendChild(card);
+  });
+
+  // Buttons
+  panel.innerHTML += `
+    <div class="btn-row">
+      <button class="btn-submit" onclick="submitSection('${sec.id}')">🌻 Submit Answers</button>
+      <button class="btn-reset" onclick="resetSection('${sec.id}')">↺ Reset</button>
+    </div>
+    <div class="score-card" id="${sec.id}_score"></div>
+  `;
+
+  wrapperEl.appendChild(panel);
+});
+
+// ====================================================
+// SWITCH SECTION
+// ====================================================
+function switchSection(id) {
+  document.querySelectorAll('.section-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  document.querySelector(`[data-sec="${id}"]`).classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ====================================================
+// SUBMIT
+// ====================================================
+function submitSection(secId) {
+  const sec = sections.find(s => s.id === secId);
+  let score = 0;
+  let unanswered = 0;
+
+  sec.questions.forEach((q, qi) => {
+    const radios = document.querySelectorAll(`input[name="${secId}_q${qi}"]`);
+    let chosen = -1;
+    radios.forEach(r => { if (r.checked) chosen = parseInt(r.value); });
+    if (chosen === -1) { unanswered++; return; }
+
+    q.opts.forEach((_, oi) => {
+      const lbl = document.getElementById(`${secId}_q${qi}_opt${oi}`);
+      lbl.classList.remove('correct','incorrect');
+      if (oi === q.ans) {
+        lbl.classList.add('correct');
+        if (chosen === oi) score++;
+      } else if (oi === chosen) {
+        lbl.classList.add('incorrect');
+      }
+      // disable
+      const inp = lbl.querySelector('input');
+      inp.disabled = true;
+    });
+  });
+
+  if (unanswered > 0) {
+    const answeredCount = sec.questions.length - unanswered;
+    if (answeredCount < sec.questions.length) {
+      const ok = confirm(`You have ${unanswered} unanswered question(s). Submit anyway?`);
+      if (!ok) {
+        // re-enable
+        sec.questions.forEach((q, qi) => {
+          q.opts.forEach((_, oi) => {
+            const inp = document.querySelector(`#${secId}_q${qi}_opt${oi} input`);
+            if (inp) inp.disabled = false;
+          });
+          const lbl = document.querySelectorAll(`#${secId}_q${qi} .option-label`);
+          lbl.forEach(l => l.classList.remove('correct','incorrect'));
+        });
+        return;
+      }
+    }
+  }
+
+  const total = sec.questions.length;
+  const pct = Math.round((score / total) * 100);
+  let emoji = '🌻', msg = '';
+  if (pct === 100) { emoji = '🏆'; msg = 'Perfect Score! Outstanding! 🎉'; }
+  else if (pct >= 80) { emoji = '🌟'; msg = 'Excellent work! Keep it up!'; }
+  else if (pct >= 60) { emoji = '😊'; msg = 'Good effort! Review the wrong ones.'; }
+  else if (pct >= 40) { emoji = '📚'; msg = 'Needs improvement. Study more!'; }
+  else { emoji = '💪'; msg = 'Don\'t give up! Practice makes perfect.'; }
+
+  const scoreCard = document.getElementById(`${secId}_score`);
+  scoreCard.classList.add('show');
+  scoreCard.innerHTML = `
+    <div class="score-emoji">${emoji}</div>
+    <div class="score-title">Your Result</div>
+    <div class="score-num">${score} <span>/ ${total}</span></div>
+    <div class="score-bar-wrap"><div class="score-bar" style="width:${pct}%"></div></div>
+    <div class="score-msg">${msg}<br/><small style="opacity:0.7">${pct}% correct</small></div>
+  `;
+  scoreCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+}
+
+// ====================================================
+// RESET
+// ====================================================
+function resetSection(secId) {
+  const sec = sections.find(s => s.id === secId);
+  sec.questions.forEach((q, qi) => {
+    q.opts.forEach((_, oi) => {
+      const lbl = document.getElementById(`${secId}_q${qi}_opt${oi}`);
+      if (lbl) {
+        lbl.classList.remove('correct','incorrect');
+        const inp = lbl.querySelector('input');
+        if (inp) { inp.checked = false; inp.disabled = false; }
+      }
+    });
+  });
+  const scoreCard = document.getElementById(`${secId}_score`);
+  if (scoreCard) { scoreCard.classList.remove('show'); scoreCard.innerHTML = ''; }
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+</script>
+</body>
+</html>
