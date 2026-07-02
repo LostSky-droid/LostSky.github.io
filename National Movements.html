@@ -1,0 +1,2165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>📜 National Movements: Social & Religious (Part 1)</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,400&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --pink:       #ffb7c5;
+    --pink-deep:  #e8839a;
+    --pink-light: #ffe4ec;
+    --sky:        #87ceeb;
+    --sky-deep:   #5ab0d6;
+    --white-glass: rgba(255,255,255,0.62);
+    --white-card:  rgba(255,255,255,0.70);
+    --text:        rgba(45, 35, 40, 0.88);
+    --text-light:  rgba(80, 55, 65, 0.80);
+    --shadow-text: 0 0 6px #fff, 0 1px 3px rgba(255,255,255,0.9);
+    --radius: 18px;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    min-height: 100vh;
+    font-family: 'Nunito', sans-serif;
+    background: linear-gradient(145deg, #fde8f0 0%, #f5e6ff 40%, #dff0ff 100%);
+    background-attachment: fixed;
+    color: var(--text);
+    overflow-x: hidden;
+  }
+
+  /* ─── PETAL RAIN ─── */
+  .petal-container {
+    position: fixed; top: 0; left: 0;
+    width: 100%; height: 100%;
+    pointer-events: none; z-index: 0; overflow: hidden;
+  }
+  .petal {
+    position: absolute; top: -40px;
+    width: 14px; height: 14px;
+    background: radial-gradient(ellipse at 40% 35%, #fff8fa 0%, #ffb7c5 55%, #f78fa7 100%);
+    border-radius: 150% 0 150% 0;
+    opacity: 0;
+    animation: petalFall linear infinite;
+    box-shadow: 0 1px 3px rgba(255,100,130,0.25);
+  }
+  @keyframes petalFall {
+    0%   { transform: translateY(0)   rotate(0deg)   translateX(0);   opacity: 0; }
+    5%   { opacity: 0.85; }
+    85%  { opacity: 0.70; }
+    100% { transform: translateY(110vh) rotate(680deg) translateX(60px); opacity: 0; }
+  }
+
+  /* ─── LAYOUT ─── */
+  #app {
+    position: relative; z-index: 1;
+    max-width: 820px; margin: 0 auto;
+    padding: 36px 20px 60px;
+  }
+
+  /* ─── HEADER ─── */
+  header {
+    text-align: center;
+    padding: 36px 30px 30px;
+    margin-bottom: 30px;
+    background: var(--white-glass);
+    border-radius: var(--radius);
+    border: 1.5px solid rgba(255,183,197,0.55);
+    box-shadow: 0 8px 32px rgba(255,130,160,0.13), 0 2px 8px rgba(255,255,255,0.4) inset;
+  }
+  header .emoji-row { font-size: 2rem; letter-spacing: 6px; margin-bottom: 10px; }
+  header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.5rem, 4vw, 2.3rem);
+    font-weight: 700; color: var(--text);
+    text-shadow: var(--shadow-text); line-height: 1.25;
+  }
+  header h1 span { color: var(--pink-deep); }
+  header p {
+    margin-top: 8px; font-size: 0.95rem;
+    color: var(--text-light); text-shadow: var(--shadow-text); font-weight: 600;
+  }
+  .coded-by {
+    margin-top: 10px; font-size: 0.78rem; font-weight: 700; letter-spacing: 3px;
+    background: linear-gradient(90deg, #ffb7c5, #87ceeb, #ffb7c5, #e8839a, #87ceeb);
+    background-size: 300% auto;
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    animation: shimmer 2.8s linear infinite, fadeSlideIn 1s ease both;
+  }
+  @keyframes shimmer { 0% { background-position: 0% center; } 100% { background-position: 300% center; } }
+  @keyframes fadeSlideIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+  .divider {
+    display: flex; align-items: center; gap: 12px;
+    margin: 14px auto 0; max-width: 320px;
+  }
+  .divider hr { flex: 1; border: none; border-top: 1.5px solid var(--pink); }
+  .divider span { font-size: 1.1rem; }
+  .progress-wrap {
+    background: rgba(255,255,255,0.55); border-radius: 50px; height: 8px;
+    margin: 18px 0 0; border: 1px solid rgba(255,183,197,0.40); overflow: hidden;
+  }
+  .progress-bar {
+    height: 100%; width: 0%;
+    background: linear-gradient(90deg, var(--pink), var(--sky-deep));
+    border-radius: 50px; transition: width 0.3s;
+  }
+  .progress-label {
+    text-align: right; font-size: 0.78rem;
+    color: var(--text-light); font-weight: 700;
+    text-shadow: var(--shadow-text); margin-top: 4px;
+  }
+
+  /* ─── SECTION LABEL ─── */
+  .section-label {
+    display: inline-block;
+    background: linear-gradient(90deg, var(--pink-deep), var(--sky-deep));
+    color: #fff; font-size: 0.78rem; font-weight: 700;
+    letter-spacing: 1.5px; text-transform: uppercase;
+    padding: 5px 16px; border-radius: 50px;
+    margin: 28px 0 14px;
+    box-shadow: 0 2px 8px rgba(200,100,130,0.25);
+    text-shadow: 0 1px 2px rgba(0,0,0,0.18);
+  }
+
+  /* ─── QUESTION CARD ─── */
+  .q-card {
+    background: var(--white-card);
+    border: 1.5px solid rgba(255,183,197,0.45);
+    border-radius: var(--radius);
+    padding: 22px 24px 18px; margin-bottom: 16px;
+    box-shadow: 0 4px 18px rgba(255,140,170,0.10), 0 1px 4px rgba(255,255,255,0.35) inset;
+    transition: box-shadow 0.25s;
+    position: relative; overflow: hidden;
+    backdrop-filter: blur(18px) saturate(1.6);
+    -webkit-backdrop-filter: blur(18px) saturate(1.6);
+    background: rgba(255,255,255,0.52) !important;
+    box-shadow:
+      0 8px 32px rgba(255,140,170,0.13),
+      0 1px 0 rgba(255,255,255,0.9) inset,
+      0 -1px 0 rgba(255,183,197,0.2) inset,
+      2px 0 0 rgba(255,255,255,0.6) inset !important;
+    transition: box-shadow 0.3s, transform 0.3s, background 1.2s, border-color 1s !important;
+  }
+  .q-card:hover { box-shadow: 0 6px 28px rgba(255,130,160,0.18); }
+  .q-card::before {
+    content:''; position:absolute; top:0; left:0; right:0; height:1px;
+    background:linear-gradient(90deg,rgba(255,255,255,0.95) 0%,rgba(255,255,255,0.4) 55%,transparent 100%);
+    z-index:2; pointer-events:none; border-radius:var(--radius) var(--radius) 0 0;
+  }
+  .q-card::after {
+    content:''; position:absolute; top:0; left:0; bottom:0; width:1px;
+    background:linear-gradient(180deg,rgba(255,255,255,0.95) 0%,rgba(255,255,255,0.3) 55%,transparent 100%);
+    z-index:2; pointer-events:none; border-radius:var(--radius) 0 0 var(--radius);
+  }
+  .q-num {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 28px; height: 28px;
+    background: linear-gradient(135deg, var(--pink), var(--sky));
+    border-radius: 50%; font-size: 0.75rem; font-weight: 700; color: #fff;
+    box-shadow: 0 2px 6px rgba(200,100,130,0.30);
+    flex-shrink: 0; margin-right: 10px; vertical-align: middle;
+  }
+  .q-text {
+    font-size: 0.96rem; font-weight: 700; color: var(--text);
+    text-shadow: var(--shadow-text); line-height: 1.5;
+    display: flex; align-items: flex-start; gap: 4px; margin-bottom: 14px;
+  }
+  .q-text-inner { flex: 1; }
+
+  /* ─── OPTIONS ─── */
+  .options { display: flex; flex-direction: column; gap: 9px; }
+  .opt-label {
+    display: flex; align-items: flex-start; gap: 10px; cursor: pointer;
+    padding: 10px 14px; border-radius: 12px;
+    border: 1.5px solid rgba(255,183,197,0.40);
+    background: rgba(255,255,255,0.45);
+    transition: background 0.2s, border-color 0.2s, transform 0.15s;
+    font-size: 0.90rem; color: var(--text);
+    text-shadow: var(--shadow-text); font-weight: 600; line-height: 1.4;
+  }
+  .opt-label:hover { background: rgba(255,183,197,0.28); border-color: var(--pink); transform: translateX(3px); }
+  input[type="radio"] { display: none; }
+  input[type="radio"]:checked + .opt-label { background: rgba(255,183,197,0.45); border-color: var(--pink-deep); box-shadow: 0 0 0 2px rgba(232,131,154,0.25); }
+  .opt-badge {
+    display: inline-flex; align-items: center; justify-content: center;
+    min-width: 22px; height: 22px; border-radius: 6px;
+    background: rgba(255,183,197,0.50); font-size: 0.72rem; font-weight: 700;
+    color: var(--pink-deep); flex-shrink: 0; margin-top: 1px;
+    border: 1px solid rgba(232,131,154,0.40);
+  }
+  input[type="radio"]:checked + .opt-label .opt-badge { background: var(--pink-deep); color: #fff; border-color: var(--pink-deep); }
+
+  /* ─── RESULT STATES ─── */
+  .opt-label.correct { background: rgba(144,238,144,0.40) !important; border-color: #4caf50 !important; }
+  .opt-label.wrong   { background: rgba(255,99,99,0.28) !important;   border-color: #e53935 !important; }
+  .opt-label.correct .opt-badge { background: #4caf50; color: #fff; border-color: #4caf50; }
+  .opt-label.wrong   .opt-badge { background: #e53935; color: #fff; border-color: #e53935; }
+  .q-card.answered-wrong   { border-color: rgba(229,57,53,0.35); }
+  .q-card.answered-correct { border-color: rgba(76,175,80,0.40); }
+  .opt-label.correct::after {
+    content: '✔'; margin-left: auto; padding-left: 10px;
+    color: #4caf50; font-size: 1rem; font-weight: 900; flex-shrink: 0;
+  }
+  .opt-label.wrong::after {
+    content: '✘'; margin-left: auto; padding-left: 10px;
+    color: #e53935; font-size: 1rem; font-weight: 900; flex-shrink: 0;
+  }
+
+  /* ─── TOAST ─── */
+  #answerToast {
+    position: fixed; bottom: 28px; left: 50%; transform: translateX(-50%) translateY(80px);
+    background: rgba(255,255,255,0.92); backdrop-filter: blur(10px);
+    border-radius: 50px; padding: 10px 26px;
+    font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 1rem;
+    box-shadow: 0 6px 28px rgba(200,100,130,0.22);
+    border: 2px solid var(--pink);
+    color: var(--text); white-space: nowrap;
+    transition: transform 0.35s cubic-bezier(0.22,1,0.36,1), opacity 0.35s ease;
+    opacity: 0; pointer-events: none; z-index: 99998;
+  }
+  #answerToast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
+
+  /* ─── CONFETTI ─── */
+  .confetti-piece {
+    position: fixed; width: 9px; height: 9px; border-radius: 2px;
+    pointer-events: none; z-index: 99999;
+    animation: confettiFly var(--dur, 0.9s) ease-out forwards; opacity: 1;
+  }
+  @keyframes confettiFly {
+    0%   { transform: translate(0,0) rotate(0deg) scale(1);   opacity: 1; }
+    80%  { opacity: 0.8; }
+    100% { transform: translate(var(--tx),var(--ty)) rotate(var(--rot)) scale(0.4); opacity: 0; }
+  }
+
+  /* ─── SUBMIT ─── */
+  .btn-wrap { text-align: center; margin-top: 32px; }
+  #submitBtn {
+    padding: 15px 58px;
+    font-family: 'Playfair Display', serif;
+    font-size: 1.15rem; font-weight: 700;
+    border: none; border-radius: 50px; cursor: pointer;
+    background: linear-gradient(135deg, #ffb7c5 0%, #87ceeb 100%);
+    color: #fff; text-shadow: 0 1px 3px rgba(100,50,70,0.30);
+    box-shadow: 0 4px 20px rgba(255,130,160,0.35), 0 1px 4px rgba(135,206,235,0.30);
+    letter-spacing: 0.5px;
+    transition: transform 0.2s, box-shadow 0.2s, filter 0.2s;
+    position: relative; overflow: hidden;
+  }
+  #submitBtn::before {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(135deg, rgba(255,255,255,0.25), transparent);
+    border-radius: inherit;
+  }
+  #submitBtn:hover:not(:disabled) { transform: translateY(-3px) scale(1.03); box-shadow: 0 8px 30px rgba(255,120,155,0.45); filter: brightness(1.05); }
+  #submitBtn:active:not(:disabled) { transform: translateY(0) scale(0.98); }
+  #submitBtn:disabled { opacity: 0.7; cursor: default; }
+
+  /* ─── SCORE PANEL ─── */
+  #scorePanel {
+    display: none; margin-top: 28px; text-align: center;
+    padding: 36px 30px; background: var(--white-glass);
+    border-radius: var(--radius); border: 2px solid rgba(255,183,197,0.55);
+    box-shadow: 0 8px 32px rgba(255,130,160,0.15);
+    animation: popIn 0.5s cubic-bezier(0.175,0.885,0.32,1.275) both;
+    backdrop-filter: blur(20px) saturate(1.5);
+    -webkit-backdrop-filter: blur(20px) saturate(1.5);
+    background: rgba(255,255,255,0.50) !important;
+    transition: background 1.2s, border-color 1s !important;
+  }
+  @keyframes popIn { from { transform: scale(0.85); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+  #scorePanel .score-emoji { font-size: 3rem; margin-bottom: 10px; display: block; }
+  #scorePanel h2 { font-family: 'Playfair Display', serif; font-size: 1.8rem; font-weight: 700; color: var(--text); text-shadow: var(--shadow-text); margin-bottom: 6px; }
+  #scorePanel .score-big {
+    font-size: 3.5rem; font-weight: 700; font-family: 'Playfair Display', serif;
+    background: linear-gradient(135deg, var(--pink-deep), var(--sky-deep));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; line-height: 1.2;
+  }
+  #scorePanel .score-sub { font-size: 1rem; color: var(--text-light); text-shadow: var(--shadow-text); margin-top: 6px; font-weight: 600; }
+  #scorePanel .grade-badge {
+    display: inline-block; margin-top: 14px; padding: 8px 28px;
+    background: linear-gradient(90deg, var(--pink), var(--sky));
+    border-radius: 50px; color: #fff; font-weight: 700; font-size: 1rem;
+    box-shadow: 0 3px 12px rgba(200,100,130,0.28); text-shadow: 0 1px 2px rgba(0,0,0,0.15);
+  }
+  .retry-btn {
+    display: inline-block; margin-top: 20px; padding: 10px 34px;
+    background: rgba(255,255,255,0.75); border: 2px solid var(--pink);
+    border-radius: 50px; cursor: pointer; font-family: 'Nunito', sans-serif;
+    font-weight: 700; font-size: 0.95rem; color: var(--pink-deep);
+    transition: background 0.2s, transform 0.2s;
+  }
+  .retry-btn:hover { background: var(--pink-light); transform: translateY(-2px); }
+
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: var(--pink); border-radius: 3px; }
+
+  /* ─── NOTES SECTION ─── */
+  .notes-section { margin-bottom: 10px; }
+  .notes-main-label {
+    display: flex; align-items: center; gap: 12px; margin-bottom: 18px;
+  }
+  .notes-main-label hr { flex: 1; border: none; border-top: 1.5px solid var(--pink); }
+  .notes-main-label .nml-text {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.05rem; font-weight: 700;
+    color: var(--pink-deep); text-shadow: var(--shadow-text);
+    white-space: nowrap; letter-spacing: 1px;
+  }
+  .note-card {
+    background: rgba(255,255,255,0.72);
+    border: 1.5px solid rgba(135,206,235,0.50);
+    border-left: 4px solid var(--pink-deep);
+    border-radius: var(--radius);
+    padding: 18px 22px 16px; margin-bottom: 14px;
+    box-shadow: 0 3px 14px rgba(135,206,235,0.12), 0 1px 4px rgba(255,255,255,0.40) inset;
+    backdrop-filter: blur(14px) saturate(1.4);
+    -webkit-backdrop-filter: blur(14px) saturate(1.4);
+    background: rgba(255,255,255,0.55) !important;
+    transition: background 1.2s !important;
+  }
+  .note-card-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem; font-weight: 700;
+    color: var(--pink-deep); text-shadow: var(--shadow-text);
+    margin-bottom: 10px; display: flex; align-items: center; gap: 8px;
+  }
+  .note-list { list-style: none; display: flex; flex-direction: column; gap: 7px; }
+  .note-list li {
+    font-size: 0.875rem; font-weight: 600; color: var(--text);
+    text-shadow: var(--shadow-text); line-height: 1.55;
+    padding: 6px 10px; border-radius: 8px;
+    background: rgba(255,183,197,0.12);
+    border-left: 2px solid rgba(255,183,197,0.45);
+  }
+  .note-list li strong { color: var(--pink-deep); }
+  .note-tag {
+    display: inline-block; font-size: 0.65rem; font-weight: 700;
+    letter-spacing: 1px; text-transform: uppercase;
+    padding: 2px 8px; border-radius: 20px;
+    background: linear-gradient(90deg, var(--pink), var(--sky));
+    color: #fff; margin-right: 6px; vertical-align: middle; text-shadow: none;
+  }
+  .note-card.sky  { border-left-color: var(--sky-deep); }
+  .note-card.sky  .note-card-title { color: var(--sky-deep); }
+  .note-card.green { border-left-color: #5cb85c; }
+  .note-card.green .note-card-title { color: #4a9e4a; }
+
+  /* ─── EXPLANATION BOX ─── */
+  .explanation-box {
+    display: none; margin-top: 12px; padding: 12px 16px; border-radius: 12px;
+    background: linear-gradient(135deg, rgba(173,216,255,0.35), rgba(200,230,255,0.50));
+    border: 1.5px solid rgba(90,176,214,0.50); border-left: 4px solid var(--sky-deep);
+    font-size: 0.875rem; color: rgba(30,60,90,0.90); font-weight: 600; line-height: 1.6;
+    box-shadow: 0 3px 12px rgba(90,176,214,0.12);
+    animation: slideExplain 0.35s cubic-bezier(0.22,1,0.36,1) both;
+  }
+  .explanation-box .expl-head {
+    font-weight: 700; color: var(--sky-deep); font-size: 0.78rem;
+    letter-spacing: 1px; text-transform: uppercase; margin-bottom: 5px;
+    display: flex; align-items: center; gap: 6px;
+  }
+  @keyframes slideExplain { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: translateY(0); } }
+
+  /* ─── TIMER ─── */
+  #timerWrap { text-align: center; margin: 0 0 18px; }
+  #quizTimer {
+    display: inline-block; font-family: 'Playfair Display', serif;
+    font-size: 1.5rem; font-weight: 700; color: var(--text);
+    background: rgba(255,255,255,0.75); backdrop-filter: blur(8px);
+    padding: 8px 28px; border-radius: 50px; border: 2px solid var(--pink);
+    box-shadow: 0 3px 14px rgba(255,130,160,0.18); letter-spacing: 2px;
+    transition: color 0.4s, border-color 0.4s;
+  }
+
+  /* ─── FLASHCARDS ─── */
+  .flash-item { background:#fff; border:1.5px solid #e8d5f0; border-radius:12px; padding:14px 16px; }
+  .flash-q { font-size:0.97rem; font-weight:600; color:var(--text); margin-bottom:10px; line-height:1.5; }
+  .show-ans-btn { background:linear-gradient(135deg,#f78fa7,#87ceeb); border:none; border-radius:20px; padding:7px 18px; font-size:0.85rem; font-weight:700; cursor:pointer; color:#fff; letter-spacing:0.5px; transition:transform 0.15s,opacity 0.15s; }
+  .show-ans-btn:hover { transform:translateY(-2px); opacity:0.9; }
+  .show-ans-btn.revealed { background:linear-gradient(135deg,#b5ead7,#c7ceea); }
+  .flash-ans { margin-top:10px; font-size:0.95rem; color:#2e7d32; background:#f1f8e9; border-left:4px solid #66bb6a; border-radius:6px; padding:8px 12px; animation:fadeIn 0.3s ease; }
+  @keyframes fadeIn { from{opacity:0;transform:translateY(-4px)} to{opacity:1;transform:translateY(0)} }
+
+  /* ─── THEME SYSTEM ─── */
+  body { transition: background 1.4s ease !important; }
+
+  body.theme-ocean {
+    --pink:#7ec8e3; --pink-deep:#0077b6; --pink-light:#e0f4ff;
+    --sky:#90e0ef; --sky-deep:#0096c7;
+    --white-glass:rgba(220,245,255,0.58); --white-card:rgba(220,245,255,0.65);
+    --text:rgba(0,35,65,0.90); --text-light:rgba(0,55,95,0.75);
+    --shadow-text:0 0 6px rgba(255,255,255,0.8),0 1px 3px rgba(255,255,255,0.7);
+    background:linear-gradient(145deg,#c8eeff 0%,#a8d8f0 40%,#d0f0ff 100%) !important;
+  }
+  body.theme-ocean .petal { background:radial-gradient(ellipse at 40% 35%,#f0faff 0%,#7ec8e3 55%,#0096c7 100%) !important; }
+
+  body.theme-night {
+    --pink:#c084fc; --pink-deep:#a855f7; --pink-light:#2d1b4e;
+    --sky:#818cf8; --sky-deep:#6366f1;
+    --white-glass:rgba(25,15,45,0.70); --white-card:rgba(30,18,55,0.75);
+    --text:rgba(230,215,255,0.93); --text-light:rgba(195,175,235,0.80);
+    --shadow-text:0 0 8px rgba(168,85,247,0.35),0 1px 3px rgba(0,0,0,0.6);
+    background:linear-gradient(145deg,#12082a 0%,#1a0d38 40%,#0d0620 100%) !important;
+  }
+  body.theme-night .q-card {
+    background:rgba(35,20,60,0.68) !important;
+    box-shadow:0 8px 32px rgba(100,50,200,0.22),0 1px 0 rgba(180,140,255,0.25) inset,2px 0 0 rgba(160,120,255,0.18) inset !important;
+    border-color:rgba(168,85,247,0.30) !important;
+  }
+  body.theme-night .q-card::before { background:linear-gradient(90deg,rgba(200,160,255,0.4) 0%,transparent 100%) !important; }
+  body.theme-night .q-card::after  { background:linear-gradient(180deg,rgba(200,160,255,0.4) 0%,transparent 100%) !important; }
+  body.theme-night header, body.theme-night #scorePanel, body.theme-night .note-card {
+    background:rgba(30,15,55,0.72) !important; border-color:rgba(168,85,247,0.30) !important;
+  }
+  body.theme-night .petal { background:radial-gradient(ellipse at 40% 35%,#f0e8ff 0%,#c084fc 55%,#7c3aed 100%) !important; }
+  body.theme-night .opt-label { background:rgba(40,20,70,0.55) !important; border-color:rgba(168,85,247,0.25) !important; color:rgba(225,210,255,0.90) !important; }
+  body.theme-night .opt-label:hover { background:rgba(168,85,247,0.22) !important; border-color:var(--pink) !important; }
+  body.theme-night .section-label { background:linear-gradient(90deg,#a855f7,#6366f1) !important; }
+
+  #themeIndicator {
+    display:inline-block; margin-top:10px;
+    font-family:'Nunito',sans-serif; font-size:0.72rem; font-weight:700;
+    letter-spacing:1.5px; padding:4px 14px; border-radius:50px;
+    border:1.5px solid rgba(255,183,197,0.5);
+    background:rgba(255,255,255,0.4); color:var(--pink-deep); text-shadow:var(--shadow-text);
+    transition:all 0.5s ease;
+  }
+  body.theme-ocean #themeIndicator { border-color:rgba(0,150,199,0.4); color:var(--pink-deep); }
+  body.theme-night #themeIndicator { border-color:rgba(168,85,247,0.4); color:#c084fc; background:rgba(50,25,80,0.4); }
+  @keyframes themeFlash { 0%{opacity:1} 50%{opacity:0.3} 100%{opacity:1} }
+  body.switching { animation:themeFlash 0.6s ease !important; }
+
+  /* ─── REVIEW MODE ─── */
+  .review-btn {
+    display:inline-block; margin-top:14px; margin-right:8px; padding:10px 26px;
+    border:2px solid var(--sky-deep); background:rgba(255,255,255,0.65);
+    border-radius:50px; cursor:pointer; font-family:'Nunito',sans-serif;
+    font-weight:700; font-size:0.90rem; color:var(--sky-deep);
+    transition:background 0.2s, transform 0.2s;
+  }
+  .review-btn:hover { background:rgba(135,206,235,0.3); transform:translateY(-2px); }
+  body.theme-night .review-btn { background:rgba(40,20,70,0.5); color:#818cf8; border-color:#6366f1; }
+  .review-mode-on .q-card.answered-correct { display:none; }
+  .review-mode-on .notes-section { display:none; }
+  #reviewBanner {
+    display:none; position:sticky; top:0; z-index:999;
+    background:linear-gradient(90deg,rgba(90,176,214,0.94),rgba(135,206,235,0.94));
+    backdrop-filter:blur(12px); text-align:center; padding:10px 20px;
+    font-family:'Nunito',sans-serif; font-weight:800; font-size:0.86rem;
+    color:#fff; box-shadow:0 3px 14px rgba(90,176,214,0.35); letter-spacing:0.5px; cursor:pointer;
+  }
+  body.theme-night #reviewBanner { background:linear-gradient(90deg,rgba(99,102,241,0.94),rgba(168,85,247,0.94)) !important; }
+
+  @keyframes timerPulse { 0%,100%{transform:scale(1)} 50%{transform:scale(1.06)} }
+  #quizTimer.danger { animation:timerPulse 0.7s ease-in-out infinite; border-color:#e53935; }
+
+  @media (max-width: 500px) {
+    #app { padding: 20px 12px 50px; }
+    .q-card { padding: 16px 14px 14px; }
+    header h1 { font-size: 1.4rem; }
+    .note-card { padding: 14px 14px 12px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="petal-container" id="petalContainer"></div>
+<div id="answerToast"></div>
+<div id="reviewBanner" onclick="toggleReview()">📋 Review Mode — Showing wrong answers only · Click to exit</div>
+
+<div id="app">
+
+  <!-- ══════════ HEADER ══════════ -->
+  <header>
+    <div class="emoji-row">📜 🕉️ ✊</div>
+    <h1>NATIONAL MOVEMENTS: <span>SOCIAL & RELIGIOUS</span><br/>ASPECTS (1750–1950)</h1>
+    <p>110 Questions · Full Set | Chapter 14 · VAC-1 · Ranchi University Sem 1</p>
+    <p class="coded-by">✦ CODED BY HITESH ✦</p>
+    <div id="themeIndicator">🌸 Sakura Mode</div>
+    <div class="divider"><hr/><span>🌷</span><hr/></div>
+    <div class="progress-wrap"><div class="progress-bar" id="progressBar"></div></div>
+    <div class="progress-label" id="progressLabel">0 / 110 answered</div>
+    <div id="timerWrap"><span id="quizTimer">⏱️ 10:00</span></div>
+  </header>
+
+  <!-- ══════════ NOTES SECTION ══════════ -->
+  <div class="notes-section">
+    <div class="notes-main-label">
+      <hr/><span class="nml-text">📖 QUICK NOTES — STUDY BEFORE YOU QUIZ</span><hr/>
+    </div>
+
+    <div class="note-card">
+      <div class="note-card-title">⚡ Quick Recall Table — Most Asked Facts</div>
+      <ul class="note-list">
+        <li><span class="note-tag">Atmiya Sabha</span> <strong>1814</strong> | Raja Ram Mohan Roy | Calcutta</li>
+        <li><span class="note-tag">Brahmo Samaj</span> <strong>1828</strong> | Raja Ram Mohan Roy | Calcutta</li>
+        <li><span class="note-tag">Wahabi Movement</span> <strong>1820</strong> | Sayyid Ahmad of Rae Bareli | Patna, Bihar</li>
+        <li><span class="note-tag">Deoband School</span> <strong>1866</strong> | Mohammad Qasim Nanotavi & Rashid Ahmed Gangohi | Deoband, UP</li>
+        <li><span class="note-tag">Satyashodhak Samaj</span> <strong>1873</strong> | Jyotiba Phule | Pune, Maharashtra</li>
+        <li><span class="note-tag">Singh Sabha</span> <strong>1873</strong> | Thakur Singh Sandhawalia & Giani Gian Singh | Amritsar</li>
+        <li><span class="note-tag">Theosophical Society</span> <strong>1875</strong> | Madame H.P. Blavatsky & Col. M.S. Olcott | New York</li>
+        <li><span class="note-tag">Aligarh Movement</span> <strong>1875</strong> | Sir Syed Ahmad Khan | Aligarh</li>
+        <li><span class="note-tag">Arya Samaj</span> <strong>1875</strong> | Swami Dayananda Saraswati | Bombay (Mumbai)</li>
+        <li><span class="note-tag">Prarthana Sabha</span> <strong>1876</strong> | Dr. Atma Ram Pandurang | Bombay</li>
+        <li><span class="note-tag">Ramakrishna Mission</span> <strong>1897</strong> | Swami Vivekananda | Belur Math, West Bengal</li>
+        <li><span class="note-tag">Father of Renaissance</span> Raja Ram Mohan Roy | Born: <strong>1772–1833</strong></li>
+        <li><span class="note-tag">First Female Teacher</span> Savitribai Phule | Modern Girls' School: <strong>1848</strong></li>
+        <li><span class="note-tag">"Dalits" coined by</span> <strong>Jyotiba Phule</strong></li>
+        <li><span class="note-tag">National Youth Day</span> January 12 = Vivekananda's birthday</li>
+      </ul>
+    </div>
+
+    <div class="note-card sky">
+      <div class="note-card-title">📌 14.1 Introduction — Two Fronts of National Movement</div>
+      <ul class="note-list">
+        <li><span class="note-tag">Two Fronts</span> (1) Freedom from British rule | (2) Social & religious reforms within society</li>
+        <li><span class="note-tag">Social Evils Targeted</span> Untouchability, caste hierarchy, illiteracy, child marriage, female infanticide, sati, widow remarriage</li>
+        <li><span class="note-tag">Other Demands</span> Liquor control, cow protection, common language</li>
+      </ul>
+    </div>
+
+    <div class="note-card">
+      <div class="note-card-title">🔖 14.2 Brahmo Samaj — Raja Ram Mohan Roy</div>
+      <ul class="note-list">
+        <li><span class="note-tag">Atmiya Sabha</span> Founded <strong>1814</strong> | Fought idolatry, untouchability, superstitions</li>
+        <li><span class="note-tag">Brahmo Sabha → Samaj</span> Founded <strong>1828</strong> | Father of Modern India's Renaissance</li>
+        <li><span class="note-tag">First Work</span> <em>Tuhfat-ul-Muwahhiddin</em> (A Gift to Monotheists) — <strong>1803</strong></li>
+        <li><span class="note-tag">Journals</span> Brahmanical Magazine, Samvad Kaumudi (1821), Mirat-ul-Akbar (Persian)</li>
+        <li><span class="note-tag">Hindu College</span> 1817 with David Hare & Alexander Duff | Vedanta College: 1825</li>
+        <li><span class="note-tag">Keshava Chandra Sen</span> Founded Indian Reform Association (1870) → Native Marriage Act 1872 | Started <em>The Indian Mirror</em> (1861)</li>
+      </ul>
+    </div>
+
+    <div class="note-card sky">
+      <div class="note-card-title">🕌 14.2 Wahabi & Deoband Movements</div>
+      <ul class="note-list">
+        <li><span class="note-tag">Wahabi</span> <strong>1820</strong> | Sayyid Ahmad of Rae Bareli | Patna, Bihar | Sunni Islamic revivalism | Primary cause of 1857 Muslim uprising</li>
+        <li><span class="note-tag">Wahabi Tendency</span> Created <strong>isolationist & separatist</strong> tendencies — did NOT become nationalist</li>
+        <li><span class="note-tag">Deoband</span> <strong>1866</strong> | Nanotavi & Gangohi | Darul Uloom, Deoband, Saharanpur, UP</li>
+        <li><span class="note-tag">Deoband Goals</span> Pure Quran/Hadis teachings + Spirit of jihad against foreign rulers</li>
+        <li><span class="note-tag">Key Contrast</span> Aligarh = <strong>Pro-British</strong> | Deoband = <strong>Anti-British</strong> (moral/religious regeneration)</li>
+        <li><span class="note-tag">Deoband Leaders</span> Mahmud-ul-Hasan and Shibli Numani</li>
+      </ul>
+    </div>
+
+    <div class="note-card">
+      <div class="note-card-title">🌺 Memory Tricks</div>
+      <ul class="note-list">
+        <li><span class="note-tag">1814-1828</span> Roy: Atmiya Sabha (1814) → Calcutta Unitarian Association (1821) → Brahmo Samaj (1828)</li>
+        <li><span class="note-tag">1875 Triple</span> Theosophical Society + Aligarh Movement + Arya Samaj = all 1875!</li>
+        <li><span class="note-tag">1873 Double</span> Satyashodhak Samaj + Singh Sabha = both October 1873</li>
+        <li><span class="note-tag">Tuhfat</span> 1803 — earliest work of Roy (25 years before Brahmo Samaj)</li>
+        <li><span class="note-tag">Deoband vs Aligarh</span> D=Anti-British religious regeneration | A=Pro-British modern education</li>
+      </ul>
+    </div>
+  </div><!-- end notes-section -->
+
+  <!-- ══ PYQ MOST REPEATED ══ -->
+  <div class="notes-section" style="margin-bottom:10px;">
+    <div class="notes-main-label"><hr/><span class="nml-text">🔥 MOST REPEATED TOPICS — PYQ ANALYSIS</span><hr/></div>
+    <div class="note-card sky">
+      <div class="note-card-title">📌 Top Exam-Guaranteed Topics (Ch. 14)</div>
+      <ul class="note-list">
+        <li><span class="note-tag">PYQ 1</span><strong>Raja Ram Mohan Roy = Father of Modern India's Renaissance</strong> | Brahmo Samaj 1828</li>
+        <li><span class="note-tag">PYQ 2</span><strong>Tuhfat-ul-Muwahhiddin = 1803</strong> | First published work of Roy</li>
+        <li><span class="note-tag">PYQ 3</span><strong>Wahabi Movement = 1820</strong> | Sayyid Ahmad | Primary cause of 1857 Muslim uprising</li>
+        <li><span class="note-tag">PYQ 4</span><strong>Deoband = 1866</strong> | Anti-British | Twin objectives: Pure Islam + Jihad spirit</li>
+        <li><span class="note-tag">PYQ 5</span><strong>Keshava Chandra Sen</strong> → Native Marriage Act 1872 | Indian Reform Association 1870</li>
+        <li><span class="note-tag">PYQ 6</span>Aligarh = <strong>Pro-British</strong> | Deoband = <strong>Anti-British</strong> — most compared pair</li>
+        <li><span class="note-tag">PYQ 7</span><strong>Atmiya Sabha = 1814</strong> (NOT 1828; Brahmo Samaj is 1828)</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ══ FLASHCARDS ══ -->
+  <div class="notes-section" style="margin-bottom:24px;">
+    <div class="notes-main-label"><hr/><span class="nml-text">🧠 FILL-IN FLASHCARDS — TEST YOURSELF</span><hr/></div>
+    <div class="note-card sky">
+      <div class="note-card-title">✍️ Tap "Show Answer" — Test Yourself First!</div>
+      <div id="flashcard-list" style="display:flex;flex-direction:column;gap:12px;margin-top:8px;">
+        <div class="flash-item"><div class="flash-q">F1. Brahmo Samaj founded in year ___ by ___</div><button class="show-ans-btn" onclick="toggleAns(this)">👁️ Show Answer</button><div class="flash-ans" style="display:none;">✅ <strong>1828 | Raja Ram Mohan Roy</strong></div></div>
+        <div class="flash-item"><div class="flash-q">F2. Roy's first work ___ published in ___</div><button class="show-ans-btn" onclick="toggleAns(this)">👁️ Show Answer</button><div class="flash-ans" style="display:none;">✅ <strong>Tuhfat-ul-Muwahhiddin | 1803</strong></div></div>
+        <div class="flash-item"><div class="flash-q">F3. Wahabi Movement started by ___ in ___ at ___</div><button class="show-ans-btn" onclick="toggleAns(this)">👁️ Show Answer</button><div class="flash-ans" style="display:none;">✅ <strong>Sayyid Ahmad of Rae Bareli | 1820 | Patna, Bihar</strong></div></div>
+        <div class="flash-item"><div class="flash-q">F4. Deoband founded by ___ & ___ in year ___</div><button class="show-ans-btn" onclick="toggleAns(this)">👁️ Show Answer</button><div class="flash-ans" style="display:none;">✅ <strong>Mohammad Qasim Nanotavi & Rashid Ahmed Gangohi | 1866</strong></div></div>
+        <div class="flash-item"><div class="flash-q">F5. Keshava Chandra Sen founded ___ in 1870 → led to ___ Act of ___</div><button class="show-ans-btn" onclick="toggleAns(this)">👁️ Show Answer</button><div class="flash-ans" style="display:none;">✅ <strong>Indian Reform Association | Native Marriage Act | 1872</strong></div></div>
+        <div class="flash-item"><div class="flash-q">F6. Atmiya Sabha year = ___ | Vedanta College year = ___</div><button class="show-ans-btn" onclick="toggleAns(this)">👁️ Show Answer</button><div class="flash-ans" style="display:none;">✅ <strong>1814 | 1825</strong></div></div>
+        <div class="flash-item"><div class="flash-q">F7. Wahabi created ___ tendencies | Deoband orientation = ___</div><button class="show-ans-btn" onclick="toggleAns(this)">👁️ Show Answer</button><div class="flash-ans" style="display:none;">✅ <strong>Isolationist & separatist | Anti-British</strong></div></div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ══════════ EXAM STRATEGY ══════════ -->
+  <div style="background:rgba(255,183,197,0.18);border:1.5px solid rgba(255,120,150,0.35);border-radius:16px;padding:18px 20px;margin:0 0 22px;backdrop-filter:blur(8px);">
+    <div style="font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:700;color:var(--text);margin-bottom:12px;">📋 Exam Strategy — Most Likely MCQs</div>
+    <div style="font-family:Nunito,sans-serif;font-size:0.82rem;line-height:1.7;color:var(--text);opacity:0.92;">
+      <b>🎯 1-Mark MCQs (Definite aayenge):</b><br/>
+      • Har movement ka founder + year (Brahmo, Arya, Deoband, SNDP, DK…)<br/>
+      • "Socrates of Maharashtra" = Ranade | "Father of Renaissance" = Roy<br/>
+      • Narayana Guru's slogan: <i>"One Caste, One Religion, One God for All"</i><br/>
+      • Theosophical motto: <i>"No religion higher than truth"</i> | RK Mission motto: <i>Atmano Mokshartham…</i><br/>
+      • First female teacher = Savitribai Phule | Coined "Dalits" = Jyotiba Phule<br/>
+      • Jan 12 = National Youth Day (Vivekananda's birthday)<br/>
+      • Aligarh = Pro-British | Deoband = Anti-British<br/>
+      • Triple 1875: Arya Samaj + MAO College + Theosophical Society<br/><br/>
+    </div>
+  </div>
+
+  <!-- ══════════ QUIZ FORM ══════════ -->
+  <form id="quizForm">
+
+    <div class="section-label">📿 Section A — Brahmo Samaj & Raja Ram Mohan Roy</div>
+
+    <div class="q-card" id="card-1">
+      <div class="q-text"><span class="q-num">1</span><span class="q-text-inner">Who is called the "Father of Modern India's Renaissance"?</span></div>
+      <div class="options">
+        <label><input type="radio" name="q1" value="A"/><span class="opt-label"><span class="opt-badge">A</span>Jyotiba Phule</span></label>
+        <label><input type="radio" name="q1" value="B"/><span class="opt-label"><span class="opt-badge">B</span>Dayananda Saraswati</span></label>
+        <label><input type="radio" name="q1" value="C"/><span class="opt-label"><span class="opt-badge">C</span>Raja Ram Mohan Roy</span></label>
+        <label><input type="radio" name="q1" value="D"/><span class="opt-label"><span class="opt-badge">D</span>Swami Vivekananda</span></label>
+      </div>
+      <div class="explanation-box" id="expl-q1"><div class="expl-head">💡 Explanation</div><strong>Raja Ram Mohan Roy (1772–1833)</strong> is called the "Father of Modern India's Renaissance." He founded Brahmo Samaj (1828), fought against sati, illiteracy, and child marriage.</div>
+    </div>
+
+    <div class="q-card" id="card-2">
+      <div class="q-text"><span class="q-num">2</span><span class="q-text-inner">Brahmo Sabha (later Brahmo Samaj) was founded in:</span></div>
+      <div class="options">
+        <label><input type="radio" name="q2" value="A"/><span class="opt-label"><span class="opt-badge">A</span>1814</span></label>
+        <label><input type="radio" name="q2" value="B"/><span class="opt-label"><span class="opt-badge">B</span>1820</span></label>
+        <label><input type="radio" name="q2" value="C"/><span class="opt-label"><span class="opt-badge">C</span>1828</span></label>
+        <label><input type="radio" name="q2" value="D"/><span class="opt-label"><span class="opt-badge">D</span>1873</span></label>
+      </div>
+      <div class="explanation-box" id="expl-q2"><div class="expl-head">💡 Explanation</div>Brahmo Sabha was founded in <strong>1828</strong> by Raja Ram Mohan Roy, which later became Brahmo Samaj. Remember: Atmiya Sabha = 1814 (earlier) and Brahmo Samaj = 1828.</div>
+    </div>
+
+    <div class="q-card" id="card-3">
+      <div class="q-text"><span class="q-num">3</span><span class="q-text-inner">Raja Ram Mohan Roy's first published work was:</span></div>
+      <div class="options">
+        <label><input type="radio" name="q3" value="A"/><span class="opt-label"><span class="opt-badge">A</span>Satyarth Prakash</span></label>
+        <label><input type="radio" name="q3" value="B"/><span class="opt-label"><span class="opt-badge">B</span>Tuhfat-ul-Muwahhiddin</span></label>
+        <label><input type="radio" name="q3" value="C"/><span class="opt-label"><span class="opt-badge">C</span>Hind Swaraj</span></label>
+        <label><input type="radio" name="q3" value="D"/><span class="opt-label"><span class="opt-badge">D</span>Gitanjali</span></label>
+      </div>
+      <div class="explanation-box" id="expl-q3"><div class="expl-head">💡 Explanation</div><strong>Tuhfat-ul-Muwahhiddin</strong> (A Gift to Monotheists), published in 1803, was Roy's first work — it exposed irrational religious beliefs. Satyarth Prakash belongs to Dayananda Saraswati.</div>
+    </div>
+
+    <div class="q-card" id="card-4">
+      <div class="q-text"><span class="q-num">4</span><span class="q-text-inner">Tuhfat-ul-Muwahhiddin was published in:</span></div>
+      <div class="options">
+        <label><input type="radio" name="q4" value="A"/><span class="opt-label"><span class="opt-badge">A</span>1814</span></label>
+        <label><input type="radio" name="q4" value="B"/><span class="opt-label"><span class="opt-badge">B</span>1803</span></label>
+        <label><input type="radio" name="q4" value="C"/><span class="opt-label"><span class="opt-badge">C</span>1828</span></label>
+        <label><input type="radio" name="q4" value="D"/><span class="opt-label"><span class="opt-badge">D</span>1821</span></label>
+      </div>
+      <div class="explanation-box" id="expl-q4"><div class="expl-head">💡 Explanation</div>Tuhfat-ul-Muwahhiddin was published in <strong>1803</strong> — a full 25 years before Brahmo Samaj (1828). It was Roy's earliest major intellectual work against irrational religious practices.</div>
+    </div>
+
+    <div class="q-card" id="card-5">
+      <div class="q-text"><span class="q-num">5</span><span class="q-text-inner">Atmiya Sabha was founded in:</span></div>
+      <div class="options">
+        <label><input type="radio" name="q5" value="A"/><span class="opt-label"><span class="opt-badge">A</span>1820</span></label>
+        <label><input type="radio" name="q5" value="B"/><span class="opt-label"><span class="opt-badge">B</span>1814</span></label>
+        <label><input type="radio" name="q5" value="C"/><span class="opt-label"><span class="opt-badge">C</span>1828</span></label>
+        <label><input type="radio" name="q5" value="D"/><span class="opt-label"><span class="opt-badge">D</span>1873</span></label>
+      </div>
+      <div class="explanation-box" id="expl-q5"><div class="expl-head">💡 Explanation</div>Atmiya Sabha was founded in <strong>1814</strong> by Raja Ram Mohan Roy in Calcutta. It campaigned against idolatry, untouchability, caste rigidities, and intoxicants — predating Brahmo Samaj by 14 years.</div>
+    </div>
+
+    <div class="q-card" id="card-6">
+      <div class="q-text"><span class="q-num">6</span><span class="q-text-inner">Raja Ram Mohan Roy supported which two educators in establishing Hindu College at Calcutta in 1817?</span></div>
+      <div class="options">
+        <label><input type="radio" name="q6" value="A"/><span class="opt-label"><span class="opt-badge">A</span>Gokhale and Tilak</span></label>
+        <label><input type="radio" name="q6" value="B"/><span class="opt-label"><span class="opt-badge">B</span>David Hare and Alexander Duff</span></label>
+        <label><input type="radio" name="q6" value="C"/><span class="opt-label"><span class="opt-badge">C</span>Vidyasagar and Dayananda</span></label>
+        <label><input type="radio" name="q6" value="D"/><span class="opt-label"><span class="opt-badge">D</span>Nehru and Gandhi</span></label>
+      </div>
+      <div class="explanation-box" id="expl-q6"><div class="expl-head">💡 Explanation</div>Raja Ram Mohan Roy supported <strong>David Hare and Alexander Duff</strong> in establishing Hindu College at Calcutta in 1817. Roy also established Vedanta College (1825) which combined Indian learning with Western sciences.</div>
+    </div>
+
+    <div class="q-card" id="card-7">
+      <div class="q-text"><span class="q-num">7</span><span class="q-text-inner">Vedanta College was established by Raja Ram Mohan Roy in:</span></div>
+      <div class="options">
+        <label><input type="radio" name="q7" value="A"/><span class="opt-label"><span class="opt-badge">A</span>1817</span></label>
+        <label><input type="radio" name="q7" value="B"/><span class="opt-label"><span class="opt-badge">B</span>1821</span></label>
+        <label><input type="radio" name="q7" value="C"/><span class="opt-label"><span class="opt-badge">C</span>1825</span></label>
+        <label><input type="radio" name="q7" value="D"/><span class="opt-label"><span class="opt-badge">D</span>1828</span></label>
+      </div>
+      <div class="explanation-box" id="expl-q7"><div class="expl-head">💡 Explanation</div>Vedanta College was established in <strong>1825</strong> by Raja Ram Mohan Roy. It combined Indian learning with Western sciences — a unique concept at that time. Hindu College was earlier in 1817.</div>
+    </div>
+
+    <div class="q-card" id="card-8">
+      <div class="q-text"><span class="q-num">8</span><span class="q-text-inner">Native Marriage Act (1872) was enacted largely due to the work of:</span></div>
+      <div class="options">
+        <label><input type="radio" name="q8" value="A"/><span class="opt-label"><span class="opt-badge">A</span>Gokhale</span></label>
+        <label><input type="radio" name="q8" value="B"/><span class="opt-label"><span class="opt-badge">B</span>Tilak</span></label>
+        <label><input type="radio" name="q8" value="C"/><span class="opt-label"><span class="opt-badge">C</span>Keshava Chandra Sen</span></label>
+        <label><input type="radio" name="q8" value="D"/><span class="opt-label"><span class="opt-badge">D</span>Vidyasagar</span></label>
+      </div>
+      <div class="explanation-box" id="expl-q8"><div class="expl-head">💡 Explanation</div><strong>Keshava Chandra Sen</strong> founded the Indian Reform Association (1870) which led to the Native Marriage Act 1872 — legalizing Brahmo marriages, fixing minimum marriage age, and allowing inter-caste marriage.</div>
+    </div>
+
+    <div class="q-card" id="card-9">
+      <div class="q-text"><span class="q-num">9</span><span class="q-text-inner">Keshava Chandra Sen founded the Indian Reform Association in:</span></div>
+      <div class="options">
+        <label><input type="radio" name="q9" value="A"/><span class="opt-label"><span class="opt-badge">A</span>1865</span></label>
+        <label><input type="radio" name="q9" value="B"/><span class="opt-label"><span class="opt-badge">B</span>1872</span></label>
+        <label><input type="radio" name="q9" value="C"/><span class="opt-label"><span class="opt-badge">C</span>1870</span></label>
+        <label><input type="radio" name="q9" value="D"/><span class="opt-label"><span class="opt-badge">D</span>1876</span></label>
+      </div>
+      <div class="explanation-box" id="expl-q9"><div class="expl-head">💡 Explanation</div>Keshava Chandra Sen founded the Indian Reform Association in <strong>1870</strong>. This led to the Native Marriage Act of 1872. He also started <em>The Indian Mirror</em> in 1861. Remember: Association (1870) → Act (1872).</div>
+    </div>
+
+    <div class="q-card" id="card-10">
+      <div class="q-text"><span class="q-num">10</span><span class="q-text-inner">Raja Ram Mohan Roy's lifespan was:</span></div>
+      <div class="options">
+        <label><input type="radio" name="q10" value="A"/><span class="opt-label"><span class="opt-badge">A</span>1824–1883</span></label>
+        <label><input type="radio" name="q10" value="B"/><span class="opt-label"><span class="opt-badge">B</span>1772–1833</span></label>
+        <label><input type="radio" name="q10" value="C"/><span class="opt-label"><span class="opt-badge">C</span>1820–1891</span></label>
+        <label><input type="radio" name="q10" value="D"/><span class="opt-label"><span class="opt-badge">D</span>1817–1898</span></label>
+      </div>
+      <div class="explanation-box" id="expl-q10"><div class="expl-head">💡 Explanation</div>Raja Ram Mohan Roy lived from <strong>1772 to 1833</strong>. The other dates: 1824–1883 = Dayananda Saraswati | 1820–1891 = Ishwar Chandra Vidyasagar | 1817–1898 = Sir Syed Ahmad Khan.</div>
+    </div>
+
+    <div class="section-label">🕌 Section B — Wahabi & Deoband Movements</div>
+
+    <div class="q-card" id="card-11">
+      <div class="q-text"><span class="q-num">11</span><span class="q-text-inner">Wahabi Movement was started by:</span></div>
+      <div class="options">
+        <label><input type="radio" name="q11" value="A"/><span class="opt-label"><span class="opt-badge">A</span>Sir Syed Ahmad Khan</span></label>
+        <label><input type="radio" name="q11" value="B"/><span class="opt-label"><span class="opt-badge">B</span>Mohammad Qasim Nanotavi</span></label>
+        <label><input type="radio" name="q11" value="C"/><span class="opt-label"><span class="opt-badge">C</span>Sayyid Ahmad of Rae Bareli</span></label>
+        <label><input type="radio" name="q11" value="D"/><span class="opt-label"><span class="opt-badge">D</span>Mahmud-ul-Hasan</span></label>
+      </div>
+      <div class="explanation-box" id="expl-q11"><div class="expl-head">💡 Explanation</div>Wahabi Movement was started by <strong>Sayyid Ahmad of Rae Bareli</strong> around Patna, Bihar in 1820. It was a Sunni Islamic revivalist movement aimed at restoration of original Islam (Dar-ul-Islam).</div>
+    </div>
+
+    <div class="q-card" id="card-12">
+      <div class="q-text"><span class="q-num">12</span><span class="q-text-inner">Wahabi Movement was one of the primary causes of:</span></div>
+      <div class="options">
+        <label><input type="radio" name="q12" value="A"/><span class="opt-label"><span class="opt-badge">A</span>Partition of Bengal</span></label>
+        <label><input type="radio" name="q12" value="B"/><span class="opt-label"><span class="opt-badge">B</span>Surat Split</span></label>
+        <label><input type="radio" name="q12" value="C"/><span class="opt-label"><span class="opt-badge">C</span>Muslim uprising of 1857</span></label>
+        <label><input type="radio" name="q12" value="D"/><span class="opt-label"><span class="opt-badge">D</span>Non-Cooperation Movement</span></label>
+      </div>
+      <div class="explanation-box" id="expl-q12"><div class="expl-head">💡 Explanation</div>Wahabi Movement was one of the primary causes of the <strong>Muslim uprising of 1857</strong>. It ultimately created isolationist and separatist tendencies among Indian Muslims and did NOT develop into a nationalist movement.</div>
+    </div>
+
+    <div class="q-card" id="card-13">
+      <div class="q-text"><span class="q-num">13</span><span class="q-text-inner">Deoband Movement was organised by:</span></div>
+      <div class="options">
+        <label><input type="radio" name="q13" value="A"/><span class="opt-label"><span class="opt-badge">A</span>Sayyid Ahmad Khan</span></label>
+        <label><input type="radio" name="q13" value="B"/><span class="opt-label"><span class="opt-badge">B</span>Mohammad Qasim Nanotavi & Rashid Ahmed Gangohi</span></label>
+        <label><input type="radio" name="q13" value="C"/><span class="opt-label"><span class="opt-badge">C</span>Mahmud-ul-Hasan</span></label>
+        <label><input type="radio" name="q13" value="D"/><span class="opt-label"><span class="opt-badge">D</span>Shibli Numani</span></label>
+      </div>
+      <div class="explanation-box" id="expl-q13"><div class="expl-head">💡 Explanation</div><strong>Mohammad Qasim Nanotavi and Rashid Ahmed Gangohi</strong> organised the Deoband Movement at Darul Uloom, Deoband, Saharanpur district, UP in 1866. Mahmud-ul-Hasan and Shibli Numani were important later leaders.</div>
+    </div>
+
+    <div class="q-card" id="card-14">
+      <div class="q-text"><span class="q-num">14</span><span class="q-text-inner">Year of Deoband school establishment:</span></div>
+      <div class="options">
+        <label><input type="radio" name="q14" value="A"/><span class="opt-label"><span class="opt-badge">A</span>1820</span></label>
+        <label><input type="radio" name="q14" value="B"/><span class="opt-label"><span class="opt-badge">B</span>1873</span></label>
+        <label><input type="radio" name="q14" value="C"/><span class="opt-label"><span class="opt-badge">C</span>1866</span></label>
+        <label><input type="radio" name="q14" value="D"/><span class="opt-label"><span class="opt-badge">D</span>1875</span></label>
+      </div>
+      <div class="explanation-box" id="expl-q14"><div class="expl-head">💡 Explanation</div>Deoband school was established in <strong>1866</strong> at Deoband, Saharanpur district, UP. Remember: Wahabi = 1820, Deoband = 1866, Satyashodhak Samaj = 1873, Triple 1875 movements come later.</div>
+    </div>
+
+    <div class="q-card" id="card-15">
+      <div class="q-text"><span class="q-num">15</span><span class="q-text-inner">Aligarh Movement was Pro-British while Deoband Movement was:</span></div>
+      <div class="options">
+        <label><input type="radio" name="q15" value="A"/><span class="opt-label"><span class="opt-badge">A</span>Also pro-British</span></label>
+        <label><input type="radio" name="q15" value="B"/><span class="opt-label"><span class="opt-badge">B</span>Neutral</span></label>
+        <label><input type="radio" name="q15" value="C"/><span class="opt-label"><span class="opt-badge">C</span>Anti-British (aimed at moral/religious regeneration)</span></label>
+        <label><input type="radio" name="q15" value="D"/><span class="opt-label"><span class="opt-badge">D</span>Pro-Congress</span></label>
+      </div>
+      <div class="explanation-box" id="expl-q15"><div class="expl-head">💡 Explanation</div>Deoband was <strong>Anti-British</strong> — it aimed at moral and religious regeneration and keeping alive the spirit of jihad against foreign rulers. This is the KEY contrast: Aligarh (Pro-British, modern education) vs Deoband (Anti-British, religious regeneration).</div>
+    </div>
+
+    <div class="q-card" id="card-16">
+      <div class="q-text"><span class="q-num">16</span><span class="q-text-inner">The twin objectives of Deoband Movement were:</span></div>
+      <div class="options">
+        <label><input type="radio" name="q16" value="A"/><span class="opt-label"><span class="opt-badge">A</span>Western education + Political agitation</span></label>
+        <label><input type="radio" name="q16" value="B"/><span class="opt-label"><span class="opt-badge">B</span>Propagating pure Islam + Spirit of jihad against foreign rulers</span></label>
+        <label><input type="radio" name="q16" value="C"/><span class="opt-label"><span class="opt-badge">C</span>Hindu-Muslim unity + Social reform</span></label>
+        <label><input type="radio" name="q16" value="D"/><span class="opt-label"><span class="opt-badge">D</span>Education + Widow remarriage</span></label>
+      </div>
+      <div class="explanation-box" id="expl-q16"><div class="expl-head">💡 Explanation</div>The twin objectives of Deoband: (1) <strong>Propagate pure teachings of Quran and Hadis</strong>, and (2) <strong>Keep alive spirit of jihad against foreign rulers</strong>. Unlike Aligarh which focused on Western education and British-Muslim relations.</div>
+    </div>
+
+    <div class="q-card" id="card-17">
+      <div class="q-text"><span class="q-num">17</span><span class="q-text-inner">Important leaders of Deoband Movement were:</span></div>
+      <div class="options">
+        <label><input type="radio" name="q17" value="A"/><span class="opt-label"><span class="opt-badge">A</span>Roy and Sen</span></label>
+        <label><input type="radio" name="q17" value="B"/><span class="opt-label"><span class="opt-badge">B</span>Mahmud-ul-Hasan and Shibli Numani</span></label>
+        <label><input type="radio" name="q17" value="C"/><span class="opt-label"><span class="opt-badge">C</span>Nanotavi and Khan</span></label>
+        <label><input type="radio" name="q17" value="D"/><span class="opt-label"><span class="opt-badge">D</span>Ranade and Gokhale</span></label>
+      </div>
+      <div class="explanation-box" id="expl-q17"><div class="expl-head">💡 Explanation</div>Important leaders of Deoband Movement: <strong>Mahmud-ul-Hasan</strong> and <strong>Shibli Numani</strong>. The founders were Nanotavi and Gangohi (1866). Mahmud-ul-Hasan and Shibli Numani were prominent later leaders.</div>
+    </div>
+
+    <div class="q-card" id="card-18">
+      <div class="q-text"><span class="q-num">18</span><span class="q-text-inner">Wahabi Movement ultimately created which kind of tendencies among Indian Muslims?</span></div>
+      <div class="options">
+        <label><input type="radio" name="q18" value="A"/><span class="opt-label"><span class="opt-badge">A</span>Nationalist</span></label>
+        <label><input type="radio" name="q18" value="B"/><span class="opt-label"><span class="opt-badge">B</span>Pro-British</span></label>
+        <label><input type="radio" name="q18" value="C"/><span class="opt-label"><span class="opt-badge">C</span>Progressive</span></label>
+        <label><input type="radio" name="q18" value="D"/><span class="opt-label"><span class="opt-badge">D</span>Isolationist and separatist</span></label>
+      </div>
+      <div class="explanation-box" id="expl-q18"><div class="expl-head">💡 Explanation</div>Wahabi Movement created <strong>isolationist and separatist</strong> tendencies among Indian Muslims. It did NOT develop into a nationalist movement — this is an important distinction from other social-religious reform movements.</div>
+    </div>
+
+    <div class="q-card" id="card-19">
+      <div class="q-text"><span class="q-num">19</span><span class="q-text-inner">Wahabi Movement aimed at restoration of:</span></div>
+      <div class="options">
+        <label><input type="radio" name="q19" value="A"/><span class="opt-label"><span class="opt-badge">A</span>Mughal Empire</span></label>
+        <label><input type="radio" name="q19" value="B"/><span class="opt-label"><span class="opt-badge">B</span>British dominance</span></label>
+        <label><input type="radio" name="q19" value="C"/><span class="opt-label"><span class="opt-badge">C</span>Original spirit of Islam (Dar-ul-Islam)</span></label>
+        <label><input type="radio" name="q19" value="D"/><span class="opt-label"><span class="opt-badge">D</span>Sikh kingdom in Punjab</span></label>
+      </div>
+      <div class="explanation-box" id="expl-q19"><div class="expl-head">💡 Explanation</div>Wahabi Movement was a famous Sunni Islamic revivalist movement that aimed at restoration of the <strong>original spirit of Islam (Dar-ul-Islam)</strong>. It sought to protect Islam from influence of Sikhs in Punjab and British in Bengal.</div>
+    </div>
+
+    <div class="q-card" id="card-20">
+      <div class="q-text"><span class="q-num">20</span><span class="q-text-inner">Deoband school is located in which district?</span></div>
+      <div class="options">
+        <label><input type="radio" name="q20" value="A"/><span class="opt-label"><span class="opt-badge">A</span>Aligarh, UP</span></label>
+        <label><input type="radio" name="q20" value="B"/><span class="opt-label"><span class="opt-badge">B</span>Varanasi, UP</span></label>
+        <label><input type="radio" name="q20" value="C"/><span class="opt-label"><span class="opt-badge">C</span>Saharanpur district, UP</span></label>
+        <label><input type="radio" name="q20" value="D"/><span class="opt-label"><span class="opt-badge">D</span>Patna, Bihar</span></label>
+      </div>
+      <div class="explanation-box" id="expl-q20"><div class="expl-head">💡 Explanation</div>Darul Uloom Deoband is located in <strong>Deoband, Saharanpur district, UP</strong>. Common trap: Aligarh = Aligarh Movement (Sir Syed Ahmad Khan) and Patna = Wahabi Movement (Sayyid Ahmad). Deoband = Saharanpur.</div>
+    </div>
+
+
+    <div class="section-label">🌾 Section C — Satyashodhak Samaj & Phule</div>
+
+    <div class="q-card" id="card-21">
+      <div class="q-text"><span class="q-num">21</span><span class="q-text-inner">The twin objectives of Deoband Movement were:</span></div>
+      <div class="options">
+        <label><input type="radio" name="q21" value="A"/><span class="opt-label"><span class="opt-badge">A</span>Western education + Political agitation</span></label>
+        <label><input type="radio" name="q21" value="B"/><span class="opt-label"><span class="opt-badge">B</span>Propagating pure Islam + Spirit of jihad against foreign rulers</span></label>
+        <label><input type="radio" name="q21" value="C"/><span class="opt-label"><span class="opt-badge">C</span>Hindu-Muslim unity + Social reform</span></label>
+        <label><input type="radio" name="q21" value="D"/><span class="opt-label"><span class="opt-badge">D</span>Education + Widow remarriage</span></label>
+      </div>
+      <div class="explanation-box" id="expl-q21"><div class="expl-head">💡 Explanation</div>The twin objectives: (1) <strong>Propagate pure teachings of Quran and Hadis</strong>, (2) <strong>Keep alive spirit of jihad against foreign rulers</strong>. Unlike Aligarh which focused on Western education.</div>
+    </div>
+
+    <div class="q-card" id="card-22">
+      <div class="q-text"><span class="q-num">22</span><span class="q-text-inner">Important leaders of Deoband Movement were:</span></div>
+      <div class="options">
+        <label><input type="radio" name="q22" value="A"/><span class="opt-label"><span class="opt-badge">A</span>Roy and Sen</span></label>
+        <label><input type="radio" name="q22" value="B"/><span class="opt-label"><span class="opt-badge">B</span>Mahmud-ul-Hasan and Shibli Numani</span></label>
+        <label><input type="radio" name="q22" value="C"/><span class="opt-label"><span class="opt-badge">C</span>Nanotavi and Khan</span></label>
+        <label><input type="radio" name="q22" value="D"/><span class="opt-label"><span class="opt-badge">D</span>Ranade and Gokhale</span></label>
+      </div>
+      <div class="explanation-box" id="expl-q22"><div class="expl-head">💡 Explanation</div>Important later leaders of Deoband Movement: <strong>Mahmud-ul-Hasan</strong> and <strong>Shibli Numani</strong>. Founders (1866) were Nanotavi and Gangohi — don't confuse founders with important leaders.</div>
+    </div>
+
+    <div class="q-card" id="card-23">
+      <div class="q-text"><span class="q-num">23</span><span class="q-text-inner">Aligarh Movement was Pro-British while Deoband Movement was:</span></div>
+      <div class="options">
+        <label><input type="radio" name="q23" value="A"/><span class="opt-label"><span class="opt-badge">A</span>Also pro-British</span></label>
+        <label><input type="radio" name="q23" value="B"/><span class="opt-label"><span class="opt-badge">B</span>Neutral</span></label>
+        <label><input type="radio" name="q23" value="C"/><span class="opt-label"><span class="opt-badge">C</span>Anti-British (aimed at moral/religious regeneration)</span></label>
+        <label><input type="radio" name="q23" value="D"/><span class="opt-label"><span class="opt-badge">D</span>Pro-Congress</span></label>
+      </div>
+      <div class="explanation-box" id="expl-q23"><div class="expl-head">💡 Explanation</div>Deoband was <strong>Anti-British</strong> — key contrast with Aligarh. Aligarh = Pro-British, modern education, Western outlook. Deoband = Anti-British, Islamic regeneration, spirit of jihad.</div>
+    </div>
+
+    <div class="q-card" id="card-24">
+      <div class="q-text"><span class="q-num">24</span><span class="q-text-inner">Satyashodhak Samaj was founded by:</span></div>
+      <div class="options">
+        <label><input type="radio" name="q24" value="A"/><span class="opt-label"><span class="opt-badge">A</span>Savitribai Phule</span></label>
+        <label><input type="radio" name="q24" value="B"/><span class="opt-label"><span class="opt-badge">B</span>Jyotiba Phule</span></label>
+        <label><input type="radio" name="q24" value="C"/><span class="opt-label"><span class="opt-badge">C</span>Dayananda Saraswati</span></label>
+        <label><input type="radio" name="q24" value="D"/><span class="opt-label"><span class="opt-badge">D</span>Govind Ranade</span></label>
+      </div>
+      <div class="explanation-box" id="expl-q24"><div class="expl-head">💡 Explanation</div><strong>Jyotiba Phule</strong> founded Satyashodhak Samaj (Truth-Seekers' Society) in 1873. He also coined the term "Dalits" and was a champion against caste discrimination. Savitribai was his wife and first female teacher.</div>
+    </div>
+
+    <div class="q-card" id="card-25">
+      <div class="q-text"><span class="q-num">25</span><span class="q-text-inner">Satyashodhak Samaj means:</span></div>
+      <div class="options">
+        <label><input type="radio" name="q25" value="A"/><span class="opt-label"><span class="opt-badge">A</span>Social Welfare Society</span></label>
+        <label><input type="radio" name="q25" value="B"/><span class="opt-label"><span class="opt-badge">B</span>Truth-Seekers' Society</span></label>
+        <label><input type="radio" name="q25" value="C"/><span class="opt-label"><span class="opt-badge">C</span>Reform Society</span></label>
+        <label><input type="radio" name="q25" value="D"/><span class="opt-label"><span class="opt-badge">D</span>Freedom Society</span></label>
+      </div>
+      <div class="explanation-box" id="expl-q25"><div class="expl-head">💡 Explanation</div><strong>Satyashodhak = Truth-Seekers' Society</strong>. "Satya" = Truth, "Shodhak" = Seeker/Searcher. Founded 1873 by Jyotiba Phule to fight Brahmin domination and caste oppression in Maharashtra.</div>
+    </div>
+
+    <div class="q-card" id="card-26">
+      <div class="q-text"><span class="q-num">26</span><span class="q-text-inner">The term "Dalits" was first coined by:</span></div>
+      <div class="options">
+        <label><input type="radio" name="q26" value="A"/><span class="opt-label"><span class="opt-badge">A</span>B.R. Ambedkar</span></label>
+        <label><input type="radio" name="q26" value="B"/><span class="opt-label"><span class="opt-badge">B</span>Gandhi</span></label>
+        <label><input type="radio" name="q26" value="C"/><span class="opt-label"><span class="opt-badge">C</span>Jyotiba Phule</span></label>
+        <label><input type="radio" name="q26" value="D"/><span class="opt-label"><span class="opt-badge">D</span>Periyar</span></label>
+      </div>
+      <div class="explanation-box" id="expl-q26"><div class="expl-head">💡 Explanation</div><strong>Jyotiba Phule</strong> first coined the term "Dalits." Common trap: many students say Ambedkar — but Phule coined it earlier. Ambedkar later popularized and championed Dalit rights.</div>
+    </div>
+
+    <div class="q-card" id="card-27">
+      <div class="q-text"><span class="q-num">27</span><span class="q-text-inner">Jyotiba Phule was Poona Municipality Commissioner between:</span></div>
+      <div class="options">
+        <label><input type="radio" name="q27" value="A"/><span class="opt-label"><span class="opt-badge">A</span>1848–1851</span></label>
+        <label><input type="radio" name="q27" value="B"/><span class="opt-label"><span class="opt-badge">B</span>1876–1883</span></label>
+        <label><input type="radio" name="q27" value="C"/><span class="opt-label"><span class="opt-badge">C</span>1873–1880</span></label>
+        <label><input type="radio" name="q27" value="D"/><span class="opt-label"><span class="opt-badge">D</span>1888–1895</span></label>
+      </div>
+      <div class="explanation-box" id="expl-q27"><div class="expl-head">💡 Explanation</div>Jyotiba Phule served as Poona Municipality Commissioner from <strong>1876 to 1883</strong>. He received the honorary title "Mahatma" in 1888 from Vithalrao Krishnaji Vandekar.</div>
+    </div>
+
+    <div class="q-card" id="card-28">
+      <div class="q-text"><span class="q-num">28</span><span class="q-text-inner">Who gave Jyotiba Phule the honorary title "Mahatma" in 1888?</span></div>
+      <div class="options">
+        <label><input type="radio" name="q28" value="A"/><span class="opt-label"><span class="opt-badge">A</span>Raja Ram Mohan Roy</span></label>
+        <label><input type="radio" name="q28" value="B"/><span class="opt-label"><span class="opt-badge">B</span>Gandhi</span></label>
+        <label><input type="radio" name="q28" value="C"/><span class="opt-label"><span class="opt-badge">C</span>Dayananda Saraswati</span></label>
+        <label><input type="radio" name="q28" value="D"/><span class="opt-label"><span class="opt-badge">D</span>Vithalrao Krishnaji Vandekar</span></label>
+      </div>
+      <div class="explanation-box" id="expl-q28"><div class="expl-head">💡 Explanation</div><strong>Vithalrao Krishnaji Vandekar</strong> gave Jyotiba Phule the title "Mahatma" in 1888. Note: Gandhi received the title "Mahatma" from Rabindranath Tagore — don't confuse the two!</div>
+    </div>
+
+    <div class="q-card" id="card-29">
+      <div class="q-text"><span class="q-num">29</span><span class="q-text-inner">Savitribai Phule is considered the pioneer of:</span></div>
+      <div class="options">
+        <label><input type="radio" name="q29" value="A"/><span class="opt-label"><span class="opt-badge">A</span>Caste reform</span></label>
+        <label><input type="radio" name="q29" value="B"/><span class="opt-label"><span class="opt-badge">B</span>Feminist movement in India</span></label>
+        <label><input type="radio" name="q29" value="C"/><span class="opt-label"><span class="opt-badge">C</span>Aligarh Movement</span></label>
+        <label><input type="radio" name="q29" value="D"/><span class="opt-label"><span class="opt-badge">D</span>Sikh reform</span></label>
+      </div>
+      <div class="explanation-box" id="expl-q29"><div class="expl-head">💡 Explanation</div><strong>Savitribai Phule</strong> is considered the pioneer of the <strong>feminist movement in India</strong>. She was the first female teacher, founded Mahila Seva Mandal (1852), and her work inspired Gandhi and Ambedkar.</div>
+    </div>
+
+    <div class="q-card" id="card-30">
+      <div class="q-text"><span class="q-num">30</span><span class="q-text-inner">Savitribai Phule was the first:</span></div>
+      <div class="options">
+        <label><input type="radio" name="q30" value="A"/><span class="opt-label"><span class="opt-badge">A</span>Female politician</span></label>
+        <label><input type="radio" name="q30" value="B"/><span class="opt-label"><span class="opt-badge">B</span>Female teacher in India</span></label>
+        <label><input type="radio" name="q30" value="C"/><span class="opt-label"><span class="opt-badge">C</span>Female lawyer</span></label>
+        <label><input type="radio" name="q30" value="D"/><span class="opt-label"><span class="opt-badge">D</span>Female doctor</span></label>
+      </div>
+      <div class="explanation-box" id="expl-q30"><div class="expl-head">💡 Explanation</div>Savitribai Phule was India's <strong>first female teacher</strong>. She and Jyotiba established the first Modern Girls' School in 1848 at Pune. By 1851, they had 3 schools in Pune.</div>
+    </div>
+
+    <div class="q-card" id="card-31">
+      <div class="q-text"><span class="q-num">31</span><span class="q-text-inner">Modern Girls' School was established in:</span></div>
+      <div class="options">
+        <label><input type="radio" name="q31" value="A"/><span class="opt-label"><span class="opt-badge">A</span>1848 in Pune</span></label>
+        <label><input type="radio" name="q31" value="B"/><span class="opt-label"><span class="opt-badge">B</span>1852 in Pune</span></label>
+        <label><input type="radio" name="q31" value="C"/><span class="opt-label"><span class="opt-badge">C</span>1873 in Mumbai</span></label>
+        <label><input type="radio" name="q31" value="D"/><span class="opt-label"><span class="opt-badge">D</span>1851 in Satara</span></label>
+      </div>
+      <div class="explanation-box" id="expl-q31"><div class="expl-head">💡 Explanation</div>Modern Girls' School was established in <strong>1848 in Pune</strong> by Savitribai and Jyotiba Phule. Key dates: Girls' School = 1848, Mahila Seva Mandal = 1852, Satyashodhak Samaj = 1873.</div>
+    </div>
+
+    <div class="q-card" id="card-32">
+      <div class="q-text"><span class="q-num">32</span><span class="q-text-inner">Mahila Seva Mandal was founded by Savitribai Phule in:</span></div>
+      <div class="options">
+        <label><input type="radio" name="q32" value="A"/><span class="opt-label"><span class="opt-badge">A</span>1848</span></label>
+        <label><input type="radio" name="q32" value="B"/><span class="opt-label"><span class="opt-badge">B</span>1851</span></label>
+        <label><input type="radio" name="q32" value="C"/><span class="opt-label"><span class="opt-badge">C</span>1852</span></label>
+        <label><input type="radio" name="q32" value="D"/><span class="opt-label"><span class="opt-badge">D</span>1873</span></label>
+      </div>
+      <div class="explanation-box" id="expl-q32"><div class="expl-head">💡 Explanation</div>Mahila Seva Mandal was founded in <strong>1852</strong> by Savitribai Phule. Sequence: Girls' School 1848 → 3 schools by 1851 → Mahila Seva Mandal 1852 → Satyashodhak Samaj 1873.</div>
+    </div>
+
+    <div class="q-card" id="card-33">
+      <div class="q-text"><span class="q-num">33</span><span class="q-text-inner">By 1851, Savitribai and Jyotiba had established how many schools in Pune?</span></div>
+      <div class="options">
+        <label><input type="radio" name="q33" value="A"/><span class="opt-label"><span class="opt-badge">A</span>Two</span></label>
+        <label><input type="radio" name="q33" value="B"/><span class="opt-label"><span class="opt-badge">B</span>Three</span></label>
+        <label><input type="radio" name="q33" value="C"/><span class="opt-label"><span class="opt-badge">C</span>Five</span></label>
+        <label><input type="radio" name="q33" value="D"/><span class="opt-label"><span class="opt-badge">D</span>Seven</span></label>
+      </div>
+      <div class="explanation-box" id="expl-q33"><div class="expl-head">💡 Explanation</div>By 1851, Savitribai and Jyotiba had established <strong>three schools</strong> in Pune. They started with the first Modern Girls' School in 1848 and rapidly expanded girls' education in Maharashtra.</div>
+    </div>
+
+    <div class="q-card" id="card-34">
+      <div class="q-text"><span class="q-num">34</span><span class="q-text-inner">Savitribai Phule's work inspired which two leaders?</span></div>
+      <div class="options">
+        <label><input type="radio" name="q34" value="A"/><span class="opt-label"><span class="opt-badge">A</span>Nehru and Patel</span></label>
+        <label><input type="radio" name="q34" value="B"/><span class="opt-label"><span class="opt-badge">B</span>Gandhi and Dr. B.R. Ambedkar</span></label>
+        <label><input type="radio" name="q34" value="C"/><span class="opt-label"><span class="opt-badge">C</span>Tilak and Gokhale</span></label>
+        <label><input type="radio" name="q34" value="D"/><span class="opt-label"><span class="opt-badge">D</span>Vivekananda and Roy</span></label>
+      </div>
+      <div class="explanation-box" id="expl-q34"><div class="expl-head">💡 Explanation</div>Savitribai Phule's work inspired <strong>Gandhi and Dr. B.R. Ambedkar</strong>. Her efforts in girls' education and anti-caste work laid the foundation for later independence and Dalit rights movements.</div>
+    </div>
+
+    <div class="q-card" id="card-35">
+      <div class="q-text"><span class="q-num">35</span><span class="q-text-inner">Satyashodhak Samaj used which medium to convey anti-Brahmin messages?</span></div>
+      <div class="options">
+        <label><input type="radio" name="q35" value="A"/><span class="opt-label"><span class="opt-badge">A</span>Newspapers</span></label>
+        <label><input type="radio" name="q35" value="B"/><span class="opt-label"><span class="opt-badge">B</span>Pamphlets</span></label>
+        <label><input type="radio" name="q35" value="C"/><span class="opt-label"><span class="opt-badge">C</span>Schools</span></label>
+        <label><input type="radio" name="q35" value="D"/><span class="opt-label"><span class="opt-badge">D</span>Tamashas (folk dramas) and Ganpati festival</span></label>
+      </div>
+      <div class="explanation-box" id="expl-q35"><div class="expl-head">💡 Explanation</div>Satyashodhak Samaj used <strong>Tamashas (folk dramas) and Ganpati festival</strong> to spread anti-Brahmin messages to common people. This mass-communication approach was very effective in rural Maharashtra.</div>
+    </div>
+
+    <div class="section-label">⚔️ Section D — Singh Sabha</div>
+
+    <div class="q-card" id="card-36">
+      <div class="q-text"><span class="q-num">36</span><span class="q-text-inner">Singh Sabha was founded at Amritsar on:</span></div>
+      <div class="options">
+        <label><input type="radio" name="q36" value="A"/><span class="opt-label"><span class="opt-badge">A</span>September 1, 1873</span></label>
+        <label><input type="radio" name="q36" value="B"/><span class="opt-label"><span class="opt-badge">B</span>January 1, 1873</span></label>
+        <label><input type="radio" name="q36" value="C"/><span class="opt-label"><span class="opt-badge">C</span>October 1, 1873</span></label>
+        <label><input type="radio" name="q36" value="D"/><span class="opt-label"><span class="opt-badge">D</span>November 1, 1873</span></label>
+      </div>
+      <div class="explanation-box" id="expl-q36"><div class="expl-head">💡 Explanation</div>Singh Sabha was founded at Amritsar on <strong>October 1, 1873</strong> by Thakur Singh Sandhawalia and Giani Gian Singh. It aimed at Sikh religious reform and revival of Sikh traditions.</div>
+    </div>
+
+    <div class="q-card" id="card-37">
+      <div class="q-text"><span class="q-num">37</span><span class="q-text-inner">Singh Sabha was founded by:</span></div>
+      <div class="options">
+        <label><input type="radio" name="q37" value="A"/><span class="opt-label"><span class="opt-badge">A</span>Dayananda and Roy</span></label>
+        <label><input type="radio" name="q37" value="B"/><span class="opt-label"><span class="opt-badge">B</span>Thakur Singh Sandhawalia and Giani Gian Singh</span></label>
+        <label><input type="radio" name="q37" value="C"/><span class="opt-label"><span class="opt-badge">C</span>Syed Khan and Nanotavi</span></label>
+        <label><input type="radio" name="q37" value="D"/><span class="opt-label"><span class="opt-badge">D</span>Vivekananda and Besant</span></label>
+      </div>
+      <div class="explanation-box" id="expl-q37"><div class="expl-head">💡 Explanation</div>Singh Sabha was founded by <strong>Thakur Singh Sandhawalia and Giani Gian Singh</strong> in 1873. It led to the establishment of Khalsa College (1892) and Khalsa Diwan at Lahore (1900).</div>
+    </div>
+
+    <div class="q-card" id="card-38">
+      <div class="q-text"><span class="q-num">38</span><span class="q-text-inner">Khalsa College was founded at Amritsar in:</span></div>
+      <div class="options">
+        <label><input type="radio" name="q38" value="A"/><span class="opt-label"><span class="opt-badge">A</span>1873</span></label>
+        <label><input type="radio" name="q38" value="B"/><span class="opt-label"><span class="opt-badge">B</span>1882</span></label>
+        <label><input type="radio" name="q38" value="C"/><span class="opt-label"><span class="opt-badge">C</span>1892</span></label>
+        <label><input type="radio" name="q38" value="D"/><span class="opt-label"><span class="opt-badge">D</span>1900</span></label>
+      </div>
+      <div class="explanation-box" id="expl-q38"><div class="expl-head">💡 Explanation</div>Khalsa College was founded at Amritsar in <strong>1892</strong>. Sequence: Singh Sabha 1873 → Khalsa College 1892 → Khalsa Diwan at Lahore 1900. Don't mix up these three dates.</div>
+    </div>
+
+    <div class="q-card" id="card-39">
+      <div class="q-text"><span class="q-num">39</span><span class="q-text-inner">Khalsa Diwan was established at Lahore in:</span></div>
+      <div class="options">
+        <label><input type="radio" name="q39" value="A"/><span class="opt-label"><span class="opt-badge">A</span>1892</span></label>
+        <label><input type="radio" name="q39" value="B"/><span class="opt-label"><span class="opt-badge">B</span>1895</span></label>
+        <label><input type="radio" name="q39" value="C"/><span class="opt-label"><span class="opt-badge">C</span>1900</span></label>
+        <label><input type="radio" name="q39" value="D"/><span class="opt-label"><span class="opt-badge">D</span>1905</span></label>
+      </div>
+      <div class="explanation-box" id="expl-q39"><div class="expl-head">💡 Explanation</div>Khalsa Diwan was established at Lahore in <strong>1900</strong>. Tip: Khalsa College (Amritsar) = 1892, Khalsa Diwan (Lahore) = 1900 — always remember city + year together.</div>
+    </div>
+
+    <div class="q-card" id="card-40">
+      <div class="q-text"><span class="q-num">40</span><span class="q-text-inner">Khalsa College was established to promote:</span></div>
+      <div class="options">
+        <label><input type="radio" name="q40" value="A"/><span class="opt-label"><span class="opt-badge">A</span>English and Urdu</span></label>
+        <label><input type="radio" name="q40" value="B"/><span class="opt-label"><span class="opt-badge">B</span>Hindi and Sanskrit</span></label>
+        <label><input type="radio" name="q40" value="C"/><span class="opt-label"><span class="opt-badge">C</span>Gurumukhi language, Sikh learning, Punjabi literature</span></label>
+        <label><input type="radio" name="q40" value="D"/><span class="opt-label"><span class="opt-badge">D</span>Tamil and Telugu</span></label>
+      </div>
+      <div class="explanation-box" id="expl-q40"><div class="expl-head">💡 Explanation</div>Khalsa College was established to promote <strong>Gurumukhi language, Sikh learning, and Punjabi literature</strong>. The Singh Sabha movement focused on reviving Sikh identity, scripture, and regional language.</div>
+    </div>
+
+    <div class="section-label">🔮 Section E — Theosophical Society</div>
+
+    <div class="q-card" id="card-41">
+      <div class="q-text"><span class="q-num">41</span><span class="q-text-inner">Theosophical Society was founded by:</span></div>
+      <div class="options">
+        <label><input type="radio" name="q41" value="A"/><span class="opt-label"><span class="opt-badge">A</span>Annie Besant alone</span></label>
+        <label><input type="radio" name="q41" value="B"/><span class="opt-label"><span class="opt-badge">B</span>Vivekananda and Roy</span></label>
+        <label><input type="radio" name="q41" value="C"/><span class="opt-label"><span class="opt-badge">C</span>Madame H.P. Blavatsky and Colonel M.S. Olcott</span></label>
+        <label><input type="radio" name="q41" value="D"/><span class="opt-label"><span class="opt-badge">D</span>Dayananda and Phule</span></label>
+      </div>
+      <div class="explanation-box" id="expl-q41"><div class="expl-head">💡 Explanation</div>Theosophical Society was founded by <strong>Madame H.P. Blavatsky and Colonel M.S. Olcott</strong> in New York (1875). Annie Besant was a later prominent leader — not the founder.</div>
+    </div>
+
+    <div class="q-card" id="card-42">
+      <div class="q-text"><span class="q-num">42</span><span class="q-text-inner">Theosophical Society was founded in:</span></div>
+      <div class="options">
+        <label><input type="radio" name="q42" value="A"/><span class="opt-label"><span class="opt-badge">A</span>London</span></label>
+        <label><input type="radio" name="q42" value="B"/><span class="opt-label"><span class="opt-badge">B</span>Madras</span></label>
+        <label><input type="radio" name="q42" value="C"/><span class="opt-label"><span class="opt-badge">C</span>Calcutta</span></label>
+        <label><input type="radio" name="q42" value="D"/><span class="opt-label"><span class="opt-badge">D</span>New York (1875)</span></label>
+      </div>
+      <div class="explanation-box" id="expl-q42"><div class="expl-head">💡 Explanation</div>Theosophical Society was founded in <strong>New York in 1875</strong>. Its HQ later moved to India (Adyar, near Madras) in 1882. Don't confuse founding location (NY) with Indian HQ (Adyar).</div>
+    </div>
+
+    <div class="q-card" id="card-43">
+      <div class="q-text"><span class="q-num">43</span><span class="q-text-inner">Theosophical Society's HQ moved to India in:</span></div>
+      <div class="options">
+        <label><input type="radio" name="q43" value="A"/><span class="opt-label"><span class="opt-badge">A</span>1875</span></label>
+        <label><input type="radio" name="q43" value="B"/><span class="opt-label"><span class="opt-badge">B</span>1882</span></label>
+        <label><input type="radio" name="q43" value="C"/><span class="opt-label"><span class="opt-badge">C</span>1886</span></label>
+        <label><input type="radio" name="q43" value="D"/><span class="opt-label"><span class="opt-badge">D</span>1897</span></label>
+      </div>
+      <div class="explanation-box" id="expl-q43"><div class="expl-head">💡 Explanation</div>Theosophical Society's HQ moved to India in <strong>1882</strong>, specifically to Adyar near Madras (Chennai). Founded New York 1875 → Moved India 1882. The 7-year gap is a common exam question.</div>
+    </div>
+
+    <div class="q-card" id="card-44">
+      <div class="q-text"><span class="q-num">44</span><span class="q-text-inner">Theosophical Society's Indian HQ was at:</span></div>
+      <div class="options">
+        <label><input type="radio" name="q44" value="A"/><span class="opt-label"><span class="opt-badge">A</span>Mumbai</span></label>
+        <label><input type="radio" name="q44" value="B"/><span class="opt-label"><span class="opt-badge">B</span>Calcutta</span></label>
+        <label><input type="radio" name="q44" value="C"/><span class="opt-label"><span class="opt-badge">C</span>Adyar, near Madras (Chennai)</span></label>
+        <label><input type="radio" name="q44" value="D"/><span class="opt-label"><span class="opt-badge">D</span>Pune</span></label>
+      </div>
+      <div class="explanation-box" id="expl-q44"><div class="expl-head">💡 Explanation</div>Theosophical Society's Indian HQ was at <strong>Adyar, near Madras (Chennai)</strong>. Adyar is a neighbourhood in Chennai — this is a very specific detail that often appears in exams.</div>
+    </div>
+
+    <div class="q-card" id="card-45">
+      <div class="q-text"><span class="q-num">45</span><span class="q-text-inner">A prominent leader of the Theosophical Society was:</span></div>
+      <div class="options">
+        <label><input type="radio" name="q45" value="A"/><span class="opt-label"><span class="opt-badge">A</span>Savitribai Phule</span></label>
+        <label><input type="radio" name="q45" value="B"/><span class="opt-label"><span class="opt-badge">B</span>Gokhale</span></label>
+        <label><input type="radio" name="q45" value="C"/><span class="opt-label"><span class="opt-badge">C</span>Annie Besant</span></label>
+        <label><input type="radio" name="q45" value="D"/><span class="opt-label"><span class="opt-badge">D</span>Dayananda Saraswati</span></label>
+      </div>
+      <div class="explanation-box" id="expl-q45"><div class="expl-head">💡 Explanation</div><strong>Annie Besant</strong> was the most prominent Indian leader of the Theosophical Society. She later also founded the Home Rule League (1916). She is a key figure connecting Theosophy with Indian nationalism.</div>
+    </div>
+
+    <div class="q-card" id="card-46">
+      <div class="q-text"><span class="q-num">46</span><span class="q-text-inner">The motto of Theosophical Society was:</span></div>
+      <div class="options">
+        <label><input type="radio" name="q46" value="A"/><span class="opt-label"><span class="opt-badge">A</span>"Back to the Vedas"</span></label>
+        <label><input type="radio" name="q46" value="B"/><span class="opt-label"><span class="opt-badge">B</span>"One Caste, One God"</span></label>
+        <label><input type="radio" name="q46" value="C"/><span class="opt-label"><span class="opt-badge">C</span>"Truth is God"</span></label>
+        <label><input type="radio" name="q46" value="D"/><span class="opt-label"><span class="opt-badge">D</span>"There is no religion higher than truth"</span></label>
+      </div>
+      <div class="explanation-box" id="expl-q46"><div class="expl-head">💡 Explanation</div>Theosophical Society's motto: <strong>"There is no religion higher than truth."</strong> Compare: Arya Samaj = "Back to the Vedas" | Gandhi = "Truth is God" | Theosophical Society = "No religion higher than truth."</div>
+    </div>
+
+    <div class="q-card" id="card-47">
+      <div class="q-text"><span class="q-num">47</span><span class="q-text-inner">The main aim of Theosophical Society was:</span></div>
+      <div class="options">
+        <label><input type="radio" name="q47" value="A"/><span class="opt-label"><span class="opt-badge">A</span>Convert people to Hinduism</span></label>
+        <label><input type="radio" name="q47" value="B"/><span class="opt-label"><span class="opt-badge">B</span>Establish schools</span></label>
+        <label><input type="radio" name="q47" value="C"/><span class="opt-label"><span class="opt-badge">C</span>Comparative study of various religions, philosophies, and sciences</span></label>
+        <label><input type="radio" name="q47" value="D"/><span class="opt-label"><span class="opt-badge">D</span>Political revolution</span></label>
+      </div>
+      <div class="explanation-box" id="expl-q47"><div class="expl-head">💡 Explanation</div>Main aim of Theosophical Society: <strong>Comparative study of various religions, philosophies, and sciences</strong>. It was a universal, non-dogmatic approach — unlike Arya Samaj which focused specifically on Vedic Hinduism.</div>
+    </div>
+
+    <div class="q-card" id="card-48">
+      <div class="q-text"><span class="q-num">48</span><span class="q-text-inner">Theosophical Society drew inspiration from:</span></div>
+      <div class="options">
+        <label><input type="radio" name="q48" value="A"/><span class="opt-label"><span class="opt-badge">A</span>Marxism and Socialism</span></label>
+        <label><input type="radio" name="q48" value="B"/><span class="opt-label"><span class="opt-badge">B</span>Upanishads, Samkhya, Yoga, Vedanta</span></label>
+        <label><input type="radio" name="q48" value="C"/><span class="opt-label"><span class="opt-badge">C</span>Christianity and Islam</span></label>
+        <label><input type="radio" name="q48" value="D"/><span class="opt-label"><span class="opt-badge">D</span>Western liberalism</span></label>
+      </div>
+      <div class="explanation-box" id="expl-q48"><div class="expl-head">💡 Explanation</div>Theosophical Society drew inspiration from <strong>Upanishads, Samkhya, Yoga, and Vedanta</strong> — the ancient Indian philosophical traditions. This is why it gained popularity in India despite being founded in New York.</div>
+    </div>
+
+    <div class="section-label">🕌 Section F — Aligarh Movement & Arya Samaj</div>
+
+    <div class="q-card" id="card-49">
+      <div class="q-text"><span class="q-num">49</span><span class="q-text-inner">Aligarh Movement was started by:</span></div>
+      <div class="options">
+        <label><input type="radio" name="q49" value="A"/><span class="opt-label"><span class="opt-badge">A</span>Mohammad Qasim Nanotavi</span></label>
+        <label><input type="radio" name="q49" value="B"/><span class="opt-label"><span class="opt-badge">B</span>Sir Syed Ahmad Khan</span></label>
+        <label><input type="radio" name="q49" value="C"/><span class="opt-label"><span class="opt-badge">C</span>Rashid Ahmed Gangohi</span></label>
+        <label><input type="radio" name="q49" value="D"/><span class="opt-label"><span class="opt-badge">D</span>Mahmud-ul-Hasan</span></label>
+      </div>
+      <div class="explanation-box" id="expl-q49"><div class="expl-head">💡 Explanation</div><strong>Sir Syed Ahmad Khan (1817–1898)</strong> started the Aligarh Movement. He founded MAO College at Aligarh in 1875 to promote modern Western education for Muslims. Pro-British approach.</div>
+    </div>
+
+    <div class="q-card" id="card-50">
+      <div class="q-text"><span class="q-num">50</span><span class="q-text-inner">Sir Syed Ahmad Khan lived from:</span></div>
+      <div class="options">
+        <label><input type="radio" name="q50" value="A"/><span class="opt-label"><span class="opt-badge">A</span>1824–1883</span></label>
+        <label><input type="radio" name="q50" value="B"/><span class="opt-label"><span class="opt-badge">B</span>1817–1898</span></label>
+        <label><input type="radio" name="q50" value="C"/><span class="opt-label"><span class="opt-badge">C</span>1820–1901</span></label>
+        <label><input type="radio" name="q50" value="D"/><span class="opt-label"><span class="opt-badge">D</span>1863–1902</span></label>
+      </div>
+      <div class="explanation-box" id="expl-q50"><div class="expl-head">💡 Explanation</div>Sir Syed Ahmad Khan: <strong>1817–1898</strong>. Memory trick: 1817 = 1 year before Marx born (1818), 1898 = same year as Bismarck died. Compare: Dayananda = 1824–1883 | Ranade = 1842–1901.</div>
+    </div>
+
+    <div class="q-card" id="card-51">
+      <div class="q-text"><span class="q-num">51</span><span class="q-text-inner">Muhammadan Anglo-Oriental College was established at Aligarh in:</span></div>
+      <div class="options">
+        <label><input type="radio" name="q51" value="A"/><span class="opt-label"><span class="opt-badge">A</span>1866</span></label>
+        <label><input type="radio" name="q51" value="B"/><span class="opt-label"><span class="opt-badge">B</span>1873</span></label>
+        <label><input type="radio" name="q51" value="C"/><span class="opt-label"><span class="opt-badge">C</span>1875</span></label>
+        <label><input type="radio" name="q51" value="D"/><span class="opt-label"><span class="opt-badge">D</span>1882</span></label>
+      </div>
+      <div class="explanation-box" id="expl-q51"><div class="expl-head">💡 Explanation</div>MAO College was established in <strong>1875</strong> at Aligarh. The "Triple 1875" to remember: Arya Samaj (Bombay) = 1875, Theosophical Society (NY) = 1875, MAO College (Aligarh) = 1875!</div>
+    </div>
+
+    <div class="q-card" id="card-52">
+      <div class="q-text"><span class="q-num">52</span><span class="q-text-inner">Aligarh Movement's approach was:</span></div>
+      <div class="options">
+        <label><input type="radio" name="q52" value="A"/><span class="opt-label"><span class="opt-badge">A</span>Anti-British</span></label>
+        <label><input type="radio" name="q52" value="B"/><span class="opt-label"><span class="opt-badge">B</span>Pro-British</span></label>
+        <label><input type="radio" name="q52" value="C"/><span class="opt-label"><span class="opt-badge">C</span>Neutral</span></label>
+        <label><input type="radio" name="q52" value="D"/><span class="opt-label"><span class="opt-badge">D</span>Anti-INC only</span></label>
+      </div>
+      <div class="explanation-box" id="expl-q52"><div class="expl-head">💡 Explanation</div>Aligarh Movement was <strong>Pro-British</strong> — Sir Syed believed Muslims should cooperate with British rule and gain modern education. Contrast: Deoband = Anti-British. This contrast is a favourite exam point.</div>
+    </div>
+
+    <div class="q-card" id="card-53">
+      <div class="q-text"><span class="q-num">53</span><span class="q-text-inner">Arya Samaj was founded by:</span></div>
+      <div class="options">
+        <label><input type="radio" name="q53" value="A"/><span class="opt-label"><span class="opt-badge">A</span>Raja Ram Mohan Roy</span></label>
+        <label><input type="radio" name="q53" value="B"/><span class="opt-label"><span class="opt-badge">B</span>Swami Dayananda Saraswati</span></label>
+        <label><input type="radio" name="q53" value="C"/><span class="opt-label"><span class="opt-badge">C</span>Jyotiba Phule</span></label>
+        <label><input type="radio" name="q53" value="D"/><span class="opt-label"><span class="opt-badge">D</span>Vivekananda</span></label>
+      </div>
+      <div class="explanation-box" id="expl-q53"><div class="expl-head">💡 Explanation</div><strong>Swami Dayananda Saraswati</strong> founded Arya Samaj in Bombay in 1875. His slogan was "Back to the Vedas." He was born in Tankara, Gujarat in 1824 and wrote the famous Satyarth Prakash.</div>
+    </div>
+
+    <div class="q-card" id="card-54">
+      <div class="q-text"><span class="q-num">54</span><span class="q-text-inner">Arya Samaj was founded in which city and year:</span></div>
+      <div class="options">
+        <label><input type="radio" name="q54" value="A"/><span class="opt-label"><span class="opt-badge">A</span>Calcutta, 1875</span></label>
+        <label><input type="radio" name="q54" value="B"/><span class="opt-label"><span class="opt-badge">B</span>Pune, 1873</span></label>
+        <label><input type="radio" name="q54" value="C"/><span class="opt-label"><span class="opt-badge">C</span>Bombay (Mumbai), 1875</span></label>
+        <label><input type="radio" name="q54" value="D"/><span class="opt-label"><span class="opt-badge">D</span>Lahore, 1886</span></label>
+      </div>
+      <div class="explanation-box" id="expl-q54"><div class="expl-head">💡 Explanation</div>Arya Samaj was founded in <strong>Bombay (Mumbai) in 1875</strong>. DAV College was later established in Lahore (1886). Triple 1875: Arya Samaj + MAO College + Theosophical Society — all in same year!</div>
+    </div>
+
+    <div class="q-card" id="card-55">
+      <div class="q-text"><span class="q-num">55</span><span class="q-text-inner">Arya Samaj is based on two basic tenets:</span></div>
+      <div class="options">
+        <label><input type="radio" name="q55" value="A"/><span class="opt-label"><span class="opt-badge">A</span>Democracy and Secularism</span></label>
+        <label><input type="radio" name="q55" value="B"/><span class="opt-label"><span class="opt-badge">B</span>Monotheism and Infallible authority of the Vedas</span></label>
+        <label><input type="radio" name="q55" value="C"/><span class="opt-label"><span class="opt-badge">C</span>Education and Social Reform</span></label>
+        <label><input type="radio" name="q55" value="D"/><span class="opt-label"><span class="opt-badge">D</span>Unity and Progress</span></label>
+      </div>
+      <div class="explanation-box" id="expl-q55"><div class="expl-head">💡 Explanation</div>Arya Samaj's two basic tenets: (1) <strong>Monotheism</strong> (belief in one God), (2) <strong>Infallible authority of the Vedas</strong>. Hence the slogan "Back to the Vedas" — Vedas are the final authority, not priests.</div>
+    </div>
+
+    <div class="q-card" id="card-56">
+      <div class="q-text"><span class="q-num">56</span><span class="q-text-inner">Arya Samaj's famous slogan was:</span></div>
+      <div class="options">
+        <label><input type="radio" name="q56" value="A"/><span class="opt-label"><span class="opt-badge">A</span>"India for Indians"</span></label>
+        <label><input type="radio" name="q56" value="B"/><span class="opt-label"><span class="opt-badge">B</span>"One God, One Caste"</span></label>
+        <label><input type="radio" name="q56" value="C"/><span class="opt-label"><span class="opt-badge">C</span>"Truth is God"</span></label>
+        <label><input type="radio" name="q56" value="D"/><span class="opt-label"><span class="opt-badge">D</span>"Back to the Vedas"</span></label>
+      </div>
+      <div class="explanation-box" id="expl-q56"><div class="expl-head">💡 Explanation</div>Arya Samaj's famous slogan: <strong>"Back to the Vedas."</strong> Dayananda also gave another famous call: "India for Indians" (1876). "Truth is God" = Gandhi. "One Caste, One God" = Narayana Guru.</div>
+    </div>
+
+    <div class="q-card" id="card-57">
+      <div class="q-text"><span class="q-num">57</span><span class="q-text-inner">Arya Samaj launched ___ movement to purify Hindus influenced by other religions:</span></div>
+      <div class="options">
+        <label><input type="radio" name="q57" value="A"/><span class="opt-label"><span class="opt-badge">A</span>Swadeshi</span></label>
+        <label><input type="radio" name="q57" value="B"/><span class="opt-label"><span class="opt-badge">B</span>Shuddhi</span></label>
+        <label><input type="radio" name="q57" value="C"/><span class="opt-label"><span class="opt-badge">C</span>Satyagraha</span></label>
+        <label><input type="radio" name="q57" value="D"/><span class="opt-label"><span class="opt-badge">D</span>Khilafat</span></label>
+      </div>
+      <div class="explanation-box" id="expl-q57"><div class="expl-head">💡 Explanation</div>Arya Samaj launched the <strong>Shuddhi</strong> movement to "purify" and reconvert Hindus who had converted to other religions. "Shuddhi" means purification. This was controversial but effective in retaining Hindu numbers.</div>
+    </div>
+
+    <div class="q-card" id="card-58">
+      <div class="q-text"><span class="q-num">58</span><span class="q-text-inner">First DAV College was established at:</span></div>
+      <div class="options">
+        <label><input type="radio" name="q58" value="A"/><span class="opt-label"><span class="opt-badge">A</span>Mumbai</span></label>
+        <label><input type="radio" name="q58" value="B"/><span class="opt-label"><span class="opt-badge">B</span>Delhi</span></label>
+        <label><input type="radio" name="q58" value="C"/><span class="opt-label"><span class="opt-badge">C</span>Amritsar</span></label>
+        <label><input type="radio" name="q58" value="D"/><span class="opt-label"><span class="opt-badge">D</span>Lahore (1886)</span></label>
+      </div>
+      <div class="explanation-box" id="expl-q58"><div class="expl-head">💡 Explanation</div>First DAV (Dayananda Anglo-Vedic) College was established at <strong>Lahore in 1886</strong>. Arya Samaj founded in Bombay 1875, but DAV College = Lahore 1886. Now there are 900+ DAV schools across India.</div>
+    </div>
+
+    <div class="q-card" id="card-59">
+      <div class="q-text"><span class="q-num">59</span><span class="q-text-inner">Dayananda Saraswati was born in:</span></div>
+      <div class="options">
+        <label><input type="radio" name="q59" value="A"/><span class="opt-label"><span class="opt-badge">A</span>Pune</span></label>
+        <label><input type="radio" name="q59" value="B"/><span class="opt-label"><span class="opt-badge">B</span>Amritsar</span></label>
+        <label><input type="radio" name="q59" value="C"/><span class="opt-label"><span class="opt-badge">C</span>Tankara, Gujarat</span></label>
+        <label><input type="radio" name="q59" value="D"/><span class="opt-label"><span class="opt-badge">D</span>Calcutta</span></label>
+      </div>
+      <div class="explanation-box" id="expl-q59"><div class="expl-head">💡 Explanation</div>Dayananda Saraswati was born in <strong>Tankara, Gujarat</strong> in 1824. Though he founded Arya Samaj in Bombay, his birthplace was Tankara (now in Morbi district, Gujarat). Lifespan: 1824–1883.</div>
+    </div>
+
+    <div class="q-card" id="card-60">
+      <div class="q-text"><span class="q-num">60</span><span class="q-text-inner">Dayananda Saraswati gave the call "India for Indians" in:</span></div>
+      <div class="options">
+        <label><input type="radio" name="q60" value="A"/><span class="opt-label"><span class="opt-badge">A</span>1873</span></label>
+        <label><input type="radio" name="q60" value="B"/><span class="opt-label"><span class="opt-badge">B</span>1875</span></label>
+        <label><input type="radio" name="q60" value="C"/><span class="opt-label"><span class="opt-badge">C</span>1876</span></label>
+        <label><input type="radio" name="q60" value="D"/><span class="opt-label"><span class="opt-badge">D</span>1882</span></label>
+      </div>
+      <div class="explanation-box" id="expl-q60"><div class="expl-head">💡 Explanation</div>Dayananda gave the call "India for Indians" in <strong>1876</strong> — one year after founding Arya Samaj (1875). This was an early nationalist slogan predating the Indian National Congress (1885) by nearly a decade.</div>
+    </div>
+
+    <div class="q-card" id="card-61">
+      <div class="q-text"><span class="q-num">61</span><span class="q-text-inner">Dayananda Saraswati's famous work was:</span></div>
+      <div class="options">
+        <label><input type="radio" name="q61" value="A"/><span class="opt-label"><span class="opt-badge">A</span>Tuhfat-ul-Muwahhiddin</span></label>
+        <label><input type="radio" name="q61" value="B"/><span class="opt-label"><span class="opt-badge">B</span>Hind Swaraj</span></label>
+        <label><input type="radio" name="q61" value="C"/><span class="opt-label"><span class="opt-badge">C</span>Satyarth Prakash (The True Exposition)</span></label>
+        <label><input type="radio" name="q61" value="D"/><span class="opt-label"><span class="opt-badge">D</span>Gita Rahasya</span></label>
+      </div>
+      <div class="explanation-box" id="expl-q61"><div class="expl-head">💡 Explanation</div><strong>Satyarth Prakash (The True Exposition)</strong> = Dayananda Saraswati. Quick reference: Tuhfat = Roy | Hind Swaraj = Gandhi | Gita Rahasya = Tilak | Satyarth Prakash = Dayananda.</div>
+    </div>
+
+    <div class="q-card" id="card-62">
+      <div class="q-text"><span class="q-num">62</span><span class="q-text-inner">Satyarth Prakash was first published in:</span></div>
+      <div class="options">
+        <label><input type="radio" name="q62" value="A"/><span class="opt-label"><span class="opt-badge">A</span>1873</span></label>
+        <label><input type="radio" name="q62" value="B"/><span class="opt-label"><span class="opt-badge">B</span>1875</span></label>
+        <label><input type="radio" name="q62" value="C"/><span class="opt-label"><span class="opt-badge">C</span>1876</span></label>
+        <label><input type="radio" name="q62" value="D"/><span class="opt-label"><span class="opt-badge">D</span>1882</span></label>
+      </div>
+      <div class="explanation-box" id="expl-q62"><div class="expl-head">💡 Explanation</div>Satyarth Prakash was first published in <strong>1875</strong> — the same year Arya Samaj was founded. So Dayananda founded Arya Samaj AND published his masterwork in the same year 1875.</div>
+    </div>
+
+    <div class="q-card" id="card-63">
+      <div class="q-text"><span class="q-num">63</span><span class="q-text-inner">Dayananda Saraswati propagated chaturvarna based on:</span></div>
+      <div class="options">
+        <label><input type="radio" name="q63" value="A"/><span class="opt-label"><span class="opt-badge">A</span>Birth in a caste</span></label>
+        <label><input type="radio" name="q63" value="B"/><span class="opt-label"><span class="opt-badge">B</span>Occupation followed</span></label>
+        <label><input type="radio" name="q63" value="C"/><span class="opt-label"><span class="opt-badge">C</span>Wealth</span></label>
+        <label><input type="radio" name="q63" value="D"/><span class="opt-label"><span class="opt-badge">D</span>Education</span></label>
+      </div>
+      <div class="explanation-box" id="expl-q63"><div class="expl-head">💡 Explanation</div>Dayananda's chaturvarna was based on <strong>occupation followed</strong>, NOT birth. This was a reform of the traditional birth-based caste system — he believed social divisions should be merit/work based, not hereditary.</div>
+    </div>
+
+    <div class="q-card" id="card-64">
+      <div class="q-text"><span class="q-num">64</span><span class="q-text-inner">Dayananda Saraswati's birth year:</span></div>
+      <div class="options">
+        <label><input type="radio" name="q64" value="A"/><span class="opt-label"><span class="opt-badge">A</span>1772</span></label>
+        <label><input type="radio" name="q64" value="B"/><span class="opt-label"><span class="opt-badge">B</span>1820</span></label>
+        <label><input type="radio" name="q64" value="C"/><span class="opt-label"><span class="opt-badge">C</span>1824</span></label>
+        <label><input type="radio" name="q64" value="D"/><span class="opt-label"><span class="opt-badge">D</span>1863</span></label>
+      </div>
+      <div class="explanation-box" id="expl-q64"><div class="expl-head">💡 Explanation</div>Dayananda Saraswati was born in <strong>1824</strong> (died 1883). Tip: 1772 = Roy, 1817 = Sir Syed, 1820 = Wahabi starts, 1824 = Dayananda born. Remembering birth years of all reformers is crucial for MCQs!</div>
+    </div>
+
+    <div class="section-label">🙏 Section G — Prarthana Sabha & Govind Ranade</div>
+
+    <div class="q-card" id="card-65">
+      <div class="q-text"><span class="q-num">65</span><span class="q-text-inner">Prarthana Sabha was established in Bombay in:</span></div>
+      <div class="options">
+        <label><input type="radio" name="q65" value="A"/><span class="opt-label"><span class="opt-badge">A</span>1873</span></label>
+        <label><input type="radio" name="q65" value="B"/><span class="opt-label"><span class="opt-badge">B</span>1875</span></label>
+        <label><input type="radio" name="q65" value="C"/><span class="opt-label"><span class="opt-badge">C</span>1867</span></label>
+        <label><input type="radio" name="q65" value="D"/><span class="opt-label"><span class="opt-badge">D</span>1884</span></label>
+      </div>
+      <div class="explanation-box" id="expl-q65"><div class="expl-head">💡 Explanation</div>Prarthana Sabha was established in Bombay in <strong>1867</strong>. It was formally organized by Dr. Atma Ram Pandurang and later Govind Ranade became its key figure. "Prarthana" = Prayer.</div>
+    </div>
+
+    <div class="q-card" id="card-66">
+      <div class="q-text"><span class="q-num">66</span><span class="q-text-inner">Prarthana Sabha was formally founded by:</span></div>
+      <div class="options">
+        <label><input type="radio" name="q66" value="A"/><span class="opt-label"><span class="opt-badge">A</span>Ranade</span></label>
+        <label><input type="radio" name="q66" value="B"/><span class="opt-label"><span class="opt-badge">B</span>Keshava Chandra Sen</span></label>
+        <label><input type="radio" name="q66" value="C"/><span class="opt-label"><span class="opt-badge">C</span>Dr. Atma Ram Pandurang</span></label>
+        <label><input type="radio" name="q66" value="D"/><span class="opt-label"><span class="opt-badge">D</span>Roy</span></label>
+      </div>
+      <div class="explanation-box" id="expl-q66"><div class="expl-head">💡 Explanation</div>Prarthana Sabha was formally founded by <strong>Dr. Atma Ram Pandurang</strong> in 1867. Govind Ranade later became its most influential leader. Don't say Ranade founded it — he was the key leader, not founder.</div>
+    </div>
+
+    <div class="q-card" id="card-67">
+      <div class="q-text"><span class="q-num">67</span><span class="q-text-inner">Govind Ranade was called:</span></div>
+      <div class="options">
+        <label><input type="radio" name="q67" value="A"/><span class="opt-label"><span class="opt-badge">A</span>"Father of Renaissance"</span></label>
+        <label><input type="radio" name="q67" value="B"/><span class="opt-label"><span class="opt-badge">B</span>"Punjab Kesari"</span></label>
+        <label><input type="radio" name="q67" value="C"/><span class="opt-label"><span class="opt-badge">C</span>"Socrates of Maharashtra"</span></label>
+        <label><input type="radio" name="q67" value="D"/><span class="opt-label"><span class="opt-badge">D</span>"Mahatma"</span></label>
+      </div>
+      <div class="explanation-box" id="expl-q67"><div class="expl-head">💡 Explanation</div>Govind Ranade was called the <strong>"Socrates of Maharashtra"</strong>. Titles to remember: Roy = Father of Renaissance | Lala Lajpat Rai = Punjab Kesari | Ranade = Socrates of Maharashtra.</div>
+    </div>
+
+    <div class="q-card" id="card-68">
+      <div class="q-text"><span class="q-num">68</span><span class="q-text-inner">Govind Ranade lived from:</span></div>
+      <div class="options">
+        <label><input type="radio" name="q68" value="A"/><span class="opt-label"><span class="opt-badge">A</span>1824–1883</span></label>
+        <label><input type="radio" name="q68" value="B"/><span class="opt-label"><span class="opt-badge">B</span>1842–1901</span></label>
+        <label><input type="radio" name="q68" value="C"/><span class="opt-label"><span class="opt-badge">C</span>1820–1891</span></label>
+        <label><input type="radio" name="q68" value="D"/><span class="opt-label"><span class="opt-badge">D</span>1863–1902</span></label>
+      </div>
+      <div class="explanation-box" id="expl-q68"><div class="expl-head">💡 Explanation</div>Govind Ranade: <strong>1842–1901</strong>. Quick recall: 1824–1883 = Dayananda | 1817–1898 = Sir Syed | 1842–1901 = Ranade. He became Bombay High Court judge in 1893.</div>
+    </div>
+
+    <div class="q-card" id="card-69">
+      <div class="q-text"><span class="q-num">69</span><span class="q-text-inner">Deccan Educational Society was founded by:</span></div>
+      <div class="options">
+        <label><input type="radio" name="q69" value="A"/><span class="opt-label"><span class="opt-badge">A</span>Jyotiba Phule</span></label>
+        <label><input type="radio" name="q69" value="B"/><span class="opt-label"><span class="opt-badge">B</span>Dayananda Saraswati</span></label>
+        <label><input type="radio" name="q69" value="C"/><span class="opt-label"><span class="opt-badge">C</span>Justice Govind Ranade</span></label>
+        <label><input type="radio" name="q69" value="D"/><span class="opt-label"><span class="opt-badge">D</span>Roy</span></label>
+      </div>
+      <div class="explanation-box" id="expl-q69"><div class="expl-head">💡 Explanation</div>Deccan Educational Society was founded by <strong>Justice Govind Ranade</strong>. Ranade was multi-faceted: Prarthana Sabha leader, Deccan Educational Society founder, Bombay High Court judge, and "Socrates of Maharashtra."</div>
+    </div>
+
+    <div class="q-card" id="card-70">
+      <div class="q-text"><span class="q-num">70</span><span class="q-text-inner">Govind Ranade became a judge at the Bombay High Court in:</span></div>
+      <div class="options">
+        <label><input type="radio" name="q70" value="A"/><span class="opt-label"><span class="opt-badge">A</span>1884</span></label>
+        <label><input type="radio" name="q70" value="B"/><span class="opt-label"><span class="opt-badge">B</span>1890</span></label>
+        <label><input type="radio" name="q70" value="C"/><span class="opt-label"><span class="opt-badge">C</span>1893</span></label>
+        <label><input type="radio" name="q70" value="D"/><span class="opt-label"><span class="opt-badge">D</span>1900</span></label>
+      </div>
+      <div class="explanation-box" id="expl-q70"><div class="expl-head">💡 Explanation</div>Govind Ranade became judge at Bombay High Court in <strong>1893</strong>. He lived 1842–1901, so he was a judge for the last 8 years of his life. Prarthana Sabha spread to South India by Kandukuri Veeresalingam.</div>
+    </div>
+
+
+    <div class="section-label">🙏 Section G cont. + Section H — Ramakrishna Mission</div>
+
+    <div class="q-card" id="card-71">
+      <div class="q-text"><span class="q-num">71</span><span class="q-text-inner">Prarthana Sabha was spread to southern India by:</span></div>
+      <div class="options">
+        <label><input type="radio" name="q71" value="A"/><span class="opt-label"><span class="opt-badge">A</span>Govind Ranade</span></label>
+        <label><input type="radio" name="q71" value="B"/><span class="opt-label"><span class="opt-badge">B</span>Vivekananda</span></label>
+        <label><input type="radio" name="q71" value="C"/><span class="opt-label"><span class="opt-badge">C</span>Dayananda</span></label>
+        <label><input type="radio" name="q71" value="D"/><span class="opt-label"><span class="opt-badge">D</span>Kandukuri Veeresalingam</span></label>
+      </div>
+      <div class="explanation-box" id="expl-q71"><div class="expl-head">💡 Explanation</div><strong>Kandukuri Veeresalingam</strong> spread Prarthana Sabha to southern India. He is called the "Father of Telugu Renaissance" and worked on widow remarriage and women's education in Andhra.</div>
+    </div>
+
+    <div class="q-card" id="card-72">
+      <div class="q-text"><span class="q-num">72</span><span class="q-text-inner">Ramakrishna Mission was founded by:</span></div>
+      <div class="options">
+        <label><input type="radio" name="q72" value="A"/><span class="opt-label"><span class="opt-badge">A</span>Ramakrishna Paramhansa</span></label>
+        <label><input type="radio" name="q72" value="B"/><span class="opt-label"><span class="opt-badge">B</span>Raja Ram Mohan Roy</span></label>
+        <label><input type="radio" name="q72" value="C"/><span class="opt-label"><span class="opt-badge">C</span>Swami Vivekananda</span></label>
+        <label><input type="radio" name="q72" value="D"/><span class="opt-label"><span class="opt-badge">D</span>Dayananda Saraswati</span></label>
+      </div>
+      <div class="explanation-box" id="expl-q72"><div class="expl-head">💡 Explanation</div><strong>Swami Vivekananda</strong> founded Ramakrishna Mission in 1897. Ramakrishna Paramhansa was Vivekananda's guru, not the founder. Common trap — don't mix guru (Ramakrishna) with founder (Vivekananda).</div>
+    </div>
+
+    <div class="q-card" id="card-73">
+      <div class="q-text"><span class="q-num">73</span><span class="q-text-inner">Ramakrishna Mission was founded in:</span></div>
+      <div class="options">
+        <label><input type="radio" name="q73" value="A"/><span class="opt-label"><span class="opt-badge">A</span>1892</span></label>
+        <label><input type="radio" name="q73" value="B"/><span class="opt-label"><span class="opt-badge">B</span>1895</span></label>
+        <label><input type="radio" name="q73" value="C"/><span class="opt-label"><span class="opt-badge">C</span>1897</span></label>
+        <label><input type="radio" name="q73" value="D"/><span class="opt-label"><span class="opt-badge">D</span>1900</span></label>
+      </div>
+      <div class="explanation-box" id="expl-q73"><div class="expl-head">💡 Explanation</div>Ramakrishna Mission was founded in <strong>1897</strong>. Memory: Vivekananda's famous Chicago speech = 1893 → Mission founded 4 years later = 1897. Located at Belur Math, West Bengal.</div>
+    </div>
+
+    <div class="q-card" id="card-74">
+      <div class="q-text"><span class="q-num">74</span><span class="q-text-inner">Ramakrishna Mission is located at:</span></div>
+      <div class="options">
+        <label><input type="radio" name="q74" value="A"/><span class="opt-label"><span class="opt-badge">A</span>Varanasi</span></label>
+        <label><input type="radio" name="q74" value="B"/><span class="opt-label"><span class="opt-badge">B</span>Calcutta</span></label>
+        <label><input type="radio" name="q74" value="C"/><span class="opt-label"><span class="opt-badge">C</span>Belur Math, West Bengal</span></label>
+        <label><input type="radio" name="q74" value="D"/><span class="opt-label"><span class="opt-badge">D</span>Pune</span></label>
+      </div>
+      <div class="explanation-box" id="expl-q74"><div class="expl-head">💡 Explanation</div>Ramakrishna Mission HQ is at <strong>Belur Math, West Bengal</strong> (near Kolkata). Don't say "Calcutta/Kolkata" — the specific answer expected is Belur Math. Similar trap: Theosophical = Adyar (not Madras).</div>
+    </div>
+
+    <div class="q-card" id="card-75">
+      <div class="q-text"><span class="q-num">75</span><span class="q-text-inner">Ramakrishna Mission is also called:</span></div>
+      <div class="options">
+        <label><input type="radio" name="q75" value="A"/><span class="opt-label"><span class="opt-badge">A</span>Brahmo Movement</span></label>
+        <label><input type="radio" name="q75" value="B"/><span class="opt-label"><span class="opt-badge">B</span>Arya Movement</span></label>
+        <label><input type="radio" name="q75" value="C"/><span class="opt-label"><span class="opt-badge">C</span>Aligarh Movement</span></label>
+        <label><input type="radio" name="q75" value="D"/><span class="opt-label"><span class="opt-badge">D</span>Vedanta Movement</span></label>
+      </div>
+      <div class="explanation-box" id="expl-q75"><div class="expl-head">💡 Explanation</div>Ramakrishna Mission is also called the <strong>Vedanta Movement</strong>. Vivekananda popularized Vedanta philosophy globally, especially through his 1893 Chicago speech. The mission is based on Vedantic principles.</div>
+    </div>
+
+    <div class="q-card" id="card-76">
+      <div class="q-text"><span class="q-num">76</span><span class="q-text-inner">Motto of Ramakrishna Mission:</span></div>
+      <div class="options">
+        <label><input type="radio" name="q76" value="A"/><span class="opt-label"><span class="opt-badge">A</span>"Back to the Vedas"</span></label>
+        <label><input type="radio" name="q76" value="B"/><span class="opt-label"><span class="opt-badge">B</span>"There is no religion higher than truth"</span></label>
+        <label><input type="radio" name="q76" value="C"/><span class="opt-label"><span class="opt-badge">C</span>"Atmano Mokshartham Jagad Hitaya Cha"</span></label>
+        <label><input type="radio" name="q76" value="D"/><span class="opt-label"><span class="opt-badge">D</span>"One Caste, One God"</span></label>
+      </div>
+      <div class="explanation-box" id="expl-q76"><div class="expl-head">💡 Explanation</div>RK Mission motto: <strong>"Atmano Mokshartham Jagad Hitaya Cha"</strong> (For one's own liberation and the welfare of the world). Arya Samaj = Back to Vedas | Theosophical = No religion higher than truth.</div>
+    </div>
+
+    <div class="q-card" id="card-77">
+      <div class="q-text"><span class="q-num">77</span><span class="q-text-inner">Swami Vivekananda was born as:</span></div>
+      <div class="options">
+        <label><input type="radio" name="q77" value="A"/><span class="opt-label"><span class="opt-badge">A</span>Ramakrishna Datta</span></label>
+        <label><input type="radio" name="q77" value="B"/><span class="opt-label"><span class="opt-badge">B</span>Narendranath Roy</span></label>
+        <label><input type="radio" name="q77" value="C"/><span class="opt-label"><span class="opt-badge">C</span>Narendranath Datta</span></label>
+        <label><input type="radio" name="q77" value="D"/><span class="opt-label"><span class="opt-badge">D</span>Vivekananda Ghosh</span></label>
+      </div>
+      <div class="explanation-box" id="expl-q77"><div class="expl-head">💡 Explanation</div>Swami Vivekananda was born as <strong>Narendranath Datta</strong> on January 12, 1863 in Calcutta. He later became a disciple of Ramakrishna Paramhansa and took the name Vivekananda.</div>
+    </div>
+
+    <div class="q-card" id="card-78">
+      <div class="q-text"><span class="q-num">78</span><span class="q-text-inner">Swami Vivekananda was born on:</span></div>
+      <div class="options">
+        <label><input type="radio" name="q78" value="A"/><span class="opt-label"><span class="opt-badge">A</span>January 26, 1863</span></label>
+        <label><input type="radio" name="q78" value="B"/><span class="opt-label"><span class="opt-badge">B</span>January 12, 1863</span></label>
+        <label><input type="radio" name="q78" value="C"/><span class="opt-label"><span class="opt-badge">C</span>January 12, 1862</span></label>
+        <label><input type="radio" name="q78" value="D"/><span class="opt-label"><span class="opt-badge">D</span>February 12, 1863</span></label>
+      </div>
+      <div class="explanation-box" id="expl-q78"><div class="expl-head">💡 Explanation</div>Vivekananda was born on <strong>January 12, 1863</strong>. This date is celebrated as National Youth Day. Don't confuse: Jan 26 = Republic Day | Jan 12 = Vivekananda/National Youth Day.</div>
+    </div>
+
+    <div class="q-card" id="card-79">
+      <div class="q-text"><span class="q-num">79</span><span class="q-text-inner">Swami Vivekananda was born in:</span></div>
+      <div class="options">
+        <label><input type="radio" name="q79" value="A"/><span class="opt-label"><span class="opt-badge">A</span>Varanasi</span></label>
+        <label><input type="radio" name="q79" value="B"/><span class="opt-label"><span class="opt-badge">B</span>Calcutta (Kolkata)</span></label>
+        <label><input type="radio" name="q79" value="C"/><span class="opt-label"><span class="opt-badge">C</span>Belur</span></label>
+        <label><input type="radio" name="q79" value="D"/><span class="opt-label"><span class="opt-badge">D</span>Bombay</span></label>
+      </div>
+      <div class="explanation-box" id="expl-q79"><div class="expl-head">💡 Explanation</div>Vivekananda was born in <strong>Calcutta (Kolkata)</strong>. Belur Math is where the Ramakrishna Mission HQ is — his birthplace (Calcutta) ≠ Mission HQ (Belur Math). Both are in West Bengal though.</div>
+    </div>
+
+    <div class="q-card" id="card-80">
+      <div class="q-text"><span class="q-num">80</span><span class="q-text-inner">Vivekananda's famous speech was at:</span></div>
+      <div class="options">
+        <label><input type="radio" name="q80" value="A"/><span class="opt-label"><span class="opt-badge">A</span>INC session</span></label>
+        <label><input type="radio" name="q80" value="B"/><span class="opt-label"><span class="opt-badge">B</span>Round Table Conference</span></label>
+        <label><input type="radio" name="q80" value="C"/><span class="opt-label"><span class="opt-badge">C</span>1893 World's Parliament of Religions</span></label>
+        <label><input type="radio" name="q80" value="D"/><span class="opt-label"><span class="opt-badge">D</span>Constituent Assembly</span></label>
+      </div>
+      <div class="explanation-box" id="expl-q80"><div class="expl-head">💡 Explanation</div>Vivekananda's famous speech was at the <strong>1893 World's Parliament of Religions</strong> in Chicago. He began with "Sisters and Brothers of America" — putting India on the world philosophical map.</div>
+    </div>
+
+    <div class="q-card" id="card-81">
+      <div class="q-text"><span class="q-num">81</span><span class="q-text-inner">January 12 is celebrated in India as:</span></div>
+      <div class="options">
+        <label><input type="radio" name="q81" value="A"/><span class="opt-label"><span class="opt-badge">A</span>Republic Day</span></label>
+        <label><input type="radio" name="q81" value="B"/><span class="opt-label"><span class="opt-badge">B</span>Constitution Day</span></label>
+        <label><input type="radio" name="q81" value="C"/><span class="opt-label"><span class="opt-badge">C</span>Independence Day</span></label>
+        <label><input type="radio" name="q81" value="D"/><span class="opt-label"><span class="opt-badge">D</span>National Youth Day</span></label>
+      </div>
+      <div class="explanation-box" id="expl-q81"><div class="expl-head">💡 Explanation</div>January 12 = <strong>National Youth Day</strong> (Vivekananda's birthday). Key dates: Jan 12 = Vivekananda/Youth Day | Jan 26 = Republic Day | Aug 15 = Independence Day | Nov 26 = Constitution Day.</div>
+    </div>
+
+    <div class="q-card" id="card-82">
+      <div class="q-text"><span class="q-num">82</span><span class="q-text-inner">Vivekananda's guru was:</span></div>
+      <div class="options">
+        <label><input type="radio" name="q82" value="A"/><span class="opt-label"><span class="opt-badge">A</span>Dayananda Saraswati</span></label>
+        <label><input type="radio" name="q82" value="B"/><span class="opt-label"><span class="opt-badge">B</span>Govind Ranade</span></label>
+        <label><input type="radio" name="q82" value="C"/><span class="opt-label"><span class="opt-badge">C</span>Ramakrishna Paramhansa</span></label>
+        <label><input type="radio" name="q82" value="D"/><span class="opt-label"><span class="opt-badge">D</span>Raja Ram Mohan Roy</span></label>
+      </div>
+      <div class="explanation-box" id="expl-q82"><div class="expl-head">💡 Explanation</div>Vivekananda's guru was <strong>Ramakrishna Paramhansa</strong>. The Mission is named after the guru (Ramakrishna), but was founded by the disciple (Vivekananda). The guru-shishya relationship is central to this movement.</div>
+    </div>
+
+    <div class="section-label">⚖️ Section I — SNDP, Justice Party, Periyar & Others</div>
+
+    <div class="q-card" id="card-83">
+      <div class="q-text"><span class="q-num">83</span><span class="q-text-inner">SNDP (Sree Narayana Dharma Paripalana Yogam) was founded by:</span></div>
+      <div class="options">
+        <label><input type="radio" name="q83" value="A"/><span class="opt-label"><span class="opt-badge">A</span>Periyar</span></label>
+        <label><input type="radio" name="q83" value="B"/><span class="opt-label"><span class="opt-badge">B</span>Justice Ranade</span></label>
+        <label><input type="radio" name="q83" value="C"/><span class="opt-label"><span class="opt-badge">C</span>Narayana Guru</span></label>
+        <label><input type="radio" name="q83" value="D"/><span class="opt-label"><span class="opt-badge">D</span>Thakkar Bapa</span></label>
+      </div>
+      <div class="explanation-box" id="expl-q83"><div class="expl-head">💡 Explanation</div><strong>Narayana Guru</strong> founded SNDP (Sree Narayana Dharma Paripalana Yogam) in 1903 in Kerala. His famous slogan: "One Caste, One Religion, One God for All." He set up 40+ temples across Kerala.</div>
+    </div>
+
+    <div class="q-card" id="card-84">
+      <div class="q-text"><span class="q-num">84</span><span class="q-text-inner">SNDP was founded in:</span></div>
+      <div class="options">
+        <label><input type="radio" name="q84" value="A"/><span class="opt-label"><span class="opt-badge">A</span>1888</span></label>
+        <label><input type="radio" name="q84" value="B"/><span class="opt-label"><span class="opt-badge">B</span>1900</span></label>
+        <label><input type="radio" name="q84" value="C"/><span class="opt-label"><span class="opt-badge">C</span>1903</span></label>
+        <label><input type="radio" name="q84" value="D"/><span class="opt-label"><span class="opt-badge">D</span>1913</span></label>
+      </div>
+      <div class="explanation-box" id="expl-q84"><div class="expl-head">💡 Explanation</div>SNDP was founded in <strong>1903</strong>. Timeline: 1888 = Aruvippuram temple | 1903 = SNDP founded | 1913 = Advaita Ashram. All three milestones of Narayana Guru's work in Kerala.</div>
+    </div>
+
+    <div class="q-card" id="card-85">
+      <div class="q-text"><span class="q-num">85</span><span class="q-text-inner">Narayana Guru's famous slogan was:</span></div>
+      <div class="options">
+        <label><input type="radio" name="q85" value="A"/><span class="opt-label"><span class="opt-badge">A</span>"Back to the Vedas"</span></label>
+        <label><input type="radio" name="q85" value="B"/><span class="opt-label"><span class="opt-badge">B</span>"Truth is God"</span></label>
+        <label><input type="radio" name="q85" value="C"/><span class="opt-label"><span class="opt-badge">C</span>"One Caste, One Religion, One God for All"</span></label>
+        <label><input type="radio" name="q85" value="D"/><span class="opt-label"><span class="opt-badge">D</span>"India for Indians"</span></label>
+      </div>
+      <div class="explanation-box" id="expl-q85"><div class="expl-head">💡 Explanation</div>Narayana Guru's slogan: <strong>"One Caste, One Religion, One God for All"</strong>. This was a powerful anti-caste declaration from Kerala. Back to Vedas = Dayananda | Truth is God = Gandhi | India for Indians = Dayananda.</div>
+    </div>
+
+    <div class="q-card" id="card-86">
+      <div class="q-text"><span class="q-num">86</span><span class="q-text-inner">In 1888, Narayana Guru consecrated the first temple of Lord Shiva at:</span></div>
+      <div class="options">
+        <label><input type="radio" name="q86" value="A"/><span class="opt-label"><span class="opt-badge">A</span>Kalavancode</span></label>
+        <label><input type="radio" name="q86" value="B"/><span class="opt-label"><span class="opt-badge">B</span>Adyar</span></label>
+        <label><input type="radio" name="q86" value="C"/><span class="opt-label"><span class="opt-badge">C</span>Aruvippuram village, Kerala</span></label>
+        <label><input type="radio" name="q86" value="D"/><span class="opt-label"><span class="opt-badge">D</span>Belur</span></label>
+      </div>
+      <div class="explanation-box" id="expl-q86"><div class="expl-head">💡 Explanation</div>Narayana Guru consecrated the first Shiva temple in 1888 at <strong>Aruvippuram village, Kerala</strong>. At Kalavancode temple, he placed mirrors instead of idols — symbolizing that God resides in every person.</div>
+    </div>
+
+    <div class="q-card" id="card-87">
+      <div class="q-text"><span class="q-num">87</span><span class="q-text-inner">At Kalavancode temple, Narayana Guru placed ___ instead of idols:</span></div>
+      <div class="options">
+        <label><input type="radio" name="q87" value="A"/><span class="opt-label"><span class="opt-badge">A</span>Photographs</span></label>
+        <label><input type="radio" name="q87" value="B"/><span class="opt-label"><span class="opt-badge">B</span>Flowers</span></label>
+        <label><input type="radio" name="q87" value="C"/><span class="opt-label"><span class="opt-badge">C</span>Mirrors</span></label>
+        <label><input type="radio" name="q87" value="D"/><span class="opt-label"><span class="opt-badge">D</span>Books</span></label>
+      </div>
+      <div class="explanation-box" id="expl-q87"><div class="expl-head">💡 Explanation</div>At Kalavancode temple, Narayana Guru placed <strong>mirrors</strong> instead of idols. The symbolism: when you look in a mirror, you see yourself — God resides within every human being, regardless of caste.</div>
+    </div>
+
+    <div class="q-card" id="card-88">
+      <div class="q-text"><span class="q-num">88</span><span class="q-text-inner">Narayana Guru set up more than ___ temples across Kerala:</span></div>
+      <div class="options">
+        <label><input type="radio" name="q88" value="A"/><span class="opt-label"><span class="opt-badge">A</span>10</span></label>
+        <label><input type="radio" name="q88" value="B"/><span class="opt-label"><span class="opt-badge">B</span>20</span></label>
+        <label><input type="radio" name="q88" value="C"/><span class="opt-label"><span class="opt-badge">C</span>30</span></label>
+        <label><input type="radio" name="q88" value="D"/><span class="opt-label"><span class="opt-badge">D</span>40</span></label>
+      </div>
+      <div class="explanation-box" id="expl-q88"><div class="expl-head">💡 Explanation</div>Narayana Guru set up more than <strong>40 temples</strong> across Kerala. These temples were open to all castes — a revolutionary act when lower castes were barred from entering Hindu temples in Kerala.</div>
+    </div>
+
+    <div class="q-card" id="card-89">
+      <div class="q-text"><span class="q-num">89</span><span class="q-text-inner">Advaita Ashram was founded by Narayana Guru in:</span></div>
+      <div class="options">
+        <label><input type="radio" name="q89" value="A"/><span class="opt-label"><span class="opt-badge">A</span>1903</span></label>
+        <label><input type="radio" name="q89" value="B"/><span class="opt-label"><span class="opt-badge">B</span>1906</span></label>
+        <label><input type="radio" name="q89" value="C"/><span class="opt-label"><span class="opt-badge">C</span>1913</span></label>
+        <label><input type="radio" name="q89" value="D"/><span class="opt-label"><span class="opt-badge">D</span>1916</span></label>
+      </div>
+      <div class="explanation-box" id="expl-q89"><div class="expl-head">💡 Explanation</div>Advaita Ashram was founded in <strong>1913</strong> by Narayana Guru. Narayana Guru's Kerala timeline: 1888 (Aruvippuram) → 1903 (SNDP) → 1913 (Advaita Ashram). "Advaita" = non-duality in Vedantic philosophy.</div>
+    </div>
+
+    <div class="q-card" id="card-90">
+      <div class="q-text"><span class="q-num">90</span><span class="q-text-inner">Justice Party was formed in:</span></div>
+      <div class="options">
+        <label><input type="radio" name="q90" value="A"/><span class="opt-label"><span class="opt-badge">A</span>1913</span></label>
+        <label><input type="radio" name="q90" value="B"/><span class="opt-label"><span class="opt-badge">B</span>1914</span></label>
+        <label><input type="radio" name="q90" value="C"/><span class="opt-label"><span class="opt-badge">C</span>1916</span></label>
+        <label><input type="radio" name="q90" value="D"/><span class="opt-label"><span class="opt-badge">D</span>1920</span></label>
+      </div>
+      <div class="explanation-box" id="expl-q90"><div class="expl-head">💡 Explanation</div>Justice Party was formed in <strong>1916</strong> in Madras (Chennai). Same year as Home Rule League (Annie Besant & Tilak). Also called South Indian Liberal Federation (SILF), it is considered the beginning of the Dravidian Movement.</div>
+    </div>
+
+    <div class="q-card" id="card-91">
+      <div class="q-text"><span class="q-num">91</span><span class="q-text-inner">Justice Party was formed in:</span></div>
+      <div class="options">
+        <label><input type="radio" name="q91" value="A"/><span class="opt-label"><span class="opt-badge">A</span>Bombay</span></label>
+        <label><input type="radio" name="q91" value="B"/><span class="opt-label"><span class="opt-badge">B</span>Calcutta</span></label>
+        <label><input type="radio" name="q91" value="C"/><span class="opt-label"><span class="opt-badge">C</span>Madras (Chennai)</span></label>
+        <label><input type="radio" name="q91" value="D"/><span class="opt-label"><span class="opt-badge">D</span>Pune</span></label>
+      </div>
+      <div class="explanation-box" id="expl-q91"><div class="expl-head">💡 Explanation</div>Justice Party was formed in <strong>Madras (Chennai)</strong> in 1916. It was a South Indian movement against Brahmin dominance, later inspiring Periyar's Self-Respect Movement and eventually the Dravidar Kazhagam (DK).</div>
+    </div>
+
+    <div class="q-card" id="card-92">
+      <div class="q-text"><span class="q-num">92</span><span class="q-text-inner">Justice Party was founded primarily by:</span></div>
+      <div class="options">
+        <label><input type="radio" name="q92" value="A"/><span class="opt-label"><span class="opt-badge">A</span>Periyar</span></label>
+        <label><input type="radio" name="q92" value="B"/><span class="opt-label"><span class="opt-badge">B</span>Narayana Guru</span></label>
+        <label><input type="radio" name="q92" value="C"/><span class="opt-label"><span class="opt-badge">C</span>Thakkar Bapa</span></label>
+        <label><input type="radio" name="q92" value="D"/><span class="opt-label"><span class="opt-badge">D</span>Dr. C. Natesa Mudaliar</span></label>
+      </div>
+      <div class="explanation-box" id="expl-q92"><div class="expl-head">💡 Explanation</div>Justice Party was founded primarily by <strong>Dr. C. Natesa Mudaliar</strong>. SILF (South Indian Liberal Federation) was founded by T.M. Nair and Pitti Theagaraya Chetty. Periyar joined later — he didn't found it.</div>
+    </div>
+
+    <div class="q-card" id="card-93">
+      <div class="q-text"><span class="q-num">93</span><span class="q-text-inner">Justice Party is considered the beginning of:</span></div>
+      <div class="options">
+        <label><input type="radio" name="q93" value="A"/><span class="opt-label"><span class="opt-badge">A</span>Aligarh Movement</span></label>
+        <label><input type="radio" name="q93" value="B"/><span class="opt-label"><span class="opt-badge">B</span>Dravidian Movement</span></label>
+        <label><input type="radio" name="q93" value="C"/><span class="opt-label"><span class="opt-badge">C</span>Arya Samaj Movement</span></label>
+        <label><input type="radio" name="q93" value="D"/><span class="opt-label"><span class="opt-badge">D</span>Sikh Reform</span></label>
+      </div>
+      <div class="explanation-box" id="expl-q93"><div class="expl-head">💡 Explanation</div>Justice Party is considered the beginning of the <strong>Dravidian Movement</strong>. The lineage: Justice Party (1916) → Periyar's Self-Respect Movement → Dravidar Kazhagam (1940) → later Tamil political parties.</div>
+    </div>
+
+    <div class="q-card" id="card-94">
+      <div class="q-text"><span class="q-num">94</span><span class="q-text-inner">South Indian Liberal Federation (SILF) was founded by:</span></div>
+      <div class="options">
+        <label><input type="radio" name="q94" value="A"/><span class="opt-label"><span class="opt-badge">A</span>Dr. Natesa Mudaliar</span></label>
+        <label><input type="radio" name="q94" value="B"/><span class="opt-label"><span class="opt-badge">B</span>T.M. Nair and Pitti Theagaraya Chetty</span></label>
+        <label><input type="radio" name="q94" value="C"/><span class="opt-label"><span class="opt-badge">C</span>Periyar</span></label>
+        <label><input type="radio" name="q94" value="D"/><span class="opt-label"><span class="opt-badge">D</span>Narayana Guru</span></label>
+      </div>
+      <div class="explanation-box" id="expl-q94"><div class="expl-head">💡 Explanation</div>SILF was founded by <strong>T.M. Nair and Pitti Theagaraya Chetty</strong>. SILF later became the Justice Party. Dr. Natesa Mudaliar was the primary founder of the Justice Party itself — these are technically two different things.</div>
+    </div>
+
+    <div class="q-card" id="card-95">
+      <div class="q-text"><span class="q-num">95</span><span class="q-text-inner">EV Ramasamy 'Periyar' was born in:</span></div>
+      <div class="options">
+        <label><input type="radio" name="q95" value="A"/><span class="opt-label"><span class="opt-badge">A</span>1875</span></label>
+        <label><input type="radio" name="q95" value="B"/><span class="opt-label"><span class="opt-badge">B</span>1879</span></label>
+        <label><input type="radio" name="q95" value="C"/><span class="opt-label"><span class="opt-badge">C</span>1882</span></label>
+        <label><input type="radio" name="q95" value="D"/><span class="opt-label"><span class="opt-badge">D</span>1885</span></label>
+      </div>
+      <div class="explanation-box" id="expl-q95"><div class="expl-head">💡 Explanation</div>Periyar (EV Ramasamy) was born in <strong>1879</strong>. He quit Congress in 1925, launched Vaikom Satyagraha (1924), and founded Dravidar Kazhagam (DK) in 1940. "Periyar" means "great man" in Tamil.</div>
+    </div>
+
+    <div class="q-card" id="card-96">
+      <div class="q-text"><span class="q-num">96</span><span class="q-text-inner">Periyar quit the Congress in 1925 due to:</span></div>
+      <div class="options">
+        <label><input type="radio" name="q96" value="A"/><span class="opt-label"><span class="opt-badge">A</span>Gandhi's support for British</span></label>
+        <label><input type="radio" name="q96" value="B"/><span class="opt-label"><span class="opt-badge">B</span>Fallout over separate dining for Brahmin and non-Brahmin students</span></label>
+        <label><input type="radio" name="q96" value="C"/><span class="opt-label"><span class="opt-badge">C</span>Partition demand</span></label>
+        <label><input type="radio" name="q96" value="D"/><span class="opt-label"><span class="opt-badge">D</span>Salt tax</span></label>
+      </div>
+      <div class="explanation-box" id="expl-q96"><div class="expl-head">💡 Explanation</div>Periyar quit Congress in 1925 due to a <strong>fallout over separate dining arrangements for Brahmin and non-Brahmin students</strong>. This caste-based discrimination within Congress pushed him toward radical anti-Brahmin politics.</div>
+    </div>
+
+    <div class="q-card" id="card-97">
+      <div class="q-text"><span class="q-num">97</span><span class="q-text-inner">Periyar is called "Vaikom Veer" because of:</span></div>
+      <div class="options">
+        <label><input type="radio" name="q97" value="A"/><span class="opt-label"><span class="opt-badge">A</span>His writings</span></label>
+        <label><input type="radio" name="q97" value="B"/><span class="opt-label"><span class="opt-badge">B</span>Vaikom Satyagraha (1924)</span></label>
+        <label><input type="radio" name="q97" value="C"/><span class="opt-label"><span class="opt-badge">C</span>Founding of DK</span></label>
+        <label><input type="radio" name="q97" value="D"/><span class="opt-label"><span class="opt-badge">D</span>His educational work</span></label>
+      </div>
+      <div class="explanation-box" id="expl-q97"><div class="expl-head">💡 Explanation</div>Periyar is called "Vaikom Veer" for leading the <strong>Vaikom Satyagraha (1924)</strong> — a movement demanding the right of lower castes to walk on roads near the Vaikom temple in Kerala. This preceded his Congress exit (1925).</div>
+    </div>
+
+    <div class="q-card" id="card-98">
+      <div class="q-text"><span class="q-num">98</span><span class="q-text-inner">Dravidar Kazhagam (DK) was launched by Periyar in:</span></div>
+      <div class="options">
+        <label><input type="radio" name="q98" value="A"/><span class="opt-label"><span class="opt-badge">A</span>1935</span></label>
+        <label><input type="radio" name="q98" value="B"/><span class="opt-label"><span class="opt-badge">B</span>1938</span></label>
+        <label><input type="radio" name="q98" value="C"/><span class="opt-label"><span class="opt-badge">C</span>1940</span></label>
+        <label><input type="radio" name="q98" value="D"/><span class="opt-label"><span class="opt-badge">D</span>1945</span></label>
+      </div>
+      <div class="explanation-box" id="expl-q98"><div class="expl-head">💡 Explanation</div>Dravidar Kazhagam (DK) was launched by Periyar in <strong>1940</strong>. DK later gave birth to DMK and other Dravidian parties that dominate Tamil Nadu politics today. DK = political heir of the Justice Party tradition.</div>
+    </div>
+
+    <div class="q-card" id="card-99">
+      <div class="q-text"><span class="q-num">99</span><span class="q-text-inner">Bharatiya Adimjati Sevak Sangh was founded on:</span></div>
+      <div class="options">
+        <label><input type="radio" name="q99" value="A"/><span class="opt-label"><span class="opt-badge">A</span>15 August 1947</span></label>
+        <label><input type="radio" name="q99" value="B"/><span class="opt-label"><span class="opt-badge">B</span>26 January 1950</span></label>
+        <label><input type="radio" name="q99" value="C"/><span class="opt-label"><span class="opt-badge">C</span>24 October 1948</span></label>
+        <label><input type="radio" name="q99" value="D"/><span class="opt-label"><span class="opt-badge">D</span>14 August 1947</span></label>
+      </div>
+      <div class="explanation-box" id="expl-q99"><div class="expl-head">💡 Explanation</div>Bharatiya Adimjati Sevak Sangh was founded on <strong>24 October 1948</strong> — over a year after Independence. It was founded by Thakkar Bapa for tribal welfare. He was called "Father of Harijans" by Gandhi.</div>
+    </div>
+
+    <div class="q-card" id="card-100">
+      <div class="q-text"><span class="q-num">100</span><span class="q-text-inner">"Father of Harijans" title was given by Gandhi to:</span></div>
+      <div class="options">
+        <label><input type="radio" name="q100" value="A"/><span class="opt-label"><span class="opt-badge">A</span>Narayana Guru</span></label>
+        <label><input type="radio" name="q100" value="B"/><span class="opt-label"><span class="opt-badge">B</span>Periyar</span></label>
+        <label><input type="radio" name="q100" value="C"/><span class="opt-label"><span class="opt-badge">C</span>Jyotiba Phule</span></label>
+        <label><input type="radio" name="q100" value="D"/><span class="opt-label"><span class="opt-badge">D</span>Thakkar Bapa</span></label>
+      </div>
+      <div class="explanation-box" id="expl-q100"><div class="expl-head">💡 Explanation</div>Gandhi gave the title "Father of Harijans" to <strong>Thakkar Bapa</strong> (Amritlal Vithaldas Thakkar). Thakkar Bapa founded Bhil Seva Mandal (1923) and authored "Tribes of India." A dedicated tribal welfare worker.</div>
+    </div>
+
+    <div class="q-card" id="card-101">
+      <div class="q-text"><span class="q-num">101</span><span class="q-text-inner">Thakkar Bapa founded Bhil Seva Mandal in:</span></div>
+      <div class="options">
+        <label><input type="radio" name="q101" value="A"/><span class="opt-label"><span class="opt-badge">A</span>1920</span></label>
+        <label><input type="radio" name="q101" value="B"/><span class="opt-label"><span class="opt-badge">B</span>1921</span></label>
+        <label><input type="radio" name="q101" value="C"/><span class="opt-label"><span class="opt-badge">C</span>1923</span></label>
+        <label><input type="radio" name="q101" value="D"/><span class="opt-label"><span class="opt-badge">D</span>1925</span></label>
+      </div>
+      <div class="explanation-box" id="expl-q101"><div class="expl-head">💡 Explanation</div>Thakkar Bapa founded Bhil Seva Mandal in <strong>1923</strong>. He dedicated his life to the Adivasi (tribal) welfare in Gujarat. Later founded Bharatiya Adimjati Sevak Sangh on 24 October 1948.</div>
+    </div>
+
+    <div class="q-card" id="card-102">
+      <div class="q-text"><span class="q-num">102</span><span class="q-text-inner">Thakkar Bapa authored the book:</span></div>
+      <div class="options">
+        <label><input type="radio" name="q102" value="A"/><span class="opt-label"><span class="opt-badge">A</span>Tribes of Maharashtra</span></label>
+        <label><input type="radio" name="q102" value="B"/><span class="opt-label"><span class="opt-badge">B</span>Tribes of India</span></label>
+        <label><input type="radio" name="q102" value="C"/><span class="opt-label"><span class="opt-badge">C</span>India for Indians</span></label>
+        <label><input type="radio" name="q102" value="D"/><span class="opt-label"><span class="opt-badge">D</span>Social India</span></label>
+      </div>
+      <div class="explanation-box" id="expl-q102"><div class="expl-head">💡 Explanation</div>Thakkar Bapa authored <strong>"Tribes of India"</strong> — a comprehensive work on tribal communities. His work laid groundwork for post-independence tribal welfare policies and the Indian Constitution's provisions for Scheduled Tribes.</div>
+    </div>
+
+    <div class="q-card" id="card-103">
+      <div class="q-text"><span class="q-num">103</span><span class="q-text-inner">Depressed Class Mission was established in:</span></div>
+      <div class="options">
+        <label><input type="radio" name="q103" value="A"/><span class="opt-label"><span class="opt-badge">A</span>1897</span></label>
+        <label><input type="radio" name="q103" value="B"/><span class="opt-label"><span class="opt-badge">B</span>1903</span></label>
+        <label><input type="radio" name="q103" value="C"/><span class="opt-label"><span class="opt-badge">C</span>1906</span></label>
+        <label><input type="radio" name="q103" value="D"/><span class="opt-label"><span class="opt-badge">D</span>1913</span></label>
+      </div>
+      <div class="explanation-box" id="expl-q103"><div class="expl-head">💡 Explanation</div>Depressed Class Mission was established in <strong>1906</strong> by Maharshi Vitthal Ramji Shinde. Year pattern: RK Mission 1897 → SNDP 1903 → Depressed Class Mission 1906 → Advaita Ashram 1913.</div>
+    </div>
+
+    <div class="q-card" id="card-104">
+      <div class="q-text"><span class="q-num">104</span><span class="q-text-inner">Depressed Class Mission was founded by:</span></div>
+      <div class="options">
+        <label><input type="radio" name="q104" value="A"/><span class="opt-label"><span class="opt-badge">A</span>Thakkar Bapa</span></label>
+        <label><input type="radio" name="q104" value="B"/><span class="opt-label"><span class="opt-badge">B</span>Narayana Guru</span></label>
+        <label><input type="radio" name="q104" value="C"/><span class="opt-label"><span class="opt-badge">C</span>Maharshi Vitthal Ramji Shinde</span></label>
+        <label><input type="radio" name="q104" value="D"/><span class="opt-label"><span class="opt-badge">D</span>Periyar</span></label>
+      </div>
+      <div class="explanation-box" id="expl-q104"><div class="expl-head">💡 Explanation</div>Depressed Class Mission (1906) was founded by <strong>Maharshi Vitthal Ramji Shinde</strong>. This is a less-known but exam-important name. He worked for untouchable communities in Maharashtra.</div>
+    </div>
+
+    <div class="section-label">📜 Section J — Vidyasagar, Liquor Ban & Miscellaneous</div>
+
+    <div class="q-card" id="card-105">
+      <div class="q-text"><span class="q-num">105</span><span class="q-text-inner">Ishwar Chandra Vidyasagar lived from:</span></div>
+      <div class="options">
+        <label><input type="radio" name="q105" value="A"/><span class="opt-label"><span class="opt-badge">A</span>1772–1833</span></label>
+        <label><input type="radio" name="q105" value="B"/><span class="opt-label"><span class="opt-badge">B</span>1824–1883</span></label>
+        <label><input type="radio" name="q105" value="C"/><span class="opt-label"><span class="opt-badge">C</span>1820–1891</span></label>
+        <label><input type="radio" name="q105" value="D"/><span class="opt-label"><span class="opt-badge">D</span>1842–1901</span></label>
+      </div>
+      <div class="explanation-box" id="expl-q105"><div class="expl-head">💡 Explanation</div>Vidyasagar: <strong>1820–1891</strong>. Master list: Roy 1772–1833 | Vidyasagar 1820–1891 | Dayananda 1824–1883 | Sir Syed 1817–1898 | Ranade 1842–1901. Vidyasagar championed Hindu widow remarriage.</div>
+    </div>
+
+    <div class="q-card" id="card-106">
+      <div class="q-text"><span class="q-num">106</span><span class="q-text-inner">Vidyasagar was the most prominent campaigner for:</span></div>
+      <div class="options">
+        <label><input type="radio" name="q106" value="A"/><span class="opt-label"><span class="opt-badge">A</span>Abolition of caste system</span></label>
+        <label><input type="radio" name="q106" value="B"/><span class="opt-label"><span class="opt-badge">B</span>Education for Dalits</span></label>
+        <label><input type="radio" name="q106" value="C"/><span class="opt-label"><span class="opt-badge">C</span>Hindu widow remarriage</span></label>
+        <label><input type="radio" name="q106" value="D"/><span class="opt-label"><span class="opt-badge">D</span>Abolition of child labour</span></label>
+      </div>
+      <div class="explanation-box" id="expl-q106"><div class="expl-head">💡 Explanation</div>Vidyasagar was the most prominent campaigner for <strong>Hindu widow remarriage</strong>. His efforts led to the Hindu Widows' Remarriage Act of 1856 — one of the earliest successful social reform legislations in British India.</div>
+    </div>
+
+    <div class="q-card" id="card-107">
+      <div class="q-text"><span class="q-num">107</span><span class="q-text-inner">Against which practice did liquor-ban campaigns of Roy, Birsa Munda, and Gandhi unite?</span></div>
+      <div class="options">
+        <label><input type="radio" name="q107" value="A"/><span class="opt-label"><span class="opt-badge">A</span>Sati</span></label>
+        <label><input type="radio" name="q107" value="B"/><span class="opt-label"><span class="opt-badge">B</span>Idol worship</span></label>
+        <label><input type="radio" name="q107" value="C"/><span class="opt-label"><span class="opt-badge">C</span>Intoxicants/liquor consumption</span></label>
+        <label><input type="radio" name="q107" value="D"/><span class="opt-label"><span class="opt-badge">D</span>Child marriage</span></label>
+      </div>
+      <div class="explanation-box" id="expl-q107"><div class="expl-head">💡 Explanation</div>Roy, Birsa Munda, and Gandhi all united against <strong>intoxicants/liquor consumption</strong>. This cross-movement, cross-religion consensus against liquor is a notable aspect of Indian social reform history across different eras.</div>
+    </div>
+
+    <div class="q-card" id="card-108">
+      <div class="q-text"><span class="q-num">108</span><span class="q-text-inner">Human sacrifice was banned by British government in:</span></div>
+      <div class="options">
+        <label><input type="radio" name="q108" value="A"/><span class="opt-label"><span class="opt-badge">A</span>1820s</span></label>
+        <label><input type="radio" name="q108" value="B"/><span class="opt-label"><span class="opt-badge">B</span>1830s</span></label>
+        <label><input type="radio" name="q108" value="C"/><span class="opt-label"><span class="opt-badge">C</span>1840s</span></label>
+        <label><input type="radio" name="q108" value="D"/><span class="opt-label"><span class="opt-badge">D</span>1850s</span></label>
+      </div>
+      <div class="explanation-box" id="expl-q108"><div class="expl-head">💡 Explanation</div>Human sacrifice was banned by British government in the <strong>1840s</strong>. Compare: Sati abolished = 1829 (1820s-30s), Female infanticide banned = 1830s, Human sacrifice = 1840s — these are sequential reform milestones.</div>
+    </div>
+
+    <div class="q-card" id="card-109">
+      <div class="q-text"><span class="q-num">109</span><span class="q-text-inner">The greatest crusader against caste system and untouchability was argued to be:</span></div>
+      <div class="options">
+        <label><input type="radio" name="q109" value="A"/><span class="opt-label"><span class="opt-badge">A</span>Newspapers</span></label>
+        <label><input type="radio" name="q109" value="B"/><span class="opt-label"><span class="opt-badge">B</span>INC</span></label>
+        <label><input type="radio" name="q109" value="C"/><span class="opt-label"><span class="opt-badge">C</span>Railways</span></label>
+        <label><input type="radio" name="q109" value="D"/><span class="opt-label"><span class="opt-badge">D</span>Schools</span></label>
+      </div>
+      <div class="explanation-box" id="expl-q109"><div class="expl-head">💡 Explanation</div><strong>Railways</strong> were argued to be the greatest crusader against caste and untouchability. In railway compartments, all castes sat together — a forced social mixing that no reform movement could achieve at that scale.</div>
+    </div>
+
+    <div class="q-card" id="card-110">
+      <div class="q-text"><span class="q-num">110</span><span class="q-text-inner">Wahabi Movement ultimately created which kind of tendencies among Indian Muslims?</span></div>
+      <div class="options">
+        <label><input type="radio" name="q110" value="A"/><span class="opt-label"><span class="opt-badge">A</span>Nationalist</span></label>
+        <label><input type="radio" name="q110" value="B"/><span class="opt-label"><span class="opt-badge">B</span>Pro-British</span></label>
+        <label><input type="radio" name="q110" value="C"/><span class="opt-label"><span class="opt-badge">C</span>Progressive</span></label>
+        <label><input type="radio" name="q110" value="D"/><span class="opt-label"><span class="opt-badge">D</span>Isolationist and separatist</span></label>
+      </div>
+      <div class="explanation-box" id="expl-q110"><div class="expl-head">💡 Explanation</div>Wahabi Movement created <strong>isolationist and separatist</strong> tendencies among Indian Muslims. It did NOT develop into a nationalist movement — unlike movements like Aligarh which tried to modernize Muslims within the British framework.</div>
+    </div>
+
+  </form>
+
+  <div style="text-align:center; margin: 28px 0 10px;">
+    <button type="button" id="submitBtn">📊 GET ANALYSIS 📊</button>
+  </div>
+
+  <div id="scorePanel">
+    <span class="score-emoji" id="scoreEmoji">📜</span>
+    <h2 id="scoreBig" style="font-family:'Playfair Display',serif;font-size:clamp(1.1rem,3.5vw,1.6rem);font-weight:700;color:var(--text);text-shadow:var(--shadow-text);margin-bottom:8px;line-height:1.3;">—</h2>
+    <div class="score-sub" id="scoreSub">out of 110 questions</div>
+    <div class="grade-badge" id="gradeBadge">—</div>
+    <br/>
+    <button class="retry-btn" onclick="retryQuiz()">↺ Try Again</button>
+    <button class="review-btn" id="reviewBtn" onclick="toggleReview()">📋 Review Mistakes Only</button>
+  </div>
+
+</div><!-- end #app -->
+
+<script>
+  /* ── STREAK TOAST ── */
+  let toastTimer = null, wrongStreak = 0, correctStreak = 0;
+
+  function showToast(msg, isCorrect) {
+    const toast = document.getElementById('answerToast');
+    toast.textContent = msg;
+    toast.style.borderColor = isCorrect ? '#4caf50' : '#e53935';
+    toast.style.color       = isCorrect ? '#2e7d32' : '#c62828';
+    if (toastTimer) clearTimeout(toastTimer);
+    toast.classList.add('show');
+    toastTimer = setTimeout(() => toast.classList.remove('show'), 2500);
+  }
+
+  function getToastMsg(isCorrect) {
+    if (isCorrect) {
+      wrongStreak = 0; correctStreak++;
+      if (correctStreak === 5) return '🏙️ AAP MUMBAI AA RAHE HO!!';
+      if (correctStreak > 5)   return `🔥 ${correctStreak} streak — Mumbai pakki hai!`;
+      return '';
+    } else {
+      correctStreak = 0; wrongStreak++;
+      if (wrongStreak === 2) return '🗣️ JALDI WAHA SE HATOOO!!';
+      return '';
+    }
+  }
+
+  /* ── CONFETTI ── */
+  const CONF_COLORS = ['#ffb7c5','#87ceeb','#f78fa7','#5ab0d6','#fff','#ffd700','#b5ead7','#c7ceea'];
+  function spawnConfetti(originEl) {
+    const rect = originEl.getBoundingClientRect();
+    const cx = rect.left + rect.width/2, cy = rect.top + rect.height/2;
+    for (let i = 0; i < 28; i++) {
+      const el = document.createElement('div');
+      el.className = 'confetti-piece';
+      const angle = (Math.PI*2/28)*i + (Math.random()-0.5)*0.8;
+      const dist  = 55 + Math.random()*80;
+      el.style.cssText = `left:${cx}px;top:${cy}px;background:${CONF_COLORS[Math.floor(Math.random()*CONF_COLORS.length)]};border-radius:${Math.random()>.5?'50%':'2px'};--tx:${Math.cos(angle)*dist}px;--ty:${Math.sin(angle)*dist-30}px;--rot:${Math.random()*720-360}deg;--dur:${0.6+Math.random()*0.5}s;`;
+      document.body.appendChild(el);
+      setTimeout(() => el.remove(), 1200);
+    }
+  }
+
+  /* ── TIMER ── */
+  const TIMER_SECS = 20 * 60;
+  let timerLeft = TIMER_SECS, timerInterval = null, timerStarted = false;
+
+  function formatTime(s) {
+    return String(Math.floor(s/60)).padStart(2,'0') + ':' + String(s%60).padStart(2,'0');
+  }
+  function updateTimerDisplay() {
+    const el = document.getElementById('quizTimer');
+    el.textContent = '⏱️ ' + formatTime(timerLeft);
+    if      (timerLeft <= 60)  { el.style.color = '#e53935'; el.style.fontWeight = '900'; }
+    else if (timerLeft <= 180) { el.style.color = '#f57c00'; el.style.fontWeight = '800'; }
+    else                       { el.style.color = 'var(--text)'; el.style.fontWeight = '700'; }
+  }
+  function startTimer() {
+    if (timerStarted) return;
+    timerStarted = true;
+    updateTimerDisplay();
+    timerInterval = setInterval(() => {
+      timerLeft--;
+      updateTimerDisplay();
+      if (timerLeft <= 0) { clearInterval(timerInterval); document.getElementById('submitBtn').click(); }
+    }, 1000);
+  }
+
+  /* ── ANSWERS ── */
+  const answers = {
+    q1:'C',  q2:'C',  q3:'B',  q4:'B',  q5:'B',
+    q6:'B',  q7:'C',  q8:'C',  q9:'C',  q10:'B',
+    q11:'C', q12:'C', q13:'B', q14:'C', q15:'C',
+    q16:'B', q17:'B', q18:'D', q19:'C', q20:'C',
+    q21:'B', q22:'B', q23:'C', q24:'B', q25:'B',
+    q26:'C', q27:'B', q28:'D', q29:'B', q30:'B',
+    q31:'A', q32:'C', q33:'B', q34:'B', q35:'D',
+    q36:'C', q37:'B', q38:'C', q39:'C', q40:'C',
+    q41:'C', q42:'D', q43:'B', q44:'C', q45:'C',
+    q46:'D', q47:'C', q48:'B', q49:'B', q50:'B',
+    q51:'C', q52:'B', q53:'B', q54:'C', q55:'B',
+    q56:'D', q57:'B', q58:'D', q59:'C', q60:'C',
+    q61:'C', q62:'B', q63:'B', q64:'C', q65:'C',
+    q66:'C', q67:'C', q68:'B', q69:'C', q70:'C',
+    q71:'D', q72:'C', q73:'C', q74:'C', q75:'D',
+    q76:'C', q77:'C', q78:'B', q79:'B', q80:'C',
+    q81:'D', q82:'C', q83:'C', q84:'C', q85:'C',
+    q86:'C', q87:'C', q88:'D', q89:'C', q90:'C',
+    q91:'C', q92:'D', q93:'B', q94:'B', q95:'B',
+    q96:'B', q97:'B', q98:'C', q99:'C', q100:'D',
+    q101:'C', q102:'B', q103:'C', q104:'C', q105:'C',
+    q106:'C', q107:'C', q108:'C', q109:'C', q110:'D',
+  };
+
+  const total = Object.keys(answers).length;
+  const score = { count: 0 };
+  const progressBar   = document.getElementById('progressBar');
+  const progressLabel = document.getElementById('progressLabel');
+  let answered = new Set();
+
+  document.querySelectorAll('input[type="radio"]').forEach(radio => {
+    radio.addEventListener('change', () => {
+      startTimer();
+      const qName = radio.name;
+      if (answered.has(qName)) return;
+      answered.add(qName);
+      progressBar.style.width = (answered.size / total * 100) + '%';
+      progressLabel.textContent = `${answered.size} / ${total} answered`;
+
+      const card    = document.getElementById('card-' + qName.replace('q',''));
+      const opts    = card.querySelectorAll('.opt-label');
+      const radios  = card.querySelectorAll(`input[name="${qName}"]`);
+      const chosen  = radio.value;
+      const correct = answers[qName];
+
+      radios.forEach((r, i) => {
+        r.disabled = true;
+        if (r.value === correct)     opts[i].classList.add('correct');
+        else if (r.value === chosen) opts[i].classList.add('wrong');
+      });
+
+      if (chosen === correct) {
+        card.classList.add('answered-correct'); score.count++;
+        spawnConfetti(card);
+        const msg = getToastMsg(true); if (msg) showToast(msg, true);
+      } else {
+        card.classList.add('answered-wrong');
+        const msg = getToastMsg(false); if (msg) showToast(msg, false);
+      }
+
+      const explBox = document.getElementById('expl-' + qName);
+      if (explBox) { explBox.style.display = 'block'; explBox.scrollIntoView({ behavior:'smooth', block:'nearest' }); }
+    });
+  });
+
+  document.getElementById('submitBtn').addEventListener('click', () => {
+    clearInterval(timerInterval);
+    for (let q in answers) {
+      if (answered.has(q)) continue;
+      const card   = document.getElementById('card-' + q.replace('q',''));
+      const opts   = card.querySelectorAll('.opt-label');
+      const radios = card.querySelectorAll(`input[name="${q}"]`);
+      radios.forEach((r, i) => { r.disabled = true; if (r.value === answers[q]) opts[i].classList.add('correct'); });
+      card.classList.add('answered-wrong');
+      const explBox = document.getElementById('expl-' + q);
+      if (explBox) explBox.style.display = 'block';
+    }
+
+    const pct = Math.round(score.count / total * 100);
+    let emoji, headline, subline, grade, ytLink;
+    if (pct >= 80) {
+      emoji = '🏆'; headline = 'COMPLETE CHAPTER 14 MASTER! Exam mein full marks pakka! 🌸';
+      subline = `${score.count} / ${total} correct · ${pct}%`;
+      grade = 'Agar Roy zinda hote toh tujhe Brahmo Samaj ka secretary banate! 🌟';
+      ytLink = 'https://youtu.be/5_gAzkKvSRE';
+    } else if (pct >= 50) {
+      emoji = '📚'; headline = 'THODA AUR PADH — Sections H–J (Vivekananda, Periyar, Narayana Guru) pe focus kar!';
+      subline = `${score.count} / ${total} correct · ${pct}%`;
+      if (pct >= 75) grade = 'Achha hai — par Tuhfat ka year aur Brahmo ka year confuse mat karna! 💪';
+      else           grade = 'Roy ki biography dobara padh — 1803, 1814, 1821, 1825, 1828 chronology! 📖';
+      ytLink = 'https://youtu.be/_iu2ouLSFkk';
+    } else {
+      emoji = '😬'; headline = 'BHAI POORA CHAPTER DOBARA PADH — Roy se Periyar tak sab revise kar!';
+      subline = `${score.count} / ${total} correct · ${pct}%`;
+      grade = 'Notes mein waapis jao — Raja Ram Mohan Roy se shuru karo! 🌸';
+      ytLink = 'https://youtu.be/_iu2ouLSFkk';
+    }
+
+    document.getElementById('scoreEmoji').textContent = emoji;
+    document.getElementById('scoreBig').textContent   = headline;
+    document.getElementById('scoreSub').textContent   = subline;
+    document.getElementById('gradeBadge').textContent = grade;
+    const panel = document.getElementById('scorePanel');
+    panel.style.display = 'block';
+    document.getElementById('submitBtn').disabled = true;
+    setTimeout(() => { window.open(ytLink, '_blank'); }, 2000);
+    currentThemeIdx = 0; applyTheme(0);
+  });
+
+  function retryQuiz() {
+    clearInterval(timerInterval);
+    timerLeft = TIMER_SECS; timerStarted = false;
+    document.getElementById('quizTimer').textContent = '⏱️ 20:00';
+    document.getElementById('quizTimer').style.color = 'var(--text)';
+    document.getElementById('quizTimer').classList.remove('danger');
+    document.querySelectorAll('input[type="radio"]').forEach(r => { r.checked = false; r.disabled = false; });
+    document.querySelectorAll('.opt-label').forEach(l => l.classList.remove('correct','wrong'));
+    document.querySelectorAll('.q-card').forEach(c => c.classList.remove('answered-correct','answered-wrong'));
+    document.querySelectorAll('.explanation-box').forEach(b => b.style.display = 'none');
+    answered.clear(); score.count = 0; wrongStreak = 0; correctStreak = 0;
+    progressBar.style.width = '0%';
+    progressLabel.textContent = `0 / ${total} answered`;
+    document.getElementById('scorePanel').style.display = 'none';
+    document.getElementById('submitBtn').disabled = false;
+    window.scrollTo({ top:0, behavior:'smooth' });
+  }
+
+  /* ── PETALS ── */
+  const container = document.getElementById('petalContainer');
+  for (let i = 0; i < 28; i++) {
+    const p = document.createElement('div');
+    p.className = 'petal';
+    const size = 10 + Math.random()*10;
+    p.style.cssText = `left:${Math.random()*100}%;width:${size}px;height:${size}px;animation-duration:${6+Math.random()*10}s;animation-delay:${-Math.random()*14}s;opacity:0;transform:rotate(${Math.random()*360}deg);border-radius:${Math.random()>.5?'150% 0 150% 0':'0 150% 0 150%'};`;
+    container.appendChild(p);
+  }
+
+  function toggleAns(btn) {
+    const ans = btn.nextElementSibling;
+    const hidden = ans.style.display === 'none';
+    ans.style.display = hidden ? 'block' : 'none';
+    btn.textContent = hidden ? '🙈 Hide Answer' : '👁️ Show Answer';
+    btn.classList.toggle('revealed', hidden);
+  }
+
+  updateTimerDisplay();
+
+  /* ── AUDIO ── */
+  const AC = window.AudioContext || window.webkitAudioContext;
+  const ac = AC ? new AC() : null;
+  function playTone(freq, type, dur, vol=0.14) {
+    if (!ac) return;
+    if (ac.state === 'suspended') ac.resume();
+    const o = ac.createOscillator(), g = ac.createGain();
+    o.type = type; o.frequency.value = freq;
+    g.gain.setValueAtTime(0, ac.currentTime);
+    g.gain.linearRampToValueAtTime(vol, ac.currentTime + 0.01);
+    g.gain.exponentialRampToValueAtTime(0.001, ac.currentTime + dur);
+    o.connect(g); g.connect(ac.destination);
+    o.start(); o.stop(ac.currentTime + dur + 0.05);
+  }
+  function playCorrect() { playTone(523,'sine',0.18,0.13); setTimeout(()=>playTone(659,'sine',0.22,0.11),80); setTimeout(()=>playTone(784,'sine',0.28,0.09),160); }
+  function playWrong()   { playTone(220,'sawtooth',0.22,0.10); setTimeout(()=>playTone(185,'sawtooth',0.28,0.07),100); }
+
+  document.querySelectorAll('input[type="radio"]').forEach(radio => {
+    radio.addEventListener('change', () => {
+      setTimeout(() => {
+        const card = document.getElementById('card-' + radio.name.replace('q',''));
+        if (card?.classList.contains('answered-correct')) playCorrect();
+        else if (card?.classList.contains('answered-wrong')) playWrong();
+      }, 60);
+    });
+  });
+
+  setInterval(() => {
+    if (timerStarted && timerLeft <= 60 && timerLeft > 0) {
+      playTone(880, 'square', 0.04, 0.04);
+      document.getElementById('quizTimer').classList.add('danger');
+    }
+  }, 1000);
+
+  /* ── THEME SWITCHER ── */
+  const THEMES = [
+    { cls:'',            label:'🌸 Sakura Mode' },
+    { cls:'theme-ocean', label:'🌊 Ocean Mode'  },
+    { cls:'theme-night', label:'🌙 Night Mode'  },
+  ];
+  let currentThemeIdx = 0;
+
+  function applyTheme(idx) {
+    const body = document.body;
+    THEMES.forEach(t => { if (t.cls) body.classList.remove(t.cls); });
+    if (THEMES[idx].cls) body.classList.add(THEMES[idx].cls);
+    document.getElementById('themeIndicator').textContent = THEMES[idx].label;
+    body.classList.add('switching');
+    setTimeout(() => body.classList.remove('switching'), 650);
+  }
+
+  document.querySelectorAll('input[type="radio"]').forEach(radio => {
+    radio.addEventListener('change', () => {
+      setTimeout(() => {
+        const sz = answered.size;
+        if (sz === 37)       { currentThemeIdx = 1; applyTheme(1); }
+        else if (sz === 74)  { currentThemeIdx = 2; applyTheme(2); }
+      }, 80);
+    });
+  });
+
+  /* ── REVIEW MODE ── */
+  let reviewOn = false;
+  function toggleReview() {
+    reviewOn = !reviewOn;
+    document.getElementById('app').classList.toggle('review-mode-on', reviewOn);
+    document.getElementById('reviewBanner').style.display = reviewOn ? 'block' : 'none';
+    document.getElementById('reviewBtn').textContent = reviewOn ? '📋 Show All Questions' : '📋 Review Mistakes Only';
+    if (reviewOn) {
+      document.querySelectorAll('.q-card.answered-wrong').forEach(c => {
+        const n = c.id.replace('card-','');
+        const ex = document.getElementById('expl-q' + n);
+        if (ex) ex.style.display = 'block';
+      });
+      const first = document.querySelector('.q-card.answered-wrong');
+      if (first) setTimeout(() => first.scrollIntoView({ behavior:'smooth', block:'center' }), 150);
+    } else {
+      window.scrollTo({ top:0, behavior:'smooth' });
+    }
+  }
+</script>
+
+</body>
+</html>
