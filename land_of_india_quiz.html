@@ -1,0 +1,1816 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>🗺️ THE LAND OF INDIA</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,400&family=Nunito:wght@400;600;700&family=Jost:wght@500;700&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --pink:       #ffb7c5;
+    --pink-deep:  #e8839a;
+    --pink-light: #ffe4ec;
+    --sky:        #87ceeb;
+    --sky-deep:   #5ab0d6;
+    --white-glass: rgba(255,255,255,0.62);
+    --white-card:  rgba(255,255,255,0.70);
+    --text:        rgba(45, 35, 40, 0.88);
+    --text-light:  rgba(80, 55, 65, 0.80);
+    --shadow-text: 0 0 6px #fff, 0 1px 3px rgba(255,255,255,0.9);
+    --radius: 18px;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    min-height: 100vh;
+    font-family: 'Nunito', sans-serif;
+    background: linear-gradient(145deg, #fde8f0 0%, #f5e6ff 40%, #dff0ff 100%);
+    background-attachment: fixed;
+    color: var(--text);
+    overflow-x: hidden;
+  }
+
+  /* ─── PETAL RAIN ─── */
+  .petal-container {
+    position: fixed; top: 0; left: 0;
+    width: 100%; height: 100%;
+    pointer-events: none; z-index: 0; overflow: hidden;
+  }
+  .petal {
+    position: absolute; top: -40px;
+    width: 14px; height: 14px;
+    background: radial-gradient(ellipse at 40% 35%, #fff8fa 0%, #ffb7c5 55%, #f78fa7 100%);
+    border-radius: 150% 0 150% 0;
+    opacity: 0;
+    animation: petalFall linear infinite;
+    box-shadow: 0 1px 3px rgba(255,100,130,0.25);
+  }
+  @keyframes petalFall {
+    0%   { transform: translateY(0)   rotate(0deg)   translateX(0);   opacity: 0; }
+    5%   { opacity: 0.85; }
+    85%  { opacity: 0.70; }
+    100% { transform: translateY(110vh) rotate(680deg) translateX(60px); opacity: 0; }
+  }
+
+  /* ─── LAYOUT ─── */
+  #app {
+    position: relative; z-index: 1;
+    max-width: 820px; margin: 0 auto;
+    padding: 36px 20px 60px;
+  }
+
+  /* ─── HEADER ─── */
+  header {
+    text-align: center;
+    padding: 36px 30px 30px;
+    margin-bottom: 30px;
+    background: var(--white-glass);
+    border-radius: var(--radius);
+    border: 1.5px solid rgba(255,183,197,0.55);
+    box-shadow: 0 8px 32px rgba(255,130,160,0.13), 0 2px 8px rgba(255,255,255,0.4) inset;
+  }
+  header .emoji-row { font-size: 2rem; letter-spacing: 6px; margin-bottom: 10px; }
+  header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.5rem, 4vw, 2.3rem);
+    font-weight: 700; color: var(--text);
+    text-shadow: var(--shadow-text); line-height: 1.25;
+  }
+  header h1 span { color: var(--pink-deep); }
+  header p {
+    margin-top: 8px; font-size: 0.95rem;
+    color: var(--text-light); text-shadow: var(--shadow-text); font-weight: 600;
+  }
+  .coded-by {
+    margin-top: 10px; font-size: 0.78rem; font-weight: 700; letter-spacing: 3px;
+    background: linear-gradient(90deg, #ffb7c5, #87ceeb, #ffb7c5, #e8839a, #87ceeb);
+    background-size: 300% auto;
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    animation: shimmer 2.8s linear infinite, fadeSlideIn 1s ease both;
+  }
+  @keyframes shimmer { 0% { background-position: 0% center; } 100% { background-position: 300% center; } }
+  @keyframes fadeSlideIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+  .divider {
+    display: flex; align-items: center; gap: 12px;
+    margin: 14px auto 0; max-width: 320px;
+  }
+  .divider hr { flex: 1; border: none; border-top: 1.5px solid var(--pink); }
+  .divider span { font-size: 1.1rem; }
+  .progress-wrap {
+    background: rgba(255,255,255,0.55); border-radius: 50px; height: 8px;
+    margin: 18px 0 0; border: 1px solid rgba(255,183,197,0.40); overflow: hidden;
+  }
+  .progress-bar {
+    height: 100%; width: 0%;
+    background: linear-gradient(90deg, var(--pink), var(--sky-deep));
+    border-radius: 50px; transition: width 0.3s;
+  }
+  .progress-label {
+    text-align: right; font-size: 0.78rem;
+    color: var(--text-light); font-weight: 700;
+    text-shadow: var(--shadow-text); margin-top: 4px;
+  }
+
+  /* ─── SECTION LABEL ─── */
+  .section-label {
+    display: inline-block;
+    background: linear-gradient(90deg, var(--pink-deep), var(--sky-deep));
+    color: #fff; font-size: 0.78rem; font-weight: 700;
+    letter-spacing: 1.5px; text-transform: uppercase;
+    padding: 5px 16px; border-radius: 50px;
+    margin: 28px 0 14px;
+    box-shadow: 0 2px 8px rgba(200,100,130,0.25);
+    text-shadow: 0 1px 2px rgba(0,0,0,0.18);
+  }
+
+  /* ─── QUESTION CARD ─── */
+  .q-card {
+    background: var(--white-card);
+    border: 1.5px solid rgba(255,183,197,0.45);
+    border-radius: var(--radius);
+    padding: 22px 24px 18px; margin-bottom: 16px;
+    box-shadow: 0 4px 18px rgba(255,140,170,0.10), 0 1px 4px rgba(255,255,255,0.35) inset;
+    transition: box-shadow 0.25s;
+  }
+  .q-card:hover { box-shadow: 0 6px 28px rgba(255,130,160,0.18); }
+  .q-num {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 28px; height: 28px;
+    background: linear-gradient(135deg, var(--pink), var(--sky));
+    border-radius: 50%; font-size: 0.75rem; font-weight: 700; color: #fff;
+    box-shadow: 0 2px 6px rgba(200,100,130,0.30);
+    flex-shrink: 0; margin-right: 10px; vertical-align: middle;
+  }
+  .q-text {
+    font-size: 0.96rem; font-weight: 700; color: var(--text);
+    text-shadow: var(--shadow-text); line-height: 1.5;
+    display: flex; align-items: flex-start; gap: 4px; margin-bottom: 14px;
+  }
+  .q-text-inner { flex: 1; }
+
+  /* ─── OPTIONS ─── */
+  .options { display: flex; flex-direction: column; gap: 9px; }
+  .opt-label {
+    display: flex; align-items: flex-start; gap: 10px; cursor: pointer;
+    padding: 10px 14px; border-radius: 12px;
+    border: 1.5px solid rgba(255,183,197,0.40);
+    background: rgba(255,255,255,0.45);
+    transition: background 0.2s, border-color 0.2s, transform 0.15s;
+    font-size: 0.90rem; color: var(--text);
+    text-shadow: var(--shadow-text); font-weight: 600; line-height: 1.4;
+  }
+  .opt-label:hover { background: rgba(255,183,197,0.28); border-color: var(--pink); transform: translateX(3px); }
+  input[type="radio"] { display: none; }
+  input[type="radio"]:checked + .opt-label { background: rgba(255,183,197,0.45); border-color: var(--pink-deep); box-shadow: 0 0 0 2px rgba(232,131,154,0.25); }
+  .opt-badge {
+    display: inline-flex; align-items: center; justify-content: center;
+    min-width: 22px; height: 22px; border-radius: 6px;
+    background: rgba(255,183,197,0.50); font-size: 0.72rem; font-weight: 700;
+    color: var(--pink-deep); flex-shrink: 0; margin-top: 1px;
+    border: 1px solid rgba(232,131,154,0.40);
+  }
+  input[type="radio"]:checked + .opt-label .opt-badge { background: var(--pink-deep); color: #fff; border-color: var(--pink-deep); }
+
+  /* ─── RESULT STATES ─── */
+  .opt-label.correct { background: rgba(144,238,144,0.40) !important; border-color: #4caf50 !important; }
+  .opt-label.wrong   { background: rgba(255,99,99,0.28) !important;   border-color: #e53935 !important; }
+  .opt-label.correct .opt-badge { background: #4caf50; color: #fff; border-color: #4caf50; }
+  .opt-label.wrong   .opt-badge { background: #e53935; color: #fff; border-color: #e53935; }
+  .q-card.answered-wrong   { border-color: rgba(229,57,53,0.35); }
+  .q-card.answered-correct { border-color: rgba(76,175,80,0.40); }
+  .opt-label.correct::after {
+    content: '✔'; margin-left: auto; padding-left: 10px;
+    color: #4caf50; font-size: 1rem; font-weight: 900; flex-shrink: 0;
+  }
+  .opt-label.wrong::after {
+    content: '✘'; margin-left: auto; padding-left: 10px;
+    color: #e53935; font-size: 1rem; font-weight: 900; flex-shrink: 0;
+  }
+
+  /* ─── RANDOM MESSAGE TOAST ─── */
+  #answerToast {
+    position: fixed; bottom: 28px; left: 50%; transform: translateX(-50%) translateY(80px);
+    background: rgba(255,255,255,0.92); backdrop-filter: blur(10px);
+    border-radius: 50px; padding: 10px 26px;
+    font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 1rem;
+    box-shadow: 0 6px 28px rgba(200,100,130,0.22);
+    border: 2px solid var(--pink);
+    color: var(--text); white-space: nowrap;
+    transition: transform 0.35s cubic-bezier(0.22,1,0.36,1), opacity 0.35s ease;
+    opacity: 0; pointer-events: none; z-index: 99998;
+  }
+  #answerToast.show {
+    transform: translateX(-50%) translateY(0);
+    opacity: 1;
+  }
+
+  /* ─── CONFETTI PARTICLE ─── */
+  .confetti-piece {
+    position: fixed;
+    width: 9px; height: 9px;
+    border-radius: 2px;
+    pointer-events: none;
+    z-index: 99999;
+    animation: confettiFly var(--dur, 0.9s) ease-out forwards;
+    opacity: 1;
+  }
+  @keyframes confettiFly {
+    0%   { transform: translate(0,0) rotate(0deg) scale(1);   opacity: 1; }
+    80%  { opacity: 0.8; }
+    100% { transform: translate(var(--tx),var(--ty)) rotate(var(--rot)) scale(0.4); opacity: 0; }
+  }
+
+  /* ─── SUBMIT ─── */
+  .btn-wrap { text-align: center; margin-top: 32px; }
+  #submitBtn {
+    padding: 15px 58px;
+    font-family: 'Playfair Display', serif;
+    font-size: 1.15rem; font-weight: 700;
+    border: none; border-radius: 50px; cursor: pointer;
+    background: linear-gradient(135deg, #ffb7c5 0%, #87ceeb 100%);
+    color: #fff; text-shadow: 0 1px 3px rgba(100,50,70,0.30);
+    box-shadow: 0 4px 20px rgba(255,130,160,0.35), 0 1px 4px rgba(135,206,235,0.30);
+    letter-spacing: 0.5px;
+    transition: transform 0.2s, box-shadow 0.2s, filter 0.2s;
+    position: relative; overflow: hidden;
+  }
+  #submitBtn::before {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(135deg, rgba(255,255,255,0.25), transparent);
+    border-radius: inherit;
+  }
+  #submitBtn:hover:not(:disabled) { transform: translateY(-3px) scale(1.03); box-shadow: 0 8px 30px rgba(255,120,155,0.45); filter: brightness(1.05); }
+  #submitBtn:active:not(:disabled) { transform: translateY(0) scale(0.98); }
+  #submitBtn:disabled { opacity: 0.7; cursor: default; }
+
+  /* ─── SCORE PANEL ─── */
+  #scorePanel {
+    display: none; margin-top: 28px; text-align: center;
+    padding: 36px 30px; background: var(--white-glass);
+    border-radius: var(--radius); border: 2px solid rgba(255,183,197,0.55);
+    box-shadow: 0 8px 32px rgba(255,130,160,0.15);
+    animation: popIn 0.5s cubic-bezier(0.175,0.885,0.32,1.275) both;
+  }
+  @keyframes popIn { from { transform: scale(0.85); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+  #scorePanel .score-emoji { font-size: 3rem; margin-bottom: 10px; display: block; }
+  #scorePanel h2 { font-family: 'Playfair Display', serif; font-size: 1.8rem; font-weight: 700; color: var(--text); text-shadow: var(--shadow-text); margin-bottom: 6px; }
+  #scorePanel .score-big {
+    font-size: 3.5rem; font-weight: 700; font-family: 'Playfair Display', serif;
+    background: linear-gradient(135deg, var(--pink-deep), var(--sky-deep));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; line-height: 1.2;
+  }
+  #scorePanel .score-sub { font-size: 1rem; color: var(--text-light); text-shadow: var(--shadow-text); margin-top: 6px; font-weight: 600; }
+  #scorePanel .grade-badge {
+    display: inline-block; margin-top: 14px; padding: 8px 28px;
+    background: linear-gradient(90deg, var(--pink), var(--sky));
+    border-radius: 50px; color: #fff; font-weight: 700; font-size: 1rem;
+    box-shadow: 0 3px 12px rgba(200,100,130,0.28); text-shadow: 0 1px 2px rgba(0,0,0,0.15);
+  }
+  .retry-btn {
+    display: inline-block; margin-top: 20px; padding: 10px 34px;
+    background: rgba(255,255,255,0.75); border: 2px solid var(--pink);
+    border-radius: 50px; cursor: pointer; font-family: 'Nunito', sans-serif;
+    font-weight: 700; font-size: 0.95rem; color: var(--pink-deep);
+    transition: background 0.2s, transform 0.2s;
+  }
+  .retry-btn:hover { background: var(--pink-light); transform: translateY(-2px); }
+
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: var(--pink); border-radius: 3px; }
+
+  /* ═══════════════════════════════════
+     NOTES SECTION STYLES
+  ═══════════════════════════════════ */
+  .notes-section { margin-bottom: 10px; }
+
+  .notes-main-label {
+    display: flex; align-items: center; gap: 12px;
+    margin-bottom: 18px;
+  }
+  .notes-main-label hr { flex: 1; border: none; border-top: 1.5px solid var(--pink); }
+  .notes-main-label .nml-text {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.05rem; font-weight: 700;
+    color: var(--pink-deep); text-shadow: var(--shadow-text);
+    white-space: nowrap; letter-spacing: 1px;
+  }
+
+  .note-card {
+    background: rgba(255,255,255,0.72);
+    border: 1.5px solid rgba(135,206,235,0.50);
+    border-left: 4px solid var(--pink-deep);
+    border-radius: var(--radius);
+    padding: 18px 22px 16px;
+    margin-bottom: 14px;
+    box-shadow: 0 3px 14px rgba(135,206,235,0.12), 0 1px 4px rgba(255,255,255,0.40) inset;
+  }
+  .note-card-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem; font-weight: 700;
+    color: var(--pink-deep); text-shadow: var(--shadow-text);
+    margin-bottom: 10px; display: flex; align-items: center; gap: 8px;
+  }
+  .note-list {
+    list-style: none; display: flex; flex-direction: column; gap: 7px;
+  }
+  .note-list li {
+    font-size: 0.875rem; font-weight: 600; color: var(--text);
+    text-shadow: var(--shadow-text); line-height: 1.55;
+    padding: 6px 10px; border-radius: 8px;
+    background: rgba(255,183,197,0.12);
+    border-left: 2px solid rgba(255,183,197,0.45);
+  }
+  .note-list li strong { color: var(--pink-deep); }
+  .note-tag {
+    display: inline-block; font-size: 0.65rem; font-weight: 700;
+    letter-spacing: 1px; text-transform: uppercase;
+    padding: 2px 8px; border-radius: 20px;
+    background: linear-gradient(90deg, var(--pink), var(--sky));
+    color: #fff; margin-right: 6px; vertical-align: middle;
+    text-shadow: none;
+  }
+  .note-card.sky  { border-left-color: var(--sky-deep); }
+  .note-card.sky  .note-card-title { color: var(--sky-deep); }
+  .note-card.green { border-left-color: #5cb85c; }
+  .note-card.green .note-card-title { color: #4a9e4a; }
+
+  @media (max-width: 500px) {
+    #app { padding: 20px 12px 50px; }
+    .q-card { padding: 16px 14px 14px; }
+    header h1 { font-size: 1.4rem; }
+    .note-card { padding: 14px 14px 12px; }
+  }
+
+  /* ─── EXPLANATION BOX ─── */
+  .explanation-box {
+    display: none;
+    margin-top: 12px;
+    padding: 12px 16px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, rgba(173,216,255,0.35), rgba(200,230,255,0.50));
+    border: 1.5px solid rgba(90,176,214,0.50);
+    border-left: 4px solid var(--sky-deep);
+    font-size: 0.875rem;
+    color: rgba(30,60,90,0.90);
+    font-weight: 600;
+    line-height: 1.6;
+    box-shadow: 0 3px 12px rgba(90,176,214,0.12);
+    animation: slideExplain 0.35s cubic-bezier(0.22,1,0.36,1) both;
+  }
+  .explanation-box .expl-head {
+    font-weight: 700;
+    color: var(--sky-deep);
+    font-size: 0.78rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 5px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  @keyframes slideExplain {
+    from { opacity: 0; transform: translateY(-8px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ═══════════════════════════════════
+     STRANGER THINGS TRANSITION + THEME
+  ═══════════════════════════════════ */
+
+  #stOverlay {
+    position: fixed; inset: 0;
+    z-index: 999999;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+  }
+  #stOverlay.active { pointer-events: all; opacity: 1; }
+
+  /* jagged tear shape — a zigzag polygon that scales up from a thin sliver
+     to full screen, with the edges kept jagged the whole way (not a rectangle) */
+  #stOverlay .st-bg {
+    position: absolute; inset: 0;
+    background: #050505;
+    clip-path: polygon(
+      49% 0%,  51% 0%,
+      52% 8%,  50% 8%,
+      48% 16%, 53% 16%,
+      49% 24%, 51% 24%,
+      52% 32%, 48% 32%,
+      50% 40%, 53% 40%,
+      48% 48%, 51% 48%,
+      49% 56%, 52% 56%,
+      50% 64%, 48% 64%,
+      51% 72%, 53% 72%,
+      49% 80%, 50% 80%,
+      52% 88%, 48% 88%,
+      50% 96%, 51% 96%,
+      50% 100%, 49% 100%
+    );
+    transform: scaleX(1);
+    transition: clip-path 0.9s cubic-bezier(0.65, 0, 0.35, 1);
+  }
+  #stOverlay.expand .st-bg {
+    clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
+  }
+
+  /* animated black static/noise, visible once the tear starts opening */
+  #stOverlay .st-static {
+    position: absolute; inset: 0;
+    background-image:
+      repeating-conic-gradient(from 0deg, rgba(255,255,255,0.05) 0deg 1deg, transparent 1deg 3deg),
+      repeating-linear-gradient(0deg, rgba(255,255,255,0.04) 0px, transparent 1px, transparent 2px, rgba(255,255,255,0.04) 3px);
+    background-size: 3px 3px, 100% 3px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    animation: staticJitter 0.12s steps(2) infinite;
+  }
+  #stOverlay.tear .st-static,
+  #stOverlay.expand .st-static { opacity: 0.5; }
+  @keyframes staticJitter {
+    0%   { transform: translate(0,0); }
+    50%  { transform: translate(-1.5%, 1%); }
+    100% { transform: translate(1.5%, -1%); }
+  }
+
+  /* red glow rim right along the jagged tear edge while it rips open */
+  #stOverlay .st-rim {
+    position: absolute; inset: 0;
+    background: transparent;
+    box-shadow: none;
+    opacity: 0;
+  }
+  #stOverlay.tear .st-rim {
+    opacity: 1;
+    animation: rimShake 0.4s ease-out;
+    background:
+      radial-gradient(ellipse 60px 100% at 50% 50%, rgba(255,26,26,0.55), transparent 70%);
+    mix-blend-mode: screen;
+  }
+  #stOverlay.expand .st-rim { opacity: 0; transition: opacity 0.4s ease; }
+  @keyframes rimShake {
+    0%   { transform: translateX(0); }
+    20%  { transform: translateX(-4px); }
+    40%  { transform: translateX(3px); }
+    60%  { transform: translateX(-2px); }
+    80%  { transform: translateX(2px); }
+    100% { transform: translateX(0); }
+  }
+
+  /* whole overlay shakes briefly as the tear rips */
+  #stOverlay.tear { animation: overlayShake 0.4s ease-out; }
+  @keyframes overlayShake {
+    0%, 100% { transform: translate(0,0); }
+    20%      { transform: translate(-3px, 1px); }
+    40%      { transform: translate(3px, -1px); }
+    60%      { transform: translate(-2px, 2px); }
+    80%      { transform: translate(2px, -1px); }
+  }
+
+  #stOverlay .st-text-wrap {
+    position: absolute; inset: 0;
+    display: flex; align-items: center; justify-content: center;
+    opacity: 0;
+  }
+  #stOverlay.show-text .st-text-wrap { opacity: 1; }
+
+  #stTypewriter {
+    font-family: 'Jost', 'Playfair Display', sans-serif;
+    font-weight: 700;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    font-size: clamp(2rem, 9vw, 4.5rem);
+    color: #ff1a1a;
+    text-shadow:
+      0 0 10px rgba(255,26,26,0.9),
+      0 0 24px rgba(255,26,26,0.7),
+      0 0 50px rgba(255,26,26,0.5);
+    white-space: nowrap;
+    display: inline-block;
+    transform: scale(1.3);
+    opacity: 0;
+  }
+  #stOverlay.show-text #stTypewriter {
+    animation: punchIn 0.5s cubic-bezier(0.2, 0.9, 0.3, 1.2) forwards,
+               glitchShift 0.5s ease 0.5s 1;
+  }
+  @keyframes punchIn {
+    0%   { transform: scale(1.3); opacity: 0; }
+    60%  { transform: scale(0.96); opacity: 1; }
+    100% { transform: scale(1); opacity: 1; }
+  }
+  @keyframes glitchShift {
+    0%   { transform: translate(0,0); text-shadow: 0 0 10px rgba(255,26,26,0.9), 0 0 24px rgba(255,26,26,0.7); }
+    15%  { transform: translate(-4px, 1px); text-shadow: -3px 0 #00e5ff, 3px 0 #ff1a1a; }
+    30%  { transform: translate(3px, -1px); text-shadow: 3px 0 #00e5ff, -3px 0 #ff1a1a; }
+    45%  { transform: translate(-2px, 0); text-shadow: -2px 0 #00e5ff, 2px 0 #ff1a1a; }
+    60%  { transform: translate(2px, 1px); text-shadow: 2px 0 #00e5ff, -2px 0 #ff1a1a; }
+    100% { transform: translate(0,0); text-shadow: 0 0 10px rgba(255,26,26,0.9), 0 0 24px rgba(255,26,26,0.7), 0 0 50px rgba(255,26,26,0.5); }
+  }
+
+  /* ── STRANGER THINGS THEME (applied to body after transition) ── */
+  body.st-theme { background: #0a0a0a !important; color: #e8e0d8; }
+  body.st-theme::before {
+    content: '';
+    position: fixed; inset: 0; z-index: 0; pointer-events: none;
+    background:
+      radial-gradient(ellipse at 50% 0%, rgba(255,20,20,0.10), transparent 60%),
+      repeating-linear-gradient(0deg, rgba(255,255,255,0.015) 0px, transparent 1px, transparent 2px, rgba(255,255,255,0.015) 3px);
+  }
+  body.st-theme .petal { display: none; }
+
+  body.st-theme header {
+    background: rgba(20,10,10,0.65);
+    border: 1.5px solid rgba(255,20,20,0.45);
+    box-shadow: 0 8px 32px rgba(255,0,0,0.18), 0 2px 8px rgba(255,26,26,0.10) inset;
+  }
+  body.st-theme header h1 {
+    font-family: 'Jost', 'Playfair Display', sans-serif;
+    letter-spacing: 2px; color: #f2e9df;
+    text-shadow: 0 0 12px rgba(255,26,26,0.65), 0 0 3px #000;
+  }
+  body.st-theme header h1 span { color: #ff1a1a; text-shadow: 0 0 16px rgba(255,26,26,0.9); }
+  body.st-theme header p { color: #c9bdb2; text-shadow: none; }
+  body.st-theme .coded-by {
+    background: linear-gradient(90deg, #ff1a1a, #8b0000, #ff1a1a, #cc0000, #ff1a1a);
+    background-size: 300% auto;
+  }
+  body.st-theme .divider hr { border-top-color: rgba(255,26,26,0.5); }
+  body.st-theme .progress-wrap { background: rgba(255,255,255,0.06); border-color: rgba(255,26,26,0.35); }
+  body.st-theme .progress-bar { background: linear-gradient(90deg, #8b0000, #ff1a1a); }
+  body.st-theme .progress-label { color: #c9bdb2; text-shadow: none; }
+  body.st-theme .section-label {
+    background: linear-gradient(90deg, #8b0000, #ff1a1a);
+    text-shadow: 0 1px 4px rgba(0,0,0,0.6);
+  }
+  body.st-theme .q-card {
+    background: rgba(20,12,12,0.72);
+    border: 1.5px solid rgba(255,26,26,0.30);
+    box-shadow: 0 4px 18px rgba(255,0,0,0.10), 0 1px 4px rgba(255,26,26,0.08) inset;
+  }
+  body.st-theme .q-card:hover { box-shadow: 0 6px 28px rgba(255,26,26,0.22); }
+  body.st-theme .q-num { background: linear-gradient(135deg, #ff1a1a, #4a0000); box-shadow: 0 2px 10px rgba(255,26,26,0.45); }
+  body.st-theme .q-text { color: #f2e9df; text-shadow: none; }
+  body.st-theme .opt-label {
+    background: rgba(255,255,255,0.03);
+    border-color: rgba(255,26,26,0.25);
+    color: #ddd3c8; text-shadow: none;
+  }
+  body.st-theme .opt-label:hover { background: rgba(255,26,26,0.12); border-color: #ff1a1a; }
+  body.st-theme input[type="radio"]:checked + .opt-label {
+    background: rgba(255,26,26,0.18); border-color: #ff1a1a;
+    box-shadow: 0 0 0 2px rgba(255,26,26,0.30);
+  }
+  body.st-theme .opt-badge { background: rgba(255,26,26,0.25); color: #ff8080; border-color: rgba(255,26,26,0.4); }
+  body.st-theme input[type="radio"]:checked + .opt-label .opt-badge { background: #ff1a1a; color: #fff; border-color: #ff1a1a; }
+  body.st-theme .opt-label.correct { background: rgba(60,180,60,0.22) !important; border-color: #4caf50 !important; }
+  body.st-theme .opt-label.wrong   { background: rgba(255,26,26,0.28) !important; border-color: #ff1a1a !important; }
+  body.st-theme #submitBtn {
+    background: linear-gradient(135deg, #8b0000 0%, #ff1a1a 100%);
+    box-shadow: 0 4px 20px rgba(255,26,26,0.45);
+  }
+  body.st-theme #scorePanel { background: rgba(20,12,12,0.75); border-color: rgba(255,26,26,0.45); }
+  body.st-theme #scorePanel h2 { color: #f2e9df; text-shadow: none; }
+  body.st-theme #scorePanel .score-big {
+    background: linear-gradient(135deg, #ff1a1a, #8b0000);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  }
+  body.st-theme #scorePanel .score-sub { color: #c9bdb2; text-shadow: none; }
+  body.st-theme .grade-badge { background: linear-gradient(90deg, #8b0000, #ff1a1a); }
+  body.st-theme .retry-btn { background: rgba(255,255,255,0.05); border-color: #ff1a1a; color: #ff8080; }
+  body.st-theme .retry-btn:hover { background: rgba(255,26,26,0.15); }
+  body.st-theme .note-card {
+    background: rgba(20,12,12,0.65);
+    border-color: rgba(255,26,26,0.30);
+    border-left-color: #ff1a1a;
+  }
+  body.st-theme .note-card-title { color: #ff1a1a; text-shadow: none; }
+  body.st-theme .note-list li { color: #ddd3c8; text-shadow: none; background: rgba(255,26,26,0.06); border-left-color: rgba(255,26,26,0.35); }
+  body.st-theme .note-list li strong { color: #ff8080; }
+  body.st-theme .note-tag { background: linear-gradient(90deg, #8b0000, #ff1a1a); }
+  body.st-theme .notes-main-label .nml-text { color: #ff1a1a; text-shadow: none; }
+  body.st-theme .notes-main-label hr { border-top-color: rgba(255,26,26,0.5); }
+  body.st-theme .explanation-box {
+    background: linear-gradient(135deg, rgba(255,26,26,0.10), rgba(139,0,0,0.15));
+    border-color: rgba(255,26,26,0.35);
+    border-left-color: #ff1a1a;
+    color: #ddd3c8;
+  }
+  body.st-theme .explanation-box .expl-head { color: #ff8080; }
+  body.st-theme #answerToast { background: rgba(15,10,10,0.92); border-color: #ff1a1a; color: #f2e9df; }
+
+  body, header, .q-card, .opt-label, .note-card, #submitBtn, #scorePanel,
+  .progress-wrap, .progress-bar, .section-label, .explanation-box,
+  .q-num, .opt-badge, #answerToast {
+    transition: background 0.35s ease, border-color 0.35s ease, color 0.35s ease,
+                box-shadow 0.35s ease, background-color 0.35s ease;
+  }
+
+  /* ═══════════════════════════════════
+     BAT SWARM — occasional cameo, ST theme only
+     Group of bats travels between two random screen corners.
+  ═══════════════════════════════════ */
+  #sporeLayer {
+    position: fixed; inset: 0;
+    pointer-events: none;
+    z-index: 1;
+    overflow: hidden;
+    display: none;
+  }
+  body.st-theme #sporeLayer { display: block; }
+
+  .bat-swarm {
+    position: absolute;
+    top: 0; left: 0;
+    width: 1px; height: 1px;
+    animation: swarmTravel var(--swarm-dur, 12s) cubic-bezier(0.45, 0, 0.55, 1) forwards;
+  }
+  @keyframes swarmTravel {
+    0%   { transform: translate(var(--x1), var(--y1)); opacity: 0; }
+    8%   { opacity: 1; }
+    92%  { opacity: 1; }
+    100% { transform: translate(var(--x2), var(--y2)); opacity: 0; }
+  }
+
+  .shadow-bat {
+    position: absolute;
+    width: 40px; height: 26px;
+    margin-left: var(--ox, 0px);
+    margin-top: var(--oy, 0px);
+    filter: drop-shadow(0 0 7px rgba(255,90,26,0.6)) drop-shadow(0 0 15px rgba(255,26,26,0.4));
+    animation: batWobble var(--wobble-dur, 2.6s) ease-in-out infinite;
+    animation-delay: var(--wobble-delay, 0s);
+  }
+  @keyframes batWobble {
+    0%, 100% { transform: translate(0, 0) rotate(0deg); }
+    25%      { transform: translate(4px, -6px) rotate(-4deg); }
+    50%      { transform: translate(-3px, 3px) rotate(3deg); }
+    75%      { transform: translate(5px, 4px) rotate(-3deg); }
+  }
+
+  .shadow-bat svg { width: 100%; height: 100%; display: block; overflow: visible; }
+  .shadow-bat .bat-body { fill: rgba(10,5,5,0.94); }
+  .shadow-bat .bat-wing {
+    fill: rgba(18,7,7,0.88);
+    stroke: rgba(255,90,26,0.55);
+    stroke-width: 0.8;
+    transform-box: fill-box;
+    animation: batFlap 0.22s ease-in-out infinite alternate;
+  }
+  .shadow-bat .wing-left  { transform-origin: 100% 30%; }
+  .shadow-bat .wing-right { transform-origin: 0% 30%; animation-delay: 0.03s; }
+  @keyframes batFlap {
+    0%   { transform: scaleY(1) rotate(0deg); }
+    100% { transform: scaleY(0.5) rotate(22deg); }
+  }
+</style>
+</head>
+<body>
+
+<div class="petal-container" id="petalContainer"></div>
+<div id="sporeLayer"></div>
+<div id="answerToast"></div>
+
+<!-- ══════════ STRANGER THINGS TRANSITION OVERLAY ══════════ -->
+<div id="stOverlay">
+  <div class="st-bg"></div>
+  <div class="st-static"></div>
+  <div class="st-rim"></div>
+  <div class="st-text-wrap">
+    <div id="stTypewriter">APOCALYPSE!!!</div>
+  </div>
+</div>
+
+<div id="app">
+
+  <!-- ══════════ HEADER ══════════ -->
+  <header>
+    <div class="emoji-row">🗺️ 🇮🇳 🗺️</div>
+    <h1>THE <span>LAND OF</span><br/>INDIA</h1>
+    <p>60 Questions · Geography &amp; Environment of India</p>
+    <p class="coded-by">✦ CODED BY HITESH ✦</p>
+    <div class="divider"><hr/><span>🌷</span><hr/></div>
+    <div class="progress-wrap"><div class="progress-bar" id="progressBar"></div></div>
+    <div class="progress-label" id="progressLabel">0 / 60 answered</div>
+  </header>
+
+  <!-- ══════════════════════════════════════
+       NOTES SECTION
+  ══════════════════════════════════════ -->
+  <div class="notes-section">
+    <div class="notes-main-label">
+      <hr/>
+      <span class="nml-text">📖 QUICK NOTES — STUDY BEFORE YOU QUIZ</span>
+      <hr/>
+    </div>
+
+    <div class="note-card">
+      <div class="note-card-title">🌍 India — Position &amp; Borders</div>
+      <ul class="note-list">
+        <li><span class="note-tag">Rank</span> India is the <strong>7th largest</strong> country in the world by land area.</li>
+        <li><span class="note-tag">Hemisphere</span> Lies entirely in the <strong>Northern &amp; Eastern</strong> hemisphere.</li>
+        <li><span class="note-tag">Longitude</span> <strong>68°7'E to 97°25'E</strong></li>
+        <li><span class="note-tag">Latitude</span> <strong>8°4'N to 37°6'N</strong></li>
+        <li><span class="note-tag">Longest Border</span> <strong>Bangladesh — 4097 km</strong></li>
+        <li><span class="note-tag">Coastline</span> Over <strong>7,500 km</strong></li>
+        <li><span class="note-tag">Borders</span> NW = Pakistan (Line of Control) · NE = China, Bhutan, Nepal · East = Myanmar &amp; Bangladesh · South = Indian Ocean</li>
+      </ul>
+    </div>
+
+    <div class="note-card sky">
+      <div class="note-card-title">🏔️ Peaks &amp; Key Geography</div>
+      <ul class="note-list">
+        <li><span class="note-tag">Highest in India</span> <strong>Kanchenjunga — 28,169 ft</strong></li>
+        <li><span class="note-tag">Highest on Earth</span> <strong>Mount Everest</strong> (in Himalayas)</li>
+        <li><span class="note-tag">Thar Desert</span> Also called <strong>Great Indian Desert</strong> — located in Rajasthan.</li>
+        <li><span class="note-tag">Rann of Kutch</span> Unique <strong>salt marshes and wildlife</strong>.</li>
+        <li><span class="note-tag">Deccan Plateau</span> Rich in minerals: <strong>iron ore, coal, bauxite</strong>.</li>
+        <li><span class="note-tag">Rivers</span> Ganges, Brahmaputra, Yamuna, Godavari, Krishna, Subarnarekha, Damodar, Koel. Barak flows in <strong>Northeast India</strong>.</li>
+        <li><span class="note-tag">Seasons (N &amp; Central India)</span> 4 seasons — Winter (Dec–Feb), Spring (March), Summer (Apr–Jun), Monsoon (Jun–Sep). Summer &gt; <strong>40°C</strong> in plains.</li>
+      </ul>
+    </div>
+
+    <div class="note-card">
+      <div class="note-card-title">🏛️ Ancient Indian Subcontinent</div>
+      <ul class="note-list">
+        <li><span class="note-tag">Countries</span> India, Pakistan, Bangladesh, Nepal, Bhutan, Afghanistan, Myanmar, Sri Lanka.</li>
+        <li><span class="note-tag">Indo-Gangetic Plains</span> Heartland of ancient India — rise of <strong>Indus Valley Civilization, Maurya Empire, Gupta Empire</strong>.</li>
+        <li><span class="note-tag">NW Passes</span> <strong>Khyber &amp; Bolan passes</strong> — crucial trade routes with Mesopotamia &amp; Central Asia.</li>
+        <li><span class="note-tag">Eastern Region (Bangladesh)</span> Ancient names: <strong>Vanga, Paundra, Radh, Gauda, Samatata</strong>. Fertile delta of Ganges-Brahmaputra-Meghna.</li>
+        <li><span class="note-tag">Nobodvip</span> Section of soil ~120 km north of <strong>Kolkata</strong> = "New Found Land."</li>
+        <li><span class="note-tag">South Dynasties</span> <strong>Cholas, Pallavas, Chalukyas</strong> — 1/5th of India's population; influenced Sri Lanka.</li>
+        <li><span class="note-tag">Megasthenes</span> Greek chronicler (4th century BCE); wrote <strong><em>Indica</em></strong>; said <strong>Pandia (Tamil Nadu)</strong> was the only state dominated by females.</li>
+      </ul>
+    </div>
+
+    <div class="note-card sky">
+      <div class="note-card-title">🌿 Seven Sister States (Northeast)</div>
+      <ul class="note-list">
+        <li><span class="note-tag">States</span> <strong>Arunachal Pradesh, Assam, Manipur, Meghalaya, Mizoram, Nagaland, Tripura</strong></li>
+        <li><span class="note-tag">Rivers</span> Brahmaputra and Barak</li>
+        <li><span class="note-tag">Climate</span> Monsoons (May–Sep) — abundant rainfall; winters bring snowfall.</li>
+        <li><span class="note-tag">Biodiversity Hotspot</span> <strong>Indo-Burma Biodiversity Hotspot</strong> — states: Assam, Arunachal Pradesh, Meghalaya, Nagaland.</li>
+      </ul>
+    </div>
+
+    <div class="note-card">
+      <div class="note-card-title">🌳 Biodiversity &amp; Conservation</div>
+      <ul class="note-list">
+        <li><span class="note-tag">Western Ghats</span> <strong>UNESCO World Heritage Site</strong> — runs parallel to western coast. Endemic species: <strong>lion-tailed macaque, Nilgiri tahr</strong>, Malabar giant squirrel.</li>
+        <li><span class="note-tag">Kaziranga NP</span> Assam — <strong>UNESCO World Heritage Site</strong>. World's <strong>largest population of one-horned rhinoceros</strong>. Also: Bengal tiger, Asian elephant.</li>
+        <li><span class="note-tag">Sundarbans</span> Ganges-Brahmaputra delta — <strong>largest mangrove forest in the world</strong> (UNESCO). Species: Royal Bengal tiger, estuarine crocodile, <strong>endangered Gangetic dolphin</strong>.</li>
+        <li><span class="note-tag">Wetlands</span> <strong>Chilika Lake</strong> (Odisha) &amp; <strong>Keoladeo National Park</strong> (Rajasthan) — important for migratory birds.</li>
+        <li><span class="note-tag">Coastal</span> <strong>Lakshadweep Islands</strong> — coral reefs (Arabian Sea). <strong>Gulf of Mannar</strong> (India–Sri Lanka) — coral reefs, seagrass, mangroves.</li>
+        <li><span class="note-tag">Project Tiger</span> Launched <strong>1973</strong> — Bengal tiger conservation.</li>
+        <li><span class="note-tag">Namami Gange</span> Programme to <strong>restore and rejuvenate River Ganges</strong>.</li>
+      </ul>
+    </div>
+
+    <div class="note-card sky">
+      <div class="note-card-title">⛏️ Jharkhand</div>
+      <ul class="note-list">
+        <li><span class="note-tag">Location</span> <strong>Eastern India</strong></li>
+        <li><span class="note-tag">Plateau</span> <strong>Chota Nagpur Plateau</strong> dominates the state.</li>
+        <li><span class="note-tag">Hills</span> North = <strong>Parasnath Hills</strong> · West = <strong>Netarhat Hills</strong> · South = <strong>Dalma Hills</strong></li>
+        <li><span class="note-tag">Rivers</span> Subarnarekha, Damodar, Koel</li>
+        <li><span class="note-tag">Forests</span> <strong>Sal forests</strong>, bamboo groves, medicinal plants</li>
+        <li><span class="note-tag">Minerals</span> Coal, iron ore, copper, mica, bauxite (<strong>NOT petroleum</strong>)</li>
+        <li><span class="note-tag">Crops</span> Paddy, wheat, maize, pulses, oilseeds</li>
+      </ul>
+    </div>
+
+    <div class="note-card">
+      <div class="note-card-title">💡 Important One-Liners</div>
+      <ul class="note-list">
+        <li>Mark Twain: India is <strong>"the cradle of the human race, the birthplace of human speech"</strong></li>
+        <li>Southern region = <strong>1/5th</strong> of India's total population</li>
+        <li>India's strategic location connects it to the <strong>Silk Road</strong> and ancient civilizations</li>
+        <li>Indo-Gangetic plains = <strong>heartland of ancient India</strong></li>
+      </ul>
+    </div>
+
+  </div><!-- end notes-section -->
+
+  
+  
+  <!-- ══════════════════════════════════════
+       QUIZ FORM
+  ══════════════════════════════════════ -->
+  <form id="quizForm">
+
+    <div class="section-label">🌍 Section 1 — India's Position &amp; Borders</div>
+
+    <div class="q-card" id="card-1">
+      <div class="q-text"><span class="q-num">1</span><span class="q-text-inner">India is the _____ largest country in the world by land area.</span></div>
+      <div class="options">
+        <label><input type="radio" name="q1" value="A"/><span class="opt-label"><span class="opt-badge">A</span>5th</span></label>
+        <label><input type="radio" name="q1" value="B"/><span class="opt-label"><span class="opt-badge">B</span>6th</span></label>
+        <label><input type="radio" name="q1" value="C"/><span class="opt-label"><span class="opt-badge">C</span>7th</span></label>
+        <label><input type="radio" name="q1" value="D"/><span class="opt-label"><span class="opt-badge">D</span>8th</span></label>
+      </div>
+      <div class="explanation-box" id="expl-q1"><div class="expl-head">💡 Explanation</div>India is the 7th largest country in the world by land area. It covers about 3.29 million sq km, making it larger than Pakistan, France, and many other nations but smaller than Australia, Brazil, China, USA, Canada and Russia.</div>
+    </div>
+
+    <div class="q-card" id="card-2">
+      <div class="q-text"><span class="q-num">2</span><span class="q-text-inner">India lies entirely in which hemisphere?</span></div>
+      <div class="options">
+        <label><input type="radio" name="q2" value="A"/><span class="opt-label"><span class="opt-badge">A</span>Southern and Eastern</span></label>
+        <label><input type="radio" name="q2" value="B"/><span class="opt-label"><span class="opt-badge">B</span>Northern and Eastern</span></label>
+        <label><input type="radio" name="q2" value="C"/><span class="opt-label"><span class="opt-badge">C</span>Northern and Western</span></label>
+        <label><input type="radio" name="q2" value="D"/><span class="opt-label"><span class="opt-badge">D</span>Southern and Western</span></label>
+      </div>
+      <div class="explanation-box" id="expl-q2"><div class="expl-head">💡 Explanation</div>India lies entirely in the Northern and Eastern hemisphere. It is located north of the equator (Northern hemisphere) and east of the Prime Meridian (Eastern hemisphere).</div>
+    </div>
+
+    <div class="q-card" id="card-3">
+      <div class="q-text"><span class="q-num">3</span><span class="q-text-inner">What is the longitudinal extent of India?</span></div>
+      <div class="options">
+        <label><input type="radio" name="q3" value="A"/><span class="opt-label"><span class="opt-badge">A</span>60°7'E to 90°25'E</span></label>
+        <label><input type="radio" name="q3" value="B"/><span class="opt-label"><span class="opt-badge">B</span>70°7'E to 95°25'E</span></label>
+        <label><input type="radio" name="q3" value="C"/><span class="opt-label"><span class="opt-badge">C</span>68°7'E to 97°25'E</span></label>
+        <label><input type="radio" name="q3" value="D"/><span class="opt-label"><span class="opt-badge">D</span>65°7'E to 95°25'E</span></label>
+      </div>
+      <div class="explanation-box" id="expl-q3"><div class="expl-head">💡 Explanation</div>India's longitudinal extent is 68°7'E to 97°25'E — spanning about 29 degrees of longitude. This causes a time difference of nearly 2 hours between India's easternmost and westernmost points.</div>
+    </div>
+
+    <div class="q-card" id="card-4">
+      <div class="q-text"><span class="q-num">4</span><span class="q-text-inner">What is the latitudinal extent of India?</span></div>
+      <div class="options">
+        <label><input type="radio" name="q4" value="A"/><span class="opt-label"><span class="opt-badge">A</span>8°4'N to 37°6'N</span></label>
+        <label><input type="radio" name="q4" value="B"/><span class="opt-label"><span class="opt-badge">B</span>6°4'N to 35°6'N</span></label>
+        <label><input type="radio" name="q4" value="C"/><span class="opt-label"><span class="opt-badge">C</span>10°4'N to 38°6'N</span></label>
+        <label><input type="radio" name="q4" value="D"/><span class="opt-label"><span class="opt-badge">D</span>8°4'S to 37°6'S</span></label>
+      </div>
+      <div class="explanation-box" id="expl-q4"><div class="expl-head">💡 Explanation</div>India's latitudinal extent is 8°4'N to 37°6'N — spanning about 29 degrees of latitude. The Tropic of Cancer (23.5°N) passes roughly through the middle of India.</div>
+    </div>
+
+    <div class="q-card" id="card-5">
+      <div class="q-text"><span class="q-num">5</span><span class="q-text-inner">Which country shares the longest boundary with India?</span></div>
+      <div class="options">
+        <label><input type="radio" name="q5" value="A"/><span class="opt-label"><span class="opt-badge">A</span>Pakistan</span></label>
+        <label><input type="radio" name="q5" value="B"/><span class="opt-label"><span class="opt-badge">B</span>China</span></label>
+        <label><input type="radio" name="q5" value="C"/><span class="opt-label"><span class="opt-badge">C</span>Nepal</span></label>
+        <label><input type="radio" name="q5" value="D"/><span class="opt-label"><span class="opt-badge">D</span>Bangladesh</span></label>
+      </div>
+      <div class="explanation-box" id="expl-q5"><div class="expl-head">💡 Explanation</div>Bangladesh shares the longest boundary with India — 4,097 km. This is because Bangladesh is almost entirely surrounded by India on three sides, creating an exceptionally long shared border.</div>
+    </div>
+
+    <div class="q-card" id="card-6">
+      <div class="q-text"><span class="q-num">6</span><span class="q-text-inner">What is the length of India's boundary with Bangladesh?</span></div>
+      <div class="options">
+        <label><input type="radio" name="q6" value="A"/><span class="opt-label"><span class="opt-badge">A</span>3000 km</span></label>
+        <label><input type="radio" name="q6" value="B"/><span class="opt-label"><span class="opt-badge">B</span>3500 km</span></label>
+        <label><input type="radio" name="q6" value="C"/><span class="opt-label"><span class="opt-badge">C</span>4097 km</span></label>
+        <label><input type="radio" name="q6" value="D"/><span class="opt-label"><span class="opt-badge">D</span>5000 km</span></label>
+      </div>
+      <div class="explanation-box" id="expl-q6"><div class="expl-head">💡 Explanation</div>India's boundary with Bangladesh is 4,097 km — the longest land border India shares with any single country. This reflects the geographic reality that Bangladesh is nearly encircled by Indian territory.</div>
+    </div>
+
+    <div class="q-card" id="card-7">
+      <div class="q-text"><span class="q-num">7</span><span class="q-text-inner">India's coastline stretches over:</span></div>
+      <div class="options">
+        <label><input type="radio" name="q7" value="A"/><span class="opt-label"><span class="opt-badge">A</span>5,000 km</span></label>
+        <label><input type="radio" name="q7" value="B"/><span class="opt-label"><span class="opt-badge">B</span>6,000 km</span></label>
+        <label><input type="radio" name="q7" value="C"/><span class="opt-label"><span class="opt-badge">C</span>7,500 km</span></label>
+        <label><input type="radio" name="q7" value="D"/><span class="opt-label"><span class="opt-badge">D</span>10,000 km</span></label>
+      </div>
+      <div class="explanation-box" id="expl-q7"><div class="expl-head">💡 Explanation</div>India's coastline stretches over 7,500 km — touching the Arabian Sea (west), the Bay of Bengal (east), and the Indian Ocean (south). Including island coastlines, the total is over 15,000 km.</div>
+    </div>
+
+    <div class="q-card" id="card-8">
+      <div class="q-text"><span class="q-num">8</span><span class="q-text-inner">The Line of Control defines India's border with which country?</span></div>
+      <div class="options">
+        <label><input type="radio" name="q8" value="A"/><span class="opt-label"><span class="opt-badge">A</span>China</span></label>
+        <label><input type="radio" name="q8" value="B"/><span class="opt-label"><span class="opt-badge">B</span>Nepal</span></label>
+        <label><input type="radio" name="q8" value="C"/><span class="opt-label"><span class="opt-badge">C</span>Pakistan</span></label>
+        <label><input type="radio" name="q8" value="D"/><span class="opt-label"><span class="opt-badge">D</span>Bangladesh</span></label>
+      </div>
+      <div class="explanation-box" id="expl-q8"><div class="expl-head">💡 Explanation</div>The Line of Control (LoC) defines the de facto border between India and Pakistan in the Kashmir region. It was established after the 1972 Shimla Agreement following the 1971 war.</div>
+    </div>
+
+    <div class="q-card" id="card-9">
+      <div class="q-text"><span class="q-num">9</span><span class="q-text-inner">Which countries share India's northeast border?</span></div>
+      <div class="options">
+        <label><input type="radio" name="q9" value="A"/><span class="opt-label"><span class="opt-badge">A</span>Pakistan, China</span></label>
+        <label><input type="radio" name="q9" value="B"/><span class="opt-label"><span class="opt-badge">B</span>China, Bhutan, Nepal</span></label>
+        <label><input type="radio" name="q9" value="C"/><span class="opt-label"><span class="opt-badge">C</span>Myanmar, Nepal, China</span></label>
+        <label><input type="radio" name="q9" value="D"/><span class="opt-label"><span class="opt-badge">D</span>Bangladesh, Bhutan, China</span></label>
+      </div>
+      <div class="explanation-box" id="expl-q9"><div class="expl-head">💡 Explanation</div>India's northeast border is shared with China (Arunachal Pradesh, Sikkim), Bhutan, and Nepal. These three Himalayan countries form the northeastern boundary of India.</div>
+    </div>
+
+    <div class="q-card" id="card-10">
+      <div class="q-text"><span class="q-num">10</span><span class="q-text-inner">India's eastern borders are shared with:</span></div>
+      <div class="options">
+        <label><input type="radio" name="q10" value="A"/><span class="opt-label"><span class="opt-badge">A</span>China and Nepal</span></label>
+        <label><input type="radio" name="q10" value="B"/><span class="opt-label"><span class="opt-badge">B</span>Pakistan and Afghanistan</span></label>
+        <label><input type="radio" name="q10" value="C"/><span class="opt-label"><span class="opt-badge">C</span>Myanmar and Bangladesh</span></label>
+        <label><input type="radio" name="q10" value="D"/><span class="opt-label"><span class="opt-badge">D</span>Sri Lanka and Bangladesh</span></label>
+      </div>
+      <div class="explanation-box" id="expl-q10"><div class="expl-head">💡 Explanation</div>India's eastern borders are shared with Myanmar (in the far east) and Bangladesh. Myanmar borders the Seven Sister States while Bangladesh nearly encircles India's northeastern region.</div>
+    </div>
+
+    <div class="section-label">🏔️ Section 2 — Peaks, Rivers &amp; Geography</div>
+
+    <div class="q-card" id="card-11">
+      <div class="q-text"><span class="q-num">11</span><span class="q-text-inner">What is the highest peak in India?</span></div>
+      <div class="options">
+        <label><input type="radio" name="q11" value="A"/><span class="opt-label"><span class="opt-badge">A</span>Mount Everest</span></label>
+        <label><input type="radio" name="q11" value="B"/><span class="opt-label"><span class="opt-badge">B</span>Karakoram</span></label>
+        <label><input type="radio" name="q11" value="C"/><span class="opt-label"><span class="opt-badge">C</span>Kanchenjunga</span></label>
+        <label><input type="radio" name="q11" value="D"/><span class="opt-label"><span class="opt-badge">D</span>Nanda Devi</span></label>
+      </div>
+      <div class="explanation-box" id="expl-q11"><div class="expl-head">💡 Explanation</div>Kanchenjunga (28,169 ft / 8,586 m) is the highest peak in India, located on the border of Sikkim and Nepal. Mount Everest, though in the Himalayas, lies in Nepal, not India.</div>
+    </div>
+
+    <div class="q-card" id="card-12">
+      <div class="q-text"><span class="q-num">12</span><span class="q-text-inner">The height of Kanchenjunga is:</span></div>
+      <div class="options">
+        <label><input type="radio" name="q12" value="A"/><span class="opt-label"><span class="opt-badge">A</span>25,000 ft</span></label>
+        <label><input type="radio" name="q12" value="B"/><span class="opt-label"><span class="opt-badge">B</span>29,032 ft</span></label>
+        <label><input type="radio" name="q12" value="C"/><span class="opt-label"><span class="opt-badge">C</span>28,169 ft</span></label>
+        <label><input type="radio" name="q12" value="D"/><span class="opt-label"><span class="opt-badge">D</span>26,000 ft</span></label>
+      </div>
+      <div class="explanation-box" id="expl-q12"><div class="expl-head">💡 Explanation</div>Kanchenjunga stands at 28,169 ft (8,586 m) — the highest peak in India and the third highest in the world. Its name means "Five Treasures of Snow" in Tibetan, referring to its five peaks.</div>
+    </div>
+
+    <div class="q-card" id="card-13">
+      <div class="q-text"><span class="q-num">13</span><span class="q-text-inner">Mount Everest is the highest peak on:</span></div>
+      <div class="options">
+        <label><input type="radio" name="q13" value="A"/><span class="opt-label"><span class="opt-badge">A</span>India</span></label>
+        <label><input type="radio" name="q13" value="B"/><span class="opt-label"><span class="opt-badge">B</span>Nepal only</span></label>
+        <label><input type="radio" name="q13" value="C"/><span class="opt-label"><span class="opt-badge">C</span>Earth</span></label>
+        <label><input type="radio" name="q13" value="D"/><span class="opt-label"><span class="opt-badge">D</span>Asia only</span></label>
+      </div>
+      <div class="explanation-box" id="expl-q13"><div class="expl-head">💡 Explanation</div>Mount Everest (29,032 ft / 8,849 m) is the highest peak on Earth — not just in Asia or Nepal. It is located in the Himalayan range on the Nepal-Tibet border. It is NOT in India.</div>
+    </div>
+
+    <div class="q-card" id="card-14">
+      <div class="q-text"><span class="q-num">14</span><span class="q-text-inner">The Thar Desert is also known as:</span></div>
+      <div class="options">
+        <label><input type="radio" name="q14" value="A"/><span class="opt-label"><span class="opt-badge">A</span>Indian Sahara</span></label>
+        <label><input type="radio" name="q14" value="B"/><span class="opt-label"><span class="opt-badge">B</span>Eastern Desert</span></label>
+        <label><input type="radio" name="q14" value="C"/><span class="opt-label"><span class="opt-badge">C</span>Great Indian Desert</span></label>
+        <label><input type="radio" name="q14" value="D"/><span class="opt-label"><span class="opt-badge">D</span>Rajasthan Desert</span></label>
+      </div>
+      <div class="explanation-box" id="expl-q14"><div class="expl-head">💡 Explanation</div>The Thar Desert is officially called the Great Indian Desert. Located mainly in Rajasthan, it extends into parts of Pakistan. It is the world's 17th largest desert and the most densely populated desert.</div>
+    </div>
+
+    <div class="q-card" id="card-15">
+      <div class="q-text"><span class="q-num">15</span><span class="q-text-inner">The Rann of Kutch is known for its:</span></div>
+      <div class="options">
+        <label><input type="radio" name="q15" value="A"/><span class="opt-label"><span class="opt-badge">A</span>Unique salt marshes and wildlife</span></label>
+        <label><input type="radio" name="q15" value="B"/><span class="opt-label"><span class="opt-badge">B</span>Dense forests</span></label>
+        <label><input type="radio" name="q15" value="C"/><span class="opt-label"><span class="opt-badge">C</span>Coral reefs</span></label>
+        <label><input type="radio" name="q15" value="D"/><span class="opt-label"><span class="opt-badge">D</span>Mangrove forests</span></label>
+      </div>
+      <div class="explanation-box" id="expl-q15"><div class="expl-head">💡 Explanation</div>The Rann of Kutch in Gujarat is famous for its unique salt marshes and wildlife. It is the world's largest salt desert and is home to the Indian wild ass. It becomes a seasonal wetland during monsoons.</div>
+    </div>
+
+    <div class="q-card" id="card-16">
+      <div class="q-text"><span class="q-num">16</span><span class="q-text-inner">Which rivers flow through the Gangetic plains?</span></div>
+      <div class="options">
+        <label><input type="radio" name="q16" value="A"/><span class="opt-label"><span class="opt-badge">A</span>Godavari and Krishna</span></label>
+        <label><input type="radio" name="q16" value="B"/><span class="opt-label"><span class="opt-badge">B</span>Ganges and Brahmaputra</span></label>
+        <label><input type="radio" name="q16" value="C"/><span class="opt-label"><span class="opt-badge">C</span>Yamuna and Damodar</span></label>
+        <label><input type="radio" name="q16" value="D"/><span class="opt-label"><span class="opt-badge">D</span>Koel and Subarnarekha</span></label>
+      </div>
+      <div class="explanation-box" id="expl-q16"><div class="expl-head">💡 Explanation</div>The Ganges and Brahmaputra are the two major rivers that flow through the Gangetic plains. The Ganges flows from west to east while Brahmaputra flows from east, both eventually meeting in Bangladesh.</div>
+    </div>
+
+    <div class="q-card" id="card-17">
+      <div class="q-text"><span class="q-num">17</span><span class="q-text-inner">The Deccan Plateau is rich in which minerals?</span></div>
+      <div class="options">
+        <label><input type="radio" name="q17" value="A"/><span class="opt-label"><span class="opt-badge">A</span>Gold, silver, diamond</span></label>
+        <label><input type="radio" name="q17" value="B"/><span class="opt-label"><span class="opt-badge">B</span>Iron ore, coal, bauxite</span></label>
+        <label><input type="radio" name="q17" value="C"/><span class="opt-label"><span class="opt-badge">C</span>Copper, mica, zinc</span></label>
+        <label><input type="radio" name="q17" value="D"/><span class="opt-label"><span class="opt-badge">D</span>Uranium, thorium</span></label>
+      </div>
+      <div class="explanation-box" id="expl-q17"><div class="expl-head">💡 Explanation</div>The Deccan Plateau is rich in iron ore, coal, and bauxite. These minerals have made states like Jharkhand, Odisha, and Chhattisgarh major industrial centres in India.</div>
+    </div>
+
+    <div class="q-card" id="card-18">
+      <div class="q-text"><span class="q-num">18</span><span class="q-text-inner">Which sea lies to the west of India?</span></div>
+      <div class="options">
+        <label><input type="radio" name="q18" value="A"/><span class="opt-label"><span class="opt-badge">A</span>Bay of Bengal</span></label>
+        <label><input type="radio" name="q18" value="B"/><span class="opt-label"><span class="opt-badge">B</span>Indian Ocean</span></label>
+        <label><input type="radio" name="q18" value="C"/><span class="opt-label"><span class="opt-badge">C</span>Arabian Sea</span></label>
+        <label><input type="radio" name="q18" value="D"/><span class="opt-label"><span class="opt-badge">D</span>Red Sea</span></label>
+      </div>
+      <div class="explanation-box" id="expl-q18"><div class="expl-head">💡 Explanation</div>The Arabian Sea lies to the west of India. The western coastal states of Maharashtra, Goa, Karnataka, and Kerala border the Arabian Sea, which connects India to the Middle East and Africa.</div>
+    </div>
+
+    <div class="q-card" id="card-19">
+      <div class="q-text"><span class="q-num">19</span><span class="q-text-inner">Which water body lies to the east of India?</span></div>
+      <div class="options">
+        <label><input type="radio" name="q19" value="A"/><span class="opt-label"><span class="opt-badge">A</span>Bay of Bengal</span></label>
+        <label><input type="radio" name="q19" value="B"/><span class="opt-label"><span class="opt-badge">B</span>Arabian Sea</span></label>
+        <label><input type="radio" name="q19" value="C"/><span class="opt-label"><span class="opt-badge">C</span>Indian Ocean</span></label>
+        <label><input type="radio" name="q19" value="D"/><span class="opt-label"><span class="opt-badge">D</span>Pacific Ocean</span></label>
+      </div>
+      <div class="explanation-box" id="expl-q19"><div class="expl-head">💡 Explanation</div>The Bay of Bengal lies to the east of India. Eastern coastal states like Odisha, Andhra Pradesh, and Tamil Nadu border the Bay of Bengal, which is the world's largest bay.</div>
+    </div>
+
+    <div class="q-card" id="card-20">
+      <div class="q-text"><span class="q-num">20</span><span class="q-text-inner">The Barak river flows in which region of India?</span></div>
+      <div class="options">
+        <label><input type="radio" name="q20" value="A"/><span class="opt-label"><span class="opt-badge">A</span>Western India</span></label>
+        <label><input type="radio" name="q20" value="B"/><span class="opt-label"><span class="opt-badge">B</span>Northeast India</span></label>
+        <label><input type="radio" name="q20" value="C"/><span class="opt-label"><span class="opt-badge">C</span>Central India</span></label>
+        <label><input type="radio" name="q20" value="D"/><span class="opt-label"><span class="opt-badge">D</span>Southern India</span></label>
+      </div>
+      <div class="explanation-box" id="expl-q20"><div class="expl-head">💡 Explanation</div>The Barak river flows in Northeast India, primarily through Assam and Manipur. Along with the Brahmaputra, it is one of the two key rivers of the Northeast region mentioned in the notes.</div>
+    </div>
+
+    <div class="section-label">🏛️ Section 3 — Ancient Subcontinent</div>
+
+    <div class="q-card" id="card-21">
+      <div class="q-text"><span class="q-num">21</span><span class="q-text-inner">The Indian subcontinent in ancient times included which countries?</span></div>
+      <div class="options">
+        <label><input type="radio" name="q21" value="A"/><span class="opt-label"><span class="opt-badge">A</span>India, Pakistan, Bangladesh only</span></label>
+        <label><input type="radio" name="q21" value="B"/><span class="opt-label"><span class="opt-badge">B</span>India, China, Nepal, Bangladesh</span></label>
+        <label><input type="radio" name="q21" value="C"/><span class="opt-label"><span class="opt-badge">C</span>India, Pakistan, Bangladesh, Nepal, Bhutan, Afghanistan, Myanmar, Sri Lanka</span></label>
+        <label><input type="radio" name="q21" value="D"/><span class="opt-label"><span class="opt-badge">D</span>India, Nepal, Sri Lanka, Iran</span></label>
+      </div>
+      <div class="explanation-box" id="expl-q21"><div class="expl-head">💡 Explanation</div>The ancient Indian subcontinent comprised 8 countries: India, Pakistan, Bangladesh, Nepal, Bhutan, Afghanistan, Myanmar, and Sri Lanka. These regions were culturally and geographically interconnected as one landmass.</div>
+    </div>
+
+    <div class="q-card" id="card-22">
+      <div class="q-text"><span class="q-num">22</span><span class="q-text-inner">The rise of the Indus Valley Civilization, Maurya Empire, and Gupta Empire is associated with:</span></div>
+      <div class="options">
+        <label><input type="radio" name="q22" value="A"/><span class="opt-label"><span class="opt-badge">A</span>Deccan Plateau</span></label>
+        <label><input type="radio" name="q22" value="B"/><span class="opt-label"><span class="opt-badge">B</span>Eastern deltas</span></label>
+        <label><input type="radio" name="q22" value="C"/><span class="opt-label"><span class="opt-badge">C</span>Fertile Indo-Gangetic Plains</span></label>
+        <label><input type="radio" name="q22" value="D"/><span class="opt-label"><span class="opt-badge">D</span>Thar Desert</span></label>
+      </div>
+      <div class="explanation-box" id="expl-q22"><div class="expl-head">💡 Explanation</div>The Indo-Gangetic Plains — the heartland of ancient India — witnessed the rise of the Indus Valley Civilization, Maurya Empire, and Gupta Empire. Their fertile soil and major rivers supported dense populations and powerful kingdoms.</div>
+    </div>
+
+    <div class="q-card" id="card-23">
+      <div class="q-text"><span class="q-num">23</span><span class="q-text-inner">Which passes were crucial trade routes in northwest India (now Pakistan)?</span></div>
+      <div class="options">
+        <label><input type="radio" name="q23" value="A"/><span class="opt-label"><span class="opt-badge">A</span>Nathu La and Bom Di La</span></label>
+        <label><input type="radio" name="q23" value="B"/><span class="opt-label"><span class="opt-badge">B</span>Rohtang and Zoji La</span></label>
+        <label><input type="radio" name="q23" value="C"/><span class="opt-label"><span class="opt-badge">C</span>Khyber and Bolan passes</span></label>
+        <label><input type="radio" name="q23" value="D"/><span class="opt-label"><span class="opt-badge">D</span>Shipki La and Lipulekh</span></label>
+      </div>
+      <div class="explanation-box" id="expl-q23"><div class="expl-head">💡 Explanation</div>The Khyber and Bolan passes in the northwest (now Pakistan) were crucial trade and cultural exchange routes connecting the Indian subcontinent with Mesopotamia and Central Asia. Most ancient invaders and traders used these passes.</div>
+    </div>
+
+    <div class="q-card" id="card-24">
+      <div class="q-text"><span class="q-num">24</span><span class="q-text-inner">The Greek chronicler Megasthenes wrote a work called:</span></div>
+      <div class="options">
+        <label><input type="radio" name="q24" value="A"/><span class="opt-label"><span class="opt-badge">A</span>Arthashastra</span></label>
+        <label><input type="radio" name="q24" value="B"/><span class="opt-label"><span class="opt-badge">B</span>Rajtarangini</span></label>
+        <label><input type="radio" name="q24" value="C"/><span class="opt-label"><span class="opt-badge">C</span>Indica</span></label>
+        <label><input type="radio" name="q24" value="D"/><span class="opt-label"><span class="opt-badge">D</span>Periplus</span></label>
+      </div>
+      <div class="explanation-box" id="expl-q24"><div class="expl-head">💡 Explanation</div>Megasthenes, a Greek ambassador to the court of Chandragupta Maurya in the 4th century BCE, wrote Indica — one of the most valuable ancient accounts of India's geography, society, and political system.</div>
+    </div>
+
+    <div class="q-card" id="card-25">
+      <div class="q-text"><span class="q-num">25</span><span class="q-text-inner">According to Megasthenes, which region was the only state dominated by females?</span></div>
+      <div class="options">
+        <label><input type="radio" name="q25" value="A"/><span class="opt-label"><span class="opt-badge">A</span>Kerala</span></label>
+        <label><input type="radio" name="q25" value="B"/><span class="opt-label"><span class="opt-badge">B</span>Karnataka</span></label>
+        <label><input type="radio" name="q25" value="C"/><span class="opt-label"><span class="opt-badge">C</span>Pandia (Tamil Nadu)</span></label>
+        <label><input type="radio" name="q25" value="D"/><span class="opt-label"><span class="opt-badge">D</span>Andhra</span></label>
+      </div>
+      <div class="explanation-box" id="expl-q25"><div class="expl-head">💡 Explanation</div>Megasthenes stated in Indica that Pandia — the ancient kingdom corresponding to modern Tamil Nadu — was the only state dominated by females. This is one of the earliest recorded references to matriarchal governance in India.</div>
+    </div>
+
+    <div class="q-card" id="card-26">
+      <div class="q-text"><span class="q-num">26</span><span class="q-text-inner">Megasthenes belonged to which century BCE?</span></div>
+      <div class="options">
+        <label><input type="radio" name="q26" value="A"/><span class="opt-label"><span class="opt-badge">A</span>2nd century</span></label>
+        <label><input type="radio" name="q26" value="B"/><span class="opt-label"><span class="opt-badge">B</span>3rd century</span></label>
+        <label><input type="radio" name="q26" value="C"/><span class="opt-label"><span class="opt-badge">C</span>4th century</span></label>
+        <label><input type="radio" name="q26" value="D"/><span class="opt-label"><span class="opt-badge">D</span>5th century</span></label>
+      </div>
+      <div class="explanation-box" id="expl-q26"><div class="expl-head">💡 Explanation</div>Megasthenes was a 4th century BCE Greek historian and diplomat. He served as the Seleucid ambassador at the court of Chandragupta Maurya (c. 302–298 BCE) and documented his observations in Indica.</div>
+    </div>
+
+    <div class="q-card" id="card-27">
+      <div class="q-text"><span class="q-num">27</span><span class="q-text-inner">Ancient names of eastern region (now Bangladesh) include:</span></div>
+      <div class="options">
+        <label><input type="radio" name="q27" value="A"/><span class="opt-label"><span class="opt-badge">A</span>Magadha, Anga, Videha</span></label>
+        <label><input type="radio" name="q27" value="B"/><span class="opt-label"><span class="opt-badge">B</span>Vanga, Paundra, Radh, Gauda, Samatata</span></label>
+        <label><input type="radio" name="q27" value="C"/><span class="opt-label"><span class="opt-badge">C</span>Kosala, Avanti, Matsya</span></label>
+        <label><input type="radio" name="q27" value="D"/><span class="opt-label"><span class="opt-badge">D</span>Kalinga, Vengi, Chera</span></label>
+      </div>
+      <div class="explanation-box" id="expl-q27"><div class="expl-head">💡 Explanation</div>The ancient eastern region (now Bangladesh) was known by names like Vanga, Paundra, Radh, Gauda, and Samatata. These were distinct territories within the Bengal region, each with their own cultural and political identity.</div>
+    </div>
+
+    <div class="q-card" id="card-28">
+      <div class="q-text"><span class="q-num">28</span><span class="q-text-inner">"New Found Land" or Nobodvip refers to a section of soil about 120 km north of:</span></div>
+      <div class="options">
+        <label><input type="radio" name="q28" value="A"/><span class="opt-label"><span class="opt-badge">A</span>Dhaka</span></label>
+        <label><input type="radio" name="q28" value="B"/><span class="opt-label"><span class="opt-badge">B</span>Kolkata</span></label>
+        <label><input type="radio" name="q28" value="C"/><span class="opt-label"><span class="opt-badge">C</span>Patna</span></label>
+        <label><input type="radio" name="q28" value="D"/><span class="opt-label"><span class="opt-badge">D</span>Bhubaneswar</span></label>
+      </div>
+      <div class="explanation-box" id="expl-q28"><div class="expl-head">💡 Explanation</div>"New Found Land" or Nobodvip refers to a section of soil approximately 120 km north of Kolkata. This fertile alluvial land was formed by the silt deposits of the Ganges-Brahmaputra-Meghna river system.</div>
+    </div>
+
+    <div class="q-card" id="card-29">
+      <div class="q-text"><span class="q-num">29</span><span class="q-text-inner">Which dynasties were prominent in the southern subcontinent?</span></div>
+      <div class="options">
+        <label><input type="radio" name="q29" value="A"/><span class="opt-label"><span class="opt-badge">A</span>Cholas, Pallavas, Chalukyas</span></label>
+        <label><input type="radio" name="q29" value="B"/><span class="opt-label"><span class="opt-badge">B</span>Mauryas, Guptas, Kushanas</span></label>
+        <label><input type="radio" name="q29" value="C"/><span class="opt-label"><span class="opt-badge">C</span>Rajputs, Mughals, Marathas</span></label>
+        <label><input type="radio" name="q29" value="D"/><span class="opt-label"><span class="opt-badge">D</span>Nandas, Shungas, Satavahanas</span></label>
+      </div>
+      <div class="explanation-box" id="expl-q29"><div class="expl-head">💡 Explanation</div>The Cholas, Pallavas, and Chalukyas were the major dynasties of the southern subcontinent. They dominated the Deccan and South India, building powerful naval empires and influencing Sri Lanka and Southeast Asia.</div>
+    </div>
+
+    <div class="q-card" id="card-30">
+      <div class="q-text"><span class="q-num">30</span><span class="q-text-inner">The fertile delta of the eastern region was formed by which rivers?</span></div>
+      <div class="options">
+        <label><input type="radio" name="q30" value="A"/><span class="opt-label"><span class="opt-badge">A</span>Ganges and Yamuna</span></label>
+        <label><input type="radio" name="q30" value="B"/><span class="opt-label"><span class="opt-badge">B</span>Ganges-Brahmaputra-Meghna</span></label>
+        <label><input type="radio" name="q30" value="C"/><span class="opt-label"><span class="opt-badge">C</span>Godavari and Krishna</span></label>
+        <label><input type="radio" name="q30" value="D"/><span class="opt-label"><span class="opt-badge">D</span>Indus and Beas</span></label>
+      </div>
+      <div class="explanation-box" id="expl-q30"><div class="expl-head">💡 Explanation</div>The fertile delta of eastern India (now Bangladesh) was formed by the Ganges-Brahmaputra-Meghna river system — one of the world's largest river deltas. This makes the region extremely fertile but also flood-prone.</div>
+    </div>
+
+    <div class="section-label">🌤️ Section 4 — Physical Environment &amp; Seasons</div>
+
+    <div class="q-card" id="card-31">
+      <div class="q-text"><span class="q-num">31</span><span class="q-text-inner">How many primary seasons are observed in north and central India?</span></div>
+      <div class="options">
+        <label><input type="radio" name="q31" value="A"/><span class="opt-label"><span class="opt-badge">A</span>Two</span></label>
+        <label><input type="radio" name="q31" value="B"/><span class="opt-label"><span class="opt-badge">B</span>Three</span></label>
+        <label><input type="radio" name="q31" value="C"/><span class="opt-label"><span class="opt-badge">C</span>Four</span></label>
+        <label><input type="radio" name="q31" value="D"/><span class="opt-label"><span class="opt-badge">D</span>Five</span></label>
+      </div>
+      <div class="explanation-box" id="expl-q31"><div class="expl-head">💡 Explanation</div>North and central India observe four primary seasons: Winter (December–February), Spring (March), Summer (April–June), and Monsoon (June–September). This four-season pattern is distinct from coastal regions which have more moderate climates.</div>
+    </div>
+
+    <div class="q-card" id="card-32">
+      <div class="q-text"><span class="q-num">32</span><span class="q-text-inner">The winter season in north and central India is:</span></div>
+      <div class="options">
+        <label><input type="radio" name="q32" value="A"/><span class="opt-label"><span class="opt-badge">A</span>March to May</span></label>
+        <label><input type="radio" name="q32" value="B"/><span class="opt-label"><span class="opt-badge">B</span>October to November</span></label>
+        <label><input type="radio" name="q32" value="C"/><span class="opt-label"><span class="opt-badge">C</span>December to February</span></label>
+        <label><input type="radio" name="q32" value="D"/><span class="opt-label"><span class="opt-badge">D</span>June to August</span></label>
+      </div>
+      <div class="explanation-box" id="expl-q32"><div class="expl-head">💡 Explanation</div>Winter in north and central India runs from December to February. During this period, temperatures can drop significantly — especially in states like Rajasthan, Uttar Pradesh, and Bihar where cold waves are common.</div>
+    </div>
+
+    <div class="q-card" id="card-33">
+      <div class="q-text"><span class="q-num">33</span><span class="q-text-inner">Summer temperatures in plains can soar above:</span></div>
+      <div class="options">
+        <label><input type="radio" name="q33" value="A"/><span class="opt-label"><span class="opt-badge">A</span>30°C</span></label>
+        <label><input type="radio" name="q33" value="B"/><span class="opt-label"><span class="opt-badge">B</span>35°C</span></label>
+        <label><input type="radio" name="q33" value="C"/><span class="opt-label"><span class="opt-badge">C</span>40°C</span></label>
+        <label><input type="radio" name="q33" value="D"/><span class="opt-label"><span class="opt-badge">D</span>45°C</span></label>
+      </div>
+      <div class="explanation-box" id="expl-q33"><div class="expl-head">💡 Explanation</div>Summer temperatures in Indian plains soar above 40°C. States like Rajasthan (Barmer, Jaisalmer), Delhi, and parts of UP regularly record temperatures of 45–48°C during peak summer months of May–June.</div>
+    </div>
+
+    <div class="q-card" id="card-34">
+      <div class="q-text"><span class="q-num">34</span><span class="q-text-inner">The monsoon season in India is:</span></div>
+      <div class="options">
+        <label><input type="radio" name="q34" value="A"/><span class="opt-label"><span class="opt-badge">A</span>March to June</span></label>
+        <label><input type="radio" name="q34" value="B"/><span class="opt-label"><span class="opt-badge">B</span>June to September</span></label>
+        <label><input type="radio" name="q34" value="C"/><span class="opt-label"><span class="opt-badge">C</span>October to December</span></label>
+        <label><input type="radio" name="q34" value="D"/><span class="opt-label"><span class="opt-badge">D</span>April to July</span></label>
+      </div>
+      <div class="explanation-box" id="expl-q34"><div class="expl-head">💡 Explanation</div>The monsoon season in India runs from June to September. The Southwest Monsoon enters India through Kerala in early June and covers the entire country by mid-July, bringing over 75% of India's annual rainfall.</div>
+    </div>
+
+    <div class="q-card" id="card-35">
+      <div class="q-text"><span class="q-num">35</span><span class="q-text-inner">Which of the following is NOT one of the Seven Sister States?</span></div>
+      <div class="options">
+        <label><input type="radio" name="q35" value="A"/><span class="opt-label"><span class="opt-badge">A</span>Manipur</span></label>
+        <label><input type="radio" name="q35" value="B"/><span class="opt-label"><span class="opt-badge">B</span>Mizoram</span></label>
+        <label><input type="radio" name="q35" value="C"/><span class="opt-label"><span class="opt-badge">C</span>Jharkhand</span></label>
+        <label><input type="radio" name="q35" value="D"/><span class="opt-label"><span class="opt-badge">D</span>Nagaland</span></label>
+      </div>
+      <div class="explanation-box" id="expl-q35"><div class="expl-head">💡 Explanation</div>Jharkhand is NOT one of the Seven Sister States. The Seven Sisters are: Arunachal Pradesh, Assam, Manipur, Meghalaya, Mizoram, Nagaland, and Tripura — all located in Northeast India. Jharkhand is in eastern India.</div>
+    </div>
+
+    <div class="q-card" id="card-36">
+      <div class="q-text"><span class="q-num">36</span><span class="q-text-inner">The seven sister states are located in which region?</span></div>
+      <div class="options">
+        <label><input type="radio" name="q36" value="A"/><span class="opt-label"><span class="opt-badge">A</span>Northwest India</span></label>
+        <label><input type="radio" name="q36" value="B"/><span class="opt-label"><span class="opt-badge">B</span>Northeast India</span></label>
+        <label><input type="radio" name="q36" value="C"/><span class="opt-label"><span class="opt-badge">C</span>Eastern India</span></label>
+        <label><input type="radio" name="q36" value="D"/><span class="opt-label"><span class="opt-badge">D</span>Central India</span></label>
+      </div>
+      <div class="explanation-box" id="expl-q36"><div class="expl-head">💡 Explanation</div>The Seven Sister States are located in Northeast India. They are called "sisters" due to their interdependence and similar socio-economic and cultural characteristics, and share borders with Bhutan, China, Myanmar, and Bangladesh.</div>
+    </div>
+
+    <div class="section-label">🌿 Section 5 — Natural Environment &amp; Biodiversity</div>
+
+    <div class="q-card" id="card-37">
+      <div class="q-text"><span class="q-num">37</span><span class="q-text-inner">The Western Ghats are a:</span></div>
+      <div class="options">
+        <label><input type="radio" name="q37" value="A"/><span class="opt-label"><span class="opt-badge">A</span>National Park</span></label>
+        <label><input type="radio" name="q37" value="B"/><span class="opt-label"><span class="opt-badge">B</span>UNESCO World Heritage Site</span></label>
+        <label><input type="radio" name="q37" value="C"/><span class="opt-label"><span class="opt-badge">C</span>Biosphere Reserve only</span></label>
+        <label><input type="radio" name="q37" value="D"/><span class="opt-label"><span class="opt-badge">D</span>Wildlife Sanctuary</span></label>
+      </div>
+      <div class="explanation-box" id="expl-q37"><div class="expl-head">💡 Explanation</div>The Western Ghats are designated as a UNESCO World Heritage Site (since 2012). They run parallel to the western coast of India for about 1,600 km and are one of the world's eight "hottest hotspots" of biological diversity.</div>
+    </div>
+
+    <div class="q-card" id="card-38">
+      <div class="q-text"><span class="q-num">38</span><span class="q-text-inner">The Western Ghats run parallel to which coast?</span></div>
+      <div class="options">
+        <label><input type="radio" name="q38" value="A"/><span class="opt-label"><span class="opt-badge">A</span>Eastern coast</span></label>
+        <label><input type="radio" name="q38" value="B"/><span class="opt-label"><span class="opt-badge">B</span>Western coast</span></label>
+        <label><input type="radio" name="q38" value="C"/><span class="opt-label"><span class="opt-badge">C</span>Northern coast</span></label>
+        <label><input type="radio" name="q38" value="D"/><span class="opt-label"><span class="opt-badge">D</span>Southern coast</span></label>
+      </div>
+      <div class="explanation-box" id="expl-q38"><div class="expl-head">💡 Explanation</div>The Western Ghats run parallel to the western coast of India — from Gujarat in the north to Kerala in the south. They act as a barrier to the Southwest Monsoon, causing heavy rainfall on the western slopes.</div>
+    </div>
+
+    <div class="q-card" id="card-39">
+      <div class="q-text"><span class="q-num">39</span><span class="q-text-inner">Which of the following is an endemic species found ONLY in Western Ghats?</span></div>
+      <div class="options">
+        <label><input type="radio" name="q39" value="A"/><span class="opt-label"><span class="opt-badge">A</span>Bengal tiger</span></label>
+        <label><input type="radio" name="q39" value="B"/><span class="opt-label"><span class="opt-badge">B</span>One-horned rhinoceros</span></label>
+        <label><input type="radio" name="q39" value="C"/><span class="opt-label"><span class="opt-badge">C</span>Lion-tailed macaque</span></label>
+        <label><input type="radio" name="q39" value="D"/><span class="opt-label"><span class="opt-badge">D</span>Asiatic water buffalo</span></label>
+      </div>
+      <div class="explanation-box" id="expl-q39"><div class="expl-head">💡 Explanation</div>The lion-tailed macaque is an endemic species found only in the Western Ghats. It is a critically endangered primate with a silvery-white mane. Bengal tiger and Asiatic water buffalo are found in other regions too.</div>
+    </div>
+
+    <div class="q-card" id="card-40">
+      <div class="q-text"><span class="q-num">40</span><span class="q-text-inner">Which is also an endemic species of the Western Ghats?</span></div>
+      <div class="options">
+        <label><input type="radio" name="q40" value="A"/><span class="opt-label"><span class="opt-badge">A</span>Snow leopard</span></label>
+        <label><input type="radio" name="q40" value="B"/><span class="opt-label"><span class="opt-badge">B</span>Nilgiri tahr</span></label>
+        <label><input type="radio" name="q40" value="C"/><span class="opt-label"><span class="opt-badge">C</span>Gharial</span></label>
+        <label><input type="radio" name="q40" value="D"/><span class="opt-label"><span class="opt-badge">D</span>Gangetic dolphin</span></label>
+      </div>
+      <div class="explanation-box" id="expl-q40"><div class="expl-head">💡 Explanation</div>The Nilgiri tahr is an endemic species of the Western Ghats. It is a wild mountain goat found only in the Nilgiri Hills and the higher parts of the Western Ghats. The Eravikulam National Park in Kerala is its stronghold.</div>
+    </div>
+
+    <div class="q-card" id="card-41">
+      <div class="q-text"><span class="q-num">41</span><span class="q-text-inner">Kaziranga National Park is located in:</span></div>
+      <div class="options">
+        <label><input type="radio" name="q41" value="A"/><span class="opt-label"><span class="opt-badge">A</span>Assam</span></label>
+        <label><input type="radio" name="q41" value="B"/><span class="opt-label"><span class="opt-badge">B</span>Arunachal Pradesh</span></label>
+        <label><input type="radio" name="q41" value="C"/><span class="opt-label"><span class="opt-badge">C</span>Meghalaya</span></label>
+        <label><input type="radio" name="q41" value="D"/><span class="opt-label"><span class="opt-badge">D</span>Nagaland</span></label>
+      </div>
+      <div class="explanation-box" id="expl-q41"><div class="expl-head">💡 Explanation</div>Kaziranga National Park is located in Assam, in the floodplains of the Brahmaputra River. It was declared a UNESCO World Heritage Site in 1985 and is home to the world's largest population of one-horned rhinoceros.</div>
+    </div>
+
+    <div class="q-card" id="card-42">
+      <div class="q-text"><span class="q-num">42</span><span class="q-text-inner">Kaziranga National Park is a UNESCO World Heritage Site famous for:</span></div>
+      <div class="options">
+        <label><input type="radio" name="q42" value="A"/><span class="opt-label"><span class="opt-badge">A</span>Bengal tiger</span></label>
+        <label><input type="radio" name="q42" value="B"/><span class="opt-label"><span class="opt-badge">B</span>One-horned rhinoceros</span></label>
+        <label><input type="radio" name="q42" value="C"/><span class="opt-label"><span class="opt-badge">C</span>Snow leopard</span></label>
+        <label><input type="radio" name="q42" value="D"/><span class="opt-label"><span class="opt-badge">D</span>Gangetic dolphin</span></label>
+      </div>
+      <div class="explanation-box" id="expl-q42"><div class="expl-head">💡 Explanation</div>Kaziranga is famous for housing the world's largest population of one-horned rhinoceros (Indian rhinoceros). It also has the highest density of Bengal tigers among protected areas and hosts large numbers of Asian elephants.</div>
+    </div>
+
+    <div class="q-card" id="card-43">
+      <div class="q-text"><span class="q-num">43</span><span class="q-text-inner">The Sundarbans is located in:</span></div>
+      <div class="options">
+        <label><input type="radio" name="q43" value="A"/><span class="opt-label"><span class="opt-badge">A</span>Kerala delta</span></label>
+        <label><input type="radio" name="q43" value="B"/><span class="opt-label"><span class="opt-badge">B</span>Mahanadi delta</span></label>
+        <label><input type="radio" name="q43" value="C"/><span class="opt-label"><span class="opt-badge">C</span>Ganges-Brahmaputra delta</span></label>
+        <label><input type="radio" name="q43" value="D"/><span class="opt-label"><span class="opt-badge">D</span>Godavari delta</span></label>
+      </div>
+      <div class="explanation-box" id="expl-q43"><div class="expl-head">💡 Explanation</div>The Sundarbans is located in the Ganges-Brahmaputra delta — spanning India (West Bengal) and Bangladesh. The name "Sundarbans" comes from the Sundari trees (Heritiera fomes) that dominate this mangrove ecosystem.</div>
+    </div>
+
+    <div class="q-card" id="card-44">
+      <div class="q-text"><span class="q-num">44</span><span class="q-text-inner">The Sundarbans is the world's:</span></div>
+      <div class="options">
+        <label><input type="radio" name="q44" value="A"/><span class="opt-label"><span class="opt-badge">A</span>Largest coral reef</span></label>
+        <label><input type="radio" name="q44" value="B"/><span class="opt-label"><span class="opt-badge">B</span>Largest mangrove forest</span></label>
+        <label><input type="radio" name="q44" value="C"/><span class="opt-label"><span class="opt-badge">C</span>Largest tropical rainforest</span></label>
+        <label><input type="radio" name="q44" value="D"/><span class="opt-label"><span class="opt-badge">D</span>Largest wetland</span></label>
+      </div>
+      <div class="explanation-box" id="expl-q44"><div class="expl-head">💡 Explanation</div>The Sundarbans is the world's largest mangrove forest, covering about 10,000 sq km. It is a UNESCO World Heritage Site and a critical habitat for the Royal Bengal tiger. The complex tidal waterways make it almost impenetrable.</div>
+    </div>
+
+    <div class="q-card" id="card-45">
+      <div class="q-text"><span class="q-num">45</span><span class="q-text-inner">Which endangered species is found in the Sundarbans?</span></div>
+      <div class="options">
+        <label><input type="radio" name="q45" value="A"/><span class="opt-label"><span class="opt-badge">A</span>One-horned rhinoceros</span></label>
+        <label><input type="radio" name="q45" value="B"/><span class="opt-label"><span class="opt-badge">B</span>Snow leopard</span></label>
+        <label><input type="radio" name="q45" value="C"/><span class="opt-label"><span class="opt-badge">C</span>Gangetic dolphin</span></label>
+        <label><input type="radio" name="q45" value="D"/><span class="opt-label"><span class="opt-badge">D</span>Nilgiri tahr</span></label>
+      </div>
+      <div class="explanation-box" id="expl-q45"><div class="expl-head">💡 Explanation</div>The endangered Gangetic dolphin is found in the Sundarbans. Also known as the South Asian River Dolphin, it is India's national aquatic animal. The Sundarbans also hosts estuarine crocodiles and Royal Bengal tigers.</div>
+    </div>
+
+    <div class="q-card" id="card-46">
+      <div class="q-text"><span class="q-num">46</span><span class="q-text-inner">Chilika Lake is located in:</span></div>
+      <div class="options">
+        <label><input type="radio" name="q46" value="A"/><span class="opt-label"><span class="opt-badge">A</span>Odisha</span></label>
+        <label><input type="radio" name="q46" value="B"/><span class="opt-label"><span class="opt-badge">B</span>Rajasthan</span></label>
+        <label><input type="radio" name="q46" value="C"/><span class="opt-label"><span class="opt-badge">C</span>Assam</span></label>
+        <label><input type="radio" name="q46" value="D"/><span class="opt-label"><span class="opt-badge">D</span>Kerala</span></label>
+      </div>
+      <div class="explanation-box" id="expl-q46"><div class="expl-head">💡 Explanation</div>Chilika Lake is located in Odisha — it is Asia's largest brackish water lagoon and an important wetland for migratory birds. Millions of birds from Central Asia, Siberia, and other regions visit during winter.</div>
+    </div>
+
+    <div class="q-card" id="card-47">
+      <div class="q-text"><span class="q-num">47</span><span class="q-text-inner">Keoladeo National Park (important for migratory birds) is located in:</span></div>
+      <div class="options">
+        <label><input type="radio" name="q47" value="A"/><span class="opt-label"><span class="opt-badge">A</span>Odisha</span></label>
+        <label><input type="radio" name="q47" value="B"/><span class="opt-label"><span class="opt-badge">B</span>Rajasthan</span></label>
+        <label><input type="radio" name="q47" value="C"/><span class="opt-label"><span class="opt-badge">C</span>Gujarat</span></label>
+        <label><input type="radio" name="q47" value="D"/><span class="opt-label"><span class="opt-badge">D</span>Uttar Pradesh</span></label>
+      </div>
+      <div class="explanation-box" id="expl-q47"><div class="expl-head">💡 Explanation</div>Keoladeo National Park (also called Bharatpur Bird Sanctuary) is located in Rajasthan. It is a UNESCO World Heritage Site and a critical wintering area for migratory birds including the endangered Siberian crane.</div>
+    </div>
+
+    <div class="q-card" id="card-48">
+      <div class="q-text"><span class="q-num">48</span><span class="q-text-inner">Which island group has pristine coral reefs in the Arabian Sea?</span></div>
+      <div class="options">
+        <label><input type="radio" name="q48" value="A"/><span class="opt-label"><span class="opt-badge">A</span>Lakshadweep Islands</span></label>
+        <label><input type="radio" name="q48" value="B"/><span class="opt-label"><span class="opt-badge">B</span>Andaman Islands</span></label>
+        <label><input type="radio" name="q48" value="C"/><span class="opt-label"><span class="opt-badge">C</span>Nicobar Islands</span></label>
+        <label><input type="radio" name="q48" value="D"/><span class="opt-label"><span class="opt-badge">D</span>Majuli Island</span></label>
+      </div>
+      <div class="explanation-box" id="expl-q48"><div class="expl-head">💡 Explanation</div>The Lakshadweep Islands in the Arabian Sea are known for their pristine coral reefs. These 36 coral atolls host rich marine biodiversity. Andaman and Nicobar are in the Bay of Bengal, not the Arabian Sea.</div>
+    </div>
+
+    <div class="q-card" id="card-49">
+      <div class="q-text"><span class="q-num">49</span><span class="q-text-inner">The Gulf of Mannar lies between:</span></div>
+      <div class="options">
+        <label><input type="radio" name="q49" value="A"/><span class="opt-label"><span class="opt-badge">A</span>India and Sri Lanka — known for tigers</span></label>
+        <label><input type="radio" name="q49" value="B"/><span class="opt-label"><span class="opt-badge">B</span>India and Sri Lanka — known for coral reefs, seagrass, mangroves</span></label>
+        <label><input type="radio" name="q49" value="C"/><span class="opt-label"><span class="opt-badge">C</span>India and Maldives</span></label>
+        <label><input type="radio" name="q49" value="D"/><span class="opt-label"><span class="opt-badge">D</span>India and Bangladesh</span></label>
+      </div>
+      <div class="explanation-box" id="expl-q49"><div class="expl-head">💡 Explanation</div>The Gulf of Mannar lies between India and Sri Lanka. It is one of the world's richest marine biodiversity regions, known for coral reefs, seagrass meadows, and mangroves. It was declared one of India's first Marine Biosphere Reserves.</div>
+    </div>
+
+    <div class="q-card" id="card-50">
+      <div class="q-text"><span class="q-num">50</span><span class="q-text-inner">Project Tiger was launched in:</span></div>
+      <div class="options">
+        <label><input type="radio" name="q50" value="A"/><span class="opt-label"><span class="opt-badge">A</span>1965</span></label>
+        <label><input type="radio" name="q50" value="B"/><span class="opt-label"><span class="opt-badge">B</span>1970</span></label>
+        <label><input type="radio" name="q50" value="C"/><span class="opt-label"><span class="opt-badge">C</span>1973</span></label>
+        <label><input type="radio" name="q50" value="D"/><span class="opt-label"><span class="opt-badge">D</span>1980</span></label>
+      </div>
+      <div class="explanation-box" id="expl-q50"><div class="expl-head">💡 Explanation</div>Project Tiger was launched in 1973 by Prime Minister Indira Gandhi. It was India's first wildlife conservation initiative aimed specifically at protecting the Bengal tiger and its habitat. Tiger numbers have significantly recovered since then.</div>
+    </div>
+
+    <div class="q-card" id="card-51">
+      <div class="q-text"><span class="q-num">51</span><span class="q-text-inner">The Namami Gange programme aims to:</span></div>
+      <div class="options">
+        <label><input type="radio" name="q51" value="A"/><span class="opt-label"><span class="opt-badge">A</span>Build dams on the Ganga</span></label>
+        <label><input type="radio" name="q51" value="B"/><span class="opt-label"><span class="opt-badge">B</span>Restore and rejuvenate the River Ganges</span></label>
+        <label><input type="radio" name="q51" value="C"/><span class="opt-label"><span class="opt-badge">C</span>Divert Ganga water to other states</span></label>
+        <label><input type="radio" name="q51" value="D"/><span class="opt-label"><span class="opt-badge">D</span>Clean the Yamuna</span></label>
+      </div>
+      <div class="explanation-box" id="expl-q51"><div class="expl-head">💡 Explanation</div>The Namami Gange programme aims to restore and rejuvenate the River Ganges. It is a flagship programme of the Government of India that addresses pollution, restoration of the river's natural flow, and conservation of its biodiversity.</div>
+    </div>
+
+    <div class="q-card" id="card-52">
+      <div class="q-text"><span class="q-num">52</span><span class="q-text-inner">The Northeast biodiversity hotspot is also called:</span></div>
+      <div class="options">
+        <label><input type="radio" name="q52" value="A"/><span class="opt-label"><span class="opt-badge">A</span>Western Ghats Hotspot</span></label>
+        <label><input type="radio" name="q52" value="B"/><span class="opt-label"><span class="opt-badge">B</span>Indo-Burma Biodiversity Hotspot</span></label>
+        <label><input type="radio" name="q52" value="C"/><span class="opt-label"><span class="opt-badge">C</span>Himalayan Hotspot</span></label>
+        <label><input type="radio" name="q52" value="D"/><span class="opt-label"><span class="opt-badge">D</span>Deccan Hotspot</span></label>
+      </div>
+      <div class="explanation-box" id="expl-q52"><div class="expl-head">💡 Explanation</div>The Northeast biodiversity hotspot is called the Indo-Burma Biodiversity Hotspot. It covers states like Assam, Arunachal Pradesh, Meghalaya, and Nagaland and is one of the world's 36 biodiversity hotspots with extraordinary species diversity.</div>
+    </div>
+
+    <div class="section-label">⛏️ Section 6 — Jharkhand</div>
+
+    <div class="q-card" id="card-53">
+      <div class="q-text"><span class="q-num">53</span><span class="q-text-inner">Jharkhand is located in:</span></div>
+      <div class="options">
+        <label><input type="radio" name="q53" value="A"/><span class="opt-label"><span class="opt-badge">A</span>Central India</span></label>
+        <label><input type="radio" name="q53" value="B"/><span class="opt-label"><span class="opt-badge">B</span>Eastern India</span></label>
+        <label><input type="radio" name="q53" value="C"/><span class="opt-label"><span class="opt-badge">C</span>Northern India</span></label>
+        <label><input type="radio" name="q53" value="D"/><span class="opt-label"><span class="opt-badge">D</span>Western India</span></label>
+      </div>
+      <div class="explanation-box" id="expl-q53"><div class="expl-head">💡 Explanation</div>Jharkhand is located in eastern India. It was carved out of Bihar on 15 November 2000 and is bordered by Bihar, West Bengal, Odisha, Chhattisgarh, and Uttar Pradesh. Ranchi is its capital.</div>
+    </div>
+
+    <div class="q-card" id="card-54">
+      <div class="q-text"><span class="q-num">54</span><span class="q-text-inner">Which plateau dominates Jharkhand?</span></div>
+      <div class="options">
+        <label><input type="radio" name="q54" value="A"/><span class="opt-label"><span class="opt-badge">A</span>Malwa Plateau</span></label>
+        <label><input type="radio" name="q54" value="B"/><span class="opt-label"><span class="opt-badge">B</span>Chota Nagpur Plateau</span></label>
+        <label><input type="radio" name="q54" value="C"/><span class="opt-label"><span class="opt-badge">C</span>Deccan Plateau</span></label>
+        <label><input type="radio" name="q54" value="D"/><span class="opt-label"><span class="opt-badge">D</span>Meghalaya Plateau</span></label>
+      </div>
+      <div class="explanation-box" id="expl-q54"><div class="expl-head">💡 Explanation</div>The Chota Nagpur Plateau dominates Jharkhand, covering most of the state. It is part of the Peninsular Plateau of India and is one of the most mineral-rich regions in Asia — often called the "Ruhr of India."</div>
+    </div>
+
+    <div class="q-card" id="card-55">
+      <div class="q-text"><span class="q-num">55</span><span class="q-text-inner">Which mountain range is in the North of Jharkhand?</span></div>
+      <div class="options">
+        <label><input type="radio" name="q55" value="A"/><span class="opt-label"><span class="opt-badge">A</span>Parasnath Hills</span></label>
+        <label><input type="radio" name="q55" value="B"/><span class="opt-label"><span class="opt-badge">B</span>Netarhat Hills</span></label>
+        <label><input type="radio" name="q55" value="C"/><span class="opt-label"><span class="opt-badge">C</span>Dalma Hills</span></label>
+        <label><input type="radio" name="q55" value="D"/><span class="opt-label"><span class="opt-badge">D</span>Vindhya Hills</span></label>
+      </div>
+      <div class="explanation-box" id="expl-q55"><div class="expl-head">💡 Explanation</div>Parasnath Hills are located in the north of Jharkhand. At 1,365 m, Parasnath is the highest point in Jharkhand and is considered the most sacred pilgrimage site for Jains, as 20 of the 24 Jain tirthankaras attained nirvana here.</div>
+    </div>
+
+    <div class="q-card" id="card-56">
+      <div class="q-text"><span class="q-num">56</span><span class="q-text-inner">Which mountain range is in the West of Jharkhand?</span></div>
+      <div class="options">
+        <label><input type="radio" name="q56" value="A"/><span class="opt-label"><span class="opt-badge">A</span>Parasnath Hills</span></label>
+        <label><input type="radio" name="q56" value="B"/><span class="opt-label"><span class="opt-badge">B</span>Netarhat Hills</span></label>
+        <label><input type="radio" name="q56" value="C"/><span class="opt-label"><span class="opt-badge">C</span>Dalma Hills</span></label>
+        <label><input type="radio" name="q56" value="D"/><span class="opt-label"><span class="opt-badge">D</span>Aravallis</span></label>
+      </div>
+      <div class="explanation-box" id="expl-q56"><div class="expl-head">💡 Explanation</div>Netarhat Hills are located in the west of Jharkhand. Known as the "Queen of Chotanagpur," Netarhat is a popular hill station at about 1,100 m altitude. It is famous for its sunrise and sunset views and dense forests.</div>
+    </div>
+
+    <div class="q-card" id="card-57">
+      <div class="q-text"><span class="q-num">57</span><span class="q-text-inner">Jharkhand is especially known for which type of forest?</span></div>
+      <div class="options">
+        <label><input type="radio" name="q57" value="A"/><span class="opt-label"><span class="opt-badge">A</span>Teak forests</span></label>
+        <label><input type="radio" name="q57" value="B"/><span class="opt-label"><span class="opt-badge">B</span>Mangrove forests</span></label>
+        <label><input type="radio" name="q57" value="C"/><span class="opt-label"><span class="opt-badge">C</span>Sal forests</span></label>
+        <label><input type="radio" name="q57" value="D"/><span class="opt-label"><span class="opt-badge">D</span>Pine forests</span></label>
+      </div>
+      <div class="explanation-box" id="expl-q57"><div class="expl-head">💡 Explanation</div>Jharkhand is especially known for its Sal (Shorea robusta) forests. Sal is one of the most important timber trees in India and is sacred to the tribal communities of Jharkhand. The forests also contain bamboo groves and medicinal plants.</div>
+    </div>
+
+    <div class="q-card" id="card-58">
+      <div class="q-text"><span class="q-num">58</span><span class="q-text-inner">Which of the following rivers is NOT in Jharkhand?</span></div>
+      <div class="options">
+        <label><input type="radio" name="q58" value="A"/><span class="opt-label"><span class="opt-badge">A</span>Subarnarekha</span></label>
+        <label><input type="radio" name="q58" value="B"/><span class="opt-label"><span class="opt-badge">B</span>Damodar</span></label>
+        <label><input type="radio" name="q58" value="C"/><span class="opt-label"><span class="opt-badge">C</span>Koel</span></label>
+        <label><input type="radio" name="q58" value="D"/><span class="opt-label"><span class="opt-badge">D</span>Barak</span></label>
+      </div>
+      <div class="explanation-box" id="expl-q58"><div class="expl-head">💡 Explanation</div>The Barak river is NOT in Jharkhand — it flows in Northeast India, mainly through Assam and Manipur. The rivers of Jharkhand include Subarnarekha, Damodar (known as "Sorrow of Bengal"), and Koel.</div>
+    </div>
+
+    <div class="q-card" id="card-59">
+      <div class="q-text"><span class="q-num">59</span><span class="q-text-inner">Jharkhand's mineral wealth includes all EXCEPT:</span></div>
+      <div class="options">
+        <label><input type="radio" name="q59" value="A"/><span class="opt-label"><span class="opt-badge">A</span>Coal</span></label>
+        <label><input type="radio" name="q59" value="B"/><span class="opt-label"><span class="opt-badge">B</span>Iron ore</span></label>
+        <label><input type="radio" name="q59" value="C"/><span class="opt-label"><span class="opt-badge">C</span>Bauxite</span></label>
+        <label><input type="radio" name="q59" value="D"/><span class="opt-label"><span class="opt-badge">D</span>Petroleum</span></label>
+      </div>
+      <div class="explanation-box" id="expl-q59"><div class="expl-head">💡 Explanation</div>Petroleum is NOT found in Jharkhand. The state is rich in coal, iron ore, copper, mica, and bauxite — earning it the title of India's mineral heartland. Petroleum is found in states like Gujarat, Assam, and offshore in Maharashtra.</div>
+    </div>
+
+    <div class="q-card" id="card-60">
+      <div class="q-text"><span class="q-num">60</span><span class="q-text-inner">The crops grown in Jharkhand include:</span></div>
+      <div class="options">
+        <label><input type="radio" name="q60" value="A"/><span class="opt-label"><span class="opt-badge">A</span>Tea, coffee, rubber</span></label>
+        <label><input type="radio" name="q60" value="B"/><span class="opt-label"><span class="opt-badge">B</span>Paddy, wheat, maize, pulses, oilseeds</span></label>
+        <label><input type="radio" name="q60" value="C"/><span class="opt-label"><span class="opt-badge">C</span>Coconut, banana, sugarcane</span></label>
+        <label><input type="radio" name="q60" value="D"/><span class="opt-label"><span class="opt-badge">D</span>Cotton, jute, tobacco</span></label>
+      </div>
+      <div class="explanation-box" id="expl-q60"><div class="expl-head">💡 Explanation</div>Jharkhand grows paddy, wheat, maize, pulses, and oilseeds as its main crops. The state has a predominantly agrarian rural economy alongside its mining sector. Paddy is the most important kharif crop of the region.</div>
+    </div>
+
+  </form>
+
+  <div style="text-align:center; margin: 28px 0 10px;">
+    <button type="button" id="submitBtn">📊 GET ANALYSIS 📊</button>
+  </div>
+
+  <div id="scorePanel">
+    <span class="score-emoji" id="scoreEmoji">🌸</span>
+    <h2 id="scoreBig" style="font-family:'Playfair Display',serif;font-size:clamp(1.1rem,3.5vw,1.6rem);font-weight:700;color:var(--text);text-shadow:var(--shadow-text);margin-bottom:8px;line-height:1.3;">—</h2>
+    <div class="score-sub" id="scoreSub">out of 60 questions</div>
+    <div class="grade-badge" id="gradeBadge">—</div>
+    <br/>
+    <button class="retry-btn" onclick="retryQuiz()">↺ Try Again</button>
+  </div>
+</div><!-- end #app -->
+
+<script>
+  /* ── RANDOM MESSAGES TOAST ── */
+  let toastTimer = null;
+  let wrongStreak = 0;
+  let correctStreak = 0;
+
+  function showToast(msg, isCorrect) {
+    const toast = document.getElementById('answerToast');
+    toast.textContent = msg;
+    toast.style.borderColor = isCorrect ? '#4caf50' : '#e53935';
+    toast.style.color       = isCorrect ? '#2e7d32' : '#c62828';
+    if (toastTimer) clearTimeout(toastTimer);
+    toast.classList.add('show');
+    toastTimer = setTimeout(() => toast.classList.remove('show'), 2500);
+  }
+
+  function getToastMsg(isCorrect) {
+    if (isCorrect) {
+      wrongStreak = 0;
+      correctStreak++;
+      if (correctStreak === 5) return '🏙️ AAP MUMBAI AA RAHE HO!!';
+      if (correctStreak > 5)   return `🔥 ${correctStreak} streak — Mumbai pakki hai!`;
+      return '';  // no toast for regular correct — only streaks
+    } else {
+      correctStreak = 0;
+      wrongStreak++;
+      if (wrongStreak === 2) return '🗣️ JALDI WAHA SE HATOOO!!';
+      return '';  // no toast beyond this — first wrong and 3+ wrong stay silent
+    }
+  }
+
+  /* ── CONFETTI BURST ── */
+  const CONF_COLORS = ['#ffb7c5','#87ceeb','#f78fa7','#5ab0d6','#fff','#ffd700','#b5ead7','#c7ceea'];
+  function spawnConfetti(originEl) {
+    const rect = originEl.getBoundingClientRect();
+    const cx = rect.left + rect.width  / 2;
+    const cy = rect.top  + rect.height / 2;
+    const count = 28;
+    for (let i = 0; i < count; i++) {
+      const el = document.createElement('div');
+      el.className = 'confetti-piece';
+      const angle = (Math.PI * 2 / count) * i + (Math.random() - 0.5) * 0.8;
+      const dist  = 55 + Math.random() * 80;
+      const tx    = Math.cos(angle) * dist;
+      const ty    = Math.sin(angle) * dist - 30;
+      const rot   = (Math.random() * 720 - 360) + 'deg';
+      const dur   = (0.6 + Math.random() * 0.5) + 's';
+      const color = CONF_COLORS[Math.floor(Math.random() * CONF_COLORS.length)];
+      const shape = Math.random() > 0.5 ? '50%' : '2px';
+      el.style.cssText = `left:${cx}px;top:${cy}px;background:${color};border-radius:${shape};--tx:${tx}px;--ty:${ty}px;--rot:${rot};--dur:${dur};`;
+      document.body.appendChild(el);
+      setTimeout(() => el.remove(), 1200);
+    }
+  }
+
+  const answers = {
+    q1:'C', q2:'B', q3:'C', q4:'A', q5:'D',
+    q6:'C', q7:'C', q8:'C', q9:'B', q10:'C',
+    q11:'C', q12:'C', q13:'C', q14:'C', q15:'A',
+    q16:'B', q17:'B', q18:'C', q19:'A', q20:'B',
+    q21:'C', q22:'C', q23:'C', q24:'C', q25:'C',
+    q26:'C', q27:'B', q28:'B', q29:'A', q30:'B',
+    q31:'C', q32:'C', q33:'C', q34:'B', q35:'C',
+    q36:'B', q37:'B', q38:'B', q39:'C', q40:'B',
+    q41:'A', q42:'B', q43:'C', q44:'B', q45:'C',
+    q46:'A', q47:'B', q48:'A', q49:'B', q50:'C',
+    q51:'B', q52:'B', q53:'B', q54:'B', q55:'A',
+    q56:'B', q57:'C', q58:'D', q59:'D', q60:'B',
+  };
+
+  const total = Object.keys(answers).length;
+  const score = { count: 0 };
+  const progressBar   = document.getElementById('progressBar');
+  const progressLabel = document.getElementById('progressLabel');
+  let answered = new Set();
+
+  document.querySelectorAll('input[type="radio"]').forEach(radio => {
+    radio.addEventListener('change', () => {
+      const qName = radio.name;
+      if (answered.has(qName)) return;
+      answered.add(qName);
+      progressBar.style.width = (answered.size / total * 100) + '%';
+      progressLabel.textContent = `${answered.size} / ${total} answered`;
+
+      const card   = document.getElementById('card-' + qName.replace('q',''));
+      const opts   = card.querySelectorAll('.opt-label');
+      const radios = card.querySelectorAll(`input[name="${qName}"]`);
+      const chosen  = radio.value;
+      const correct = answers[qName];
+
+      radios.forEach((r, i) => {
+        r.disabled = true;
+        if (r.value === correct)     opts[i].classList.add('correct');
+        else if (r.value === chosen) opts[i].classList.add('wrong');
+      });
+
+      if (chosen === correct) {
+        card.classList.add('answered-correct');
+        score.count++;
+        spawnConfetti(card);
+        const msg = getToastMsg(true);
+        if (msg) showToast(msg, true);
+      } else {
+        card.classList.add('answered-wrong');
+        const msg = getToastMsg(false);
+        if (msg) showToast(msg, false);
+      }
+
+      const explBox = document.getElementById('expl-' + qName);
+      if (explBox) {
+        explBox.style.display = 'block';
+        explBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }
+
+      /* ── STRANGER THINGS TRANSITION TRIGGER (Q40) ── */
+      if (qName === 'q40') {
+        triggerStrangerThingsTransition();
+      }
+    });
+  });
+
+  /* ── LOFI THEME AUDIO ── */
+  const lofiAudio = new Audio('lofi.m4a');
+  lofiAudio.loop = true;
+  lofiAudio.preload = 'auto';
+  lofiAudio.load();
+
+  /* ── STRANGER THINGS TRANSITION SEQUENCE (Torn Reality) ── */
+  function triggerStrangerThingsTransition() {
+    const overlay = document.getElementById('stOverlay');
+
+    lofiAudio.currentTime = 0;
+    lofiAudio.play().catch(() => {});
+
+    setTimeout(() => {
+      // 1) Jagged tear rips open with a shake
+      overlay.classList.add('active', 'tear');
+
+      // 2) Tear expands to cover full screen with static texture
+      setTimeout(() => {
+        overlay.classList.add('expand');
+      }, 400);
+
+      // 3) Once expand animation settles, punch-in the glitch text
+      setTimeout(() => {
+        overlay.classList.add('show-text');
+      }, 400 + 900);
+
+      // 4) ~2s after text lands, fade the theme underneath
+      setTimeout(() => {
+        document.body.classList.add('st-theme');
+      }, 400 + 900 + 1000 + 2000);
+
+      // 5) Fade overlay away shortly after theme swap completes
+      setTimeout(() => {
+        overlay.classList.remove('active', 'tear', 'expand', 'show-text');
+      }, 400 + 900 + 1000 + 2000 + 400);
+
+    }, 1000); // 1 sec delay after option is chosen
+  }
+
+  document.getElementById('submitBtn').addEventListener('click', () => {
+    lofiAudio.pause();
+    lofiAudio.currentTime = 0;
+
+    for (let q in answers) {
+      if (answered.has(q)) continue;
+      const card   = document.getElementById('card-' + q.replace('q',''));
+      const opts   = card.querySelectorAll('.opt-label');
+      const radios = card.querySelectorAll(`input[name="${q}"]`);
+      radios.forEach((r, i) => {
+        r.disabled = true;
+        if (r.value === answers[q]) opts[i].classList.add('correct');
+      });
+      card.classList.add('answered-wrong');
+      const explBox = document.getElementById('expl-' + q);
+      if (explBox) explBox.style.display = 'block';
+    }
+
+    const pct = Math.round(score.count / total * 100);
+    let emoji, headline, subline, grade;
+
+    if (pct >= 90) {
+      emoji    = '🤑';
+      headline = 'SALARY KITNI LOGE — DISCUSS KARLEIN! 💰';
+      subline  = `${score.count} / ${total} correct · ${pct}%`;
+      grade    = 'Mumbai mein jagah hai tumhare liye! 🏙️';
+    } else {
+      emoji    = '😬';
+      headline = 'AAP MUMBAI NAHI AA SAKTE!';
+      subline  = `${score.count} / ${total} correct · ${pct}%`;
+      if      (pct >= 75) grade = 'Itne mein toh local train bhi nahi milegi — phir aana! 🚂';
+      else if (pct >= 60) grade = 'Bhai, Pune bhi door lag raha hai abhi. Thoda aur padho! 📚';
+      else if (pct >= 40) grade = 'Yaar, pehle India ka map toh yaad karo... phir Mumbai! 😅';
+      else                grade = 'Bhai Kanchenjunga aur Everest ka fark bhi nahi pata? 💀 phir aana!';
+    }
+
+    document.getElementById('scoreEmoji').textContent = emoji;
+    document.getElementById('scoreBig').textContent   = headline;
+    document.getElementById('scoreSub').textContent   = subline;
+    document.getElementById('gradeBadge').textContent = grade;
+
+    const panel = document.getElementById('scorePanel');
+    panel.style.display = 'block';
+    document.getElementById('submitBtn').disabled = true;
+    panel.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  });
+
+  function retryQuiz() {
+    document.querySelectorAll('input[type="radio"]').forEach(r => { r.checked = false; r.disabled = false; });
+    document.querySelectorAll('.opt-label').forEach(l => l.classList.remove('correct','wrong'));
+    document.querySelectorAll('.q-card').forEach(c => c.classList.remove('answered-correct','answered-wrong'));
+    document.querySelectorAll('.explanation-box').forEach(b => b.style.display = 'none');
+    answered.clear();
+    score.count = 0;
+    progressBar.style.width = '0%';
+    progressLabel.textContent = `0 / ${total} answered`;
+    document.getElementById('scorePanel').style.display = 'none';
+    document.getElementById('submitBtn').disabled = false;
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  const container = document.getElementById('petalContainer');
+  for (let i = 0; i < 28; i++) {
+    const p = document.createElement('div');
+    p.className = 'petal';
+    const size = 10 + Math.random() * 10;
+    p.style.cssText = `left:${Math.random()*100}%;width:${size}px;height:${size}px;animation-duration:${6+Math.random()*10}s;animation-delay:${-Math.random()*14}s;opacity:0;transform:rotate(${Math.random()*360}deg);border-radius:${Math.random()>.5?'150% 0 150% 0':'0 150% 0 150%'};`;
+    container.appendChild(p);
+  }
+
+  /* ═══════════════════════════════════
+     BAT SWARM — rare cameo, corner-to-corner, ST theme only
+  ═══════════════════════════════════ */
+  const sporeLayer = document.getElementById('sporeLayer');
+
+  // Jagged-edged bat silhouette: notched wing membrane, pointed ears.
+  const BAT_SVG = `
+    <svg viewBox="0 0 40 26" xmlns="http://www.w3.org/2000/svg">
+      <path class="bat-wing wing-left" d="M18 13
+        C13 6, 6 2, 0 3
+        C3 6, 2 9, 5 10
+        C2 11, 2 13, 5 14
+        C3 15, 4 17, 7 17
+        C10 17, 15 15, 18 13 Z"/>
+      <path class="bat-wing wing-right" d="M22 13
+        C27 6, 34 2, 40 3
+        C37 6, 38 9, 35 10
+        C38 11, 38 13, 35 14
+        C37 15, 36 17, 33 17
+        C30 17, 25 15, 22 13 Z"/>
+      <path class="bat-body" d="M20 8
+        C18.5 6, 17 6.5, 17 8
+        C15.5 6.5, 14.5 7.5, 15.5 9
+        C13 9, 13 11, 15 12
+        L17 20 Q20 23, 23 20 L25 12
+        C27 11, 27 9, 24.5 9
+        C25.5 7.5, 24.5 6.5, 23 8
+        C23 6.5, 21.5 6, 20 8 Z"/>
+    </svg>`;
+
+  // Four screen corners (in vw/vh) the swarm can travel between.
+  const CORNERS = [
+    { x: '-8vw',  y: '-8vh'  },  // top-left
+    { x: '108vw', y: '-8vh'  },  // top-right
+    { x: '-8vw',  y: '108vh' },  // bottom-left
+    { x: '108vw', y: '108vh' },  // bottom-right
+  ];
+
+  function spawnBatSwarm() {
+    if (!document.body.classList.contains('st-theme')) {
+      scheduleNextSwarm();
+      return;
+    }
+
+    // Pick two distinct random corners to travel between.
+    let a = Math.floor(Math.random() * CORNERS.length);
+    let b = Math.floor(Math.random() * CORNERS.length);
+    while (b === a) b = Math.floor(Math.random() * CORNERS.length);
+    const start = CORNERS[a], end = CORNERS[b];
+
+    const swarm = document.createElement('div');
+    swarm.className = 'bat-swarm';
+    swarm.style.setProperty('--x1', start.x);
+    swarm.style.setProperty('--y1', start.y);
+    swarm.style.setProperty('--x2', end.x);
+    swarm.style.setProperty('--y2', end.y);
+
+    const duration = 10 + Math.random() * 5; // 10–15s corner-to-corner
+    swarm.style.setProperty('--swarm-dur', duration + 's');
+
+    // 5–6 bats, loosely scattered around the swarm's shared path,
+    // each with its own offset and wobble timing.
+    const batCount = 5 + Math.floor(Math.random() * 2);
+    for (let i = 0; i < batCount; i++) {
+      const bat = document.createElement('div');
+      bat.className = 'shadow-bat';
+      bat.innerHTML = BAT_SVG;
+      const ox = (Math.random() - 0.5) * 90; // px scatter around swarm center
+      const oy = (Math.random() - 0.5) * 60;
+      bat.style.setProperty('--ox', ox + 'px');
+      bat.style.setProperty('--oy', oy + 'px');
+      bat.style.setProperty('--wobble-dur', (2 + Math.random() * 1.2) + 's');
+      bat.style.setProperty('--wobble-delay', (-Math.random() * 2.5) + 's');
+      const size = 34 + Math.random() * 12;
+      bat.style.width = size + 'px';
+      bat.style.height = (size * 0.65) + 'px';
+      swarm.appendChild(bat);
+    }
+
+    sporeLayer.appendChild(swarm);
+    setTimeout(() => swarm.remove(), duration * 1000 + 200);
+
+    scheduleNextSwarm();
+  }
+
+  function scheduleNextSwarm() {
+    const nextDelay = 10000 + Math.random() * 5000; // 10–15s between cameos
+    setTimeout(spawnBatSwarm, nextDelay);
+  }
+
+  scheduleNextSwarm();
+</script>
+
+</body>
+</html>
