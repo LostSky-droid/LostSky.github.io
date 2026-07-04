@@ -513,22 +513,48 @@
   }
 
   /* ── STRANGER THINGS THEME (applied to body after transition) ── */
-  body.st-theme { background: #0a0a0a !important; color: #e8e0d8; --beat: 0; }
+  body.st-theme { background: #0a0a0a !important; color: #e8e0d8; }
   body.st-theme::before {
     content: '';
     position: fixed; inset: 0; z-index: 0; pointer-events: none;
     background:
-      radial-gradient(ellipse at 50% 0%, rgba(255,20,20,calc(0.08 + var(--beat) * 0.28)), transparent 60%),
+      radial-gradient(ellipse at 50% 0%, rgba(255,20,20,0.10), transparent 60%),
       repeating-linear-gradient(0deg, rgba(255,255,255,0.015) 0px, transparent 1px, transparent 2px, rgba(255,255,255,0.015) 3px);
-    transition: background 0.08s linear;
   }
   body.st-theme .petal { display: none; }
 
+  /* Beat-pulse: fires briefly on every 112-BPM beat while lofi plays */
+  @keyframes beatVignette {
+    0%   { box-shadow: inset 0 0 60px 10px rgba(255,20,20,0.10); }
+    30%  { box-shadow: inset 0 0 90px 20px rgba(255,20,20,0.28); }
+    100% { box-shadow: inset 0 0 60px 10px rgba(255,20,20,0.10); }
+  }
+  body.st-theme.beat-pulse::after {
+    content: '';
+    position: fixed; inset: 0; z-index: 1; pointer-events: none;
+    animation: beatVignette 0.5s ease-out;
+  }
+  @keyframes beatBorderPulse {
+    0%   { border-color: rgba(255,20,20,0.45); }
+    30%  { border-color: rgba(255,80,50,0.85); }
+    100% { border-color: rgba(255,20,20,0.45); }
+  }
+  @keyframes beatTextGlow {
+    0%   { text-shadow: 0 0 12px rgba(255,26,26,0.65), 0 0 3px #000; }
+    30%  { text-shadow: 0 0 22px rgba(255,90,60,0.95), 0 0 6px #000; }
+    100% { text-shadow: 0 0 12px rgba(255,26,26,0.65), 0 0 3px #000; }
+  }
+  body.st-theme.beat-pulse header {
+    animation: beatBorderPulse 0.5s ease-out;
+  }
+  body.st-theme.beat-pulse header h1 {
+    animation: beatTextGlow 0.5s ease-out;
+  }
+
   body.st-theme header {
     background: rgba(20,10,10,0.65);
-    border: 1.5px solid rgba(255,20,20,calc(0.35 + var(--beat) * 0.55));
+    border: 1.5px solid rgba(255,20,20,0.45);
     box-shadow: 0 8px 32px rgba(255,0,0,0.18), 0 2px 8px rgba(255,26,26,0.10) inset;
-    transition: border-color 0.08s linear;
   }
   body.st-theme header h1 {
     font-family: 'Jost', 'Playfair Display', sans-serif;
@@ -1574,36 +1600,22 @@
   lofiAudio.preload = 'auto';
   lofiAudio.load();
 
-  /* ── BEAT-SYNC GLOW (subtle, driven by lofi's bass energy) ── */
-  let beatAnalyser = null, beatDataArray = null, beatSourceNode = null, beatRAF = null;
-  function setupBeatSync() {
-    if (beatAnalyser) return; // already set up
-    try {
-      if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-      beatSourceNode = audioCtx.createMediaElementSource(lofiAudio);
-      beatAnalyser = audioCtx.createAnalyser();
-      beatAnalyser.fftSize = 256;
-      beatSourceNode.connect(beatAnalyser);
-      beatAnalyser.connect(audioCtx.destination);
-      beatDataArray = new Uint8Array(beatAnalyser.frequencyBinCount);
-    } catch (e) {
-      console.warn('Beat-sync setup failed:', e);
-    }
+  /* ── BPM-BASED BEAT PULSE (112 BPM, fixed timing — reliable, no audio analysis needed) ── */
+  const BEAT_MS = (60 / 112) * 1000; // ≈ 535.7ms per beat
+  let beatTimer = null;
+  function startBeatPulse() {
+    if (beatTimer) return; // already running
+    beatTimer = setInterval(() => {
+      document.body.classList.remove('beat-pulse');
+      // Force reflow so the animation can restart cleanly on next beat
+      void document.body.offsetWidth;
+      document.body.classList.add('beat-pulse');
+    }, BEAT_MS);
   }
-
-  function beatSyncLoop() {
-    beatRAF = requestAnimationFrame(beatSyncLoop);
-    if (!beatAnalyser) return;
-    beatAnalyser.getByteFrequencyData(beatDataArray);
-    // Focus on low-frequency bins (bass) — first ~10% of the spectrum
-    const bassBinCount = Math.floor(beatDataArray.length * 0.12);
-    let sum = 0;
-    for (let i = 0; i < bassBinCount; i++) sum += beatDataArray[i];
-    const avgBass = sum / bassBinCount / 255; // normalize 0–1
-    document.body.style.setProperty('--beat', avgBass.toFixed(3));
+  function stopBeatPulse() {
+    if (beatTimer) { clearInterval(beatTimer); beatTimer = null; }
+    document.body.classList.remove('beat-pulse');
   }
-  beatSyncLoop();
-  setupBeatSync();
 
   /* ── SLASH (THEME SWITCH) AUDIO ── */
   const slashAudio = new Audio('slash.m4a');
@@ -1733,9 +1745,9 @@
 
     lofiAudio.currentTime = 0;
     lofiAudio.volume = 1.0;
-    setupBeatSync();
     slashAudio.onended = () => {
       lofiAudio.play().catch(() => {});
+      startBeatPulse();
     };
 
     setTimeout(() => {
@@ -1769,6 +1781,7 @@
 
   document.getElementById('submitBtn').addEventListener('click', () => {
     lofiAudio.pause();
+    stopBeatPulse();
     lofiAudio.currentTime = 0;
     slashAudio.pause();
     slashAudio.currentTime = 0;
