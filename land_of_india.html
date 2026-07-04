@@ -518,7 +518,7 @@
     content: '';
     position: fixed; inset: 0; z-index: 0; pointer-events: none;
     background:
-      radial-gradient(ellipse at 50% 0%, rgba(255,20,20,calc(0.10 + var(--beat) * 0.10)), transparent 60%),
+      radial-gradient(ellipse at 50% 0%, rgba(255,20,20,calc(0.08 + var(--beat) * 0.28)), transparent 60%),
       repeating-linear-gradient(0deg, rgba(255,255,255,0.015) 0px, transparent 1px, transparent 2px, rgba(255,255,255,0.015) 3px);
     transition: background 0.08s linear;
   }
@@ -526,7 +526,7 @@
 
   body.st-theme header {
     background: rgba(20,10,10,0.65);
-    border: 1.5px solid rgba(255,20,20,calc(0.45 + var(--beat) * 0.35));
+    border: 1.5px solid rgba(255,20,20,calc(0.35 + var(--beat) * 0.55));
     box-shadow: 0 8px 32px rgba(255,0,0,0.18), 0 2px 8px rgba(255,26,26,0.10) inset;
     transition: border-color 0.08s linear;
   }
@@ -1586,7 +1586,9 @@
       beatSourceNode.connect(beatAnalyser);
       beatAnalyser.connect(audioCtx.destination);
       beatDataArray = new Uint8Array(beatAnalyser.frequencyBinCount);
-    } catch (e) { /* ignore if unsupported */ }
+    } catch (e) {
+      console.warn('Beat-sync setup failed:', e);
+    }
   }
 
   function beatSyncLoop() {
@@ -1601,6 +1603,7 @@
     document.body.style.setProperty('--beat', avgBass.toFixed(3));
   }
   beatSyncLoop();
+  setupBeatSync();
 
   /* ── SLASH (THEME SWITCH) AUDIO ── */
   const slashAudio = new Audio('slash.m4a');
