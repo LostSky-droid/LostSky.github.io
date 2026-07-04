@@ -1563,6 +1563,67 @@
   const progressLabel = document.getElementById('progressLabel');
   let answered = new Set();
 
+  /* ── LOFI THEME AUDIO ── */
+  const lofiAudio = new Audio('lofi.m4a');
+  lofiAudio.loop = true;
+  lofiAudio.preload = 'auto';
+  lofiAudio.load();
+
+  /* ── SLASH (THEME SWITCH) AUDIO ── */
+  const slashAudio = new Audio('slash.m4a');
+  slashAudio.preload = 'auto';
+  slashAudio.load();
+
+  /* ── TOAST (3-MISTAKE STREAK) AUDIO ── */
+  const mistakeAudio = new Audio('toast.m4a');
+  mistakeAudio.preload = 'auto';
+  mistakeAudio.load();
+
+  /* ── CORRECT ANSWER DING (Web Audio API, no file needed) ── */
+  let audioCtx = null;
+  function playCorrectDing() {
+    try {
+      if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      const now = audioCtx.currentTime;
+
+      const osc  = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(880, now);        // A5
+      osc.frequency.setValueAtTime(1318.5, now + 0.1); // E6 — quick two-note "ding"
+
+      gain.gain.setValueAtTime(0.0001, now);
+      gain.gain.exponentialRampToValueAtTime(0.3, now + 0.02);
+      gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.35);
+
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+      osc.start(now);
+      osc.stop(now + 0.4);
+    } catch (e) { /* ignore if Web Audio unsupported */ }
+  }
+
+  /* ── WRONG ANSWER BUZZER (Web Audio API, no file needed) ── */
+  function playWrongBuzzer() {
+    try {
+      if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      if (audioCtx.state === 'suspended') audioCtx.resume();
+
+      function playTone(freq, type, dur, vol) {
+        const now = audioCtx.currentTime;
+        const o = audioCtx.createOscillator(), g = audioCtx.createGain();
+        o.type = type; o.frequency.value = freq;
+        g.gain.setValueAtTime(0, now);
+        g.gain.linearRampToValueAtTime(vol, now + 0.01);
+        g.gain.exponentialRampToValueAtTime(0.001, now + dur);
+        o.connect(g); g.connect(audioCtx.destination);
+        o.start(); o.stop(now + dur + 0.05);
+      }
+      playTone(220, 'sawtooth', 0.22, 0.10);
+      setTimeout(() => playTone(185, 'sawtooth', 0.28, 0.07), 100);
+    } catch (e) { /* ignore if Web Audio unsupported */ }
+  }
+
   let audioWarmedUp = false;
   function warmUpAudio() {
     if (audioWarmedUp) return;
@@ -1630,67 +1691,6 @@
       }
     });
   });
-
-  /* ── LOFI THEME AUDIO ── */
-  const lofiAudio = new Audio('lofi.m4a');
-  lofiAudio.loop = true;
-  lofiAudio.preload = 'auto';
-  lofiAudio.load();
-
-  /* ── SLASH (THEME SWITCH) AUDIO ── */
-  const slashAudio = new Audio('slash.m4a');
-  slashAudio.preload = 'auto';
-  slashAudio.load();
-
-  /* ── WRONG ANSWER BUZZER (Web Audio API, no file needed) ── */
-  function playWrongBuzzer() {
-    try {
-      if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-      if (audioCtx.state === 'suspended') audioCtx.resume();
-
-      function playTone(freq, type, dur, vol) {
-        const now = audioCtx.currentTime;
-        const o = audioCtx.createOscillator(), g = audioCtx.createGain();
-        o.type = type; o.frequency.value = freq;
-        g.gain.setValueAtTime(0, now);
-        g.gain.linearRampToValueAtTime(vol, now + 0.01);
-        g.gain.exponentialRampToValueAtTime(0.001, now + dur);
-        o.connect(g); g.connect(audioCtx.destination);
-        o.start(); o.stop(now + dur + 0.05);
-      }
-      playTone(220, 'sawtooth', 0.22, 0.10);
-      setTimeout(() => playTone(185, 'sawtooth', 0.28, 0.07), 100);
-    } catch (e) { /* ignore if Web Audio unsupported */ }
-  }
-
-  /* ── TOAST (3-MISTAKE STREAK) AUDIO ── */
-  const mistakeAudio = new Audio('toast.m4a');
-  mistakeAudio.preload = 'auto';
-  mistakeAudio.load();
-
-  /* ── CORRECT ANSWER DING (Web Audio API, no file needed) ── */
-  let audioCtx = null;
-  function playCorrectDing() {
-    try {
-      if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-      const now = audioCtx.currentTime;
-
-      const osc  = audioCtx.createOscillator();
-      const gain = audioCtx.createGain();
-      osc.type = 'sine';
-      osc.frequency.setValueAtTime(880, now);        // A5
-      osc.frequency.setValueAtTime(1318.5, now + 0.1); // E6 — quick two-note "ding"
-
-      gain.gain.setValueAtTime(0.0001, now);
-      gain.gain.exponentialRampToValueAtTime(0.3, now + 0.02);
-      gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.35);
-
-      osc.connect(gain);
-      gain.connect(audioCtx.destination);
-      osc.start(now);
-      osc.stop(now + 0.4);
-    } catch (e) { /* ignore if Web Audio unsupported */ }
-  }
 
   /* ── STRANGER THINGS TRANSITION SEQUENCE (Torn Reality) ── */
   function triggerStrangerThingsTransition() {
