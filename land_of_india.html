@@ -523,16 +523,11 @@
   }
   body.st-theme .petal { display: none; }
 
-  /* Beat-pulse: fires briefly on every 112-BPM beat while lofi plays */
+  /* Beat-pulse keyframes defined here; rules applied later after base header styles to win specificity order */
   @keyframes beatVignette {
     0%   { box-shadow: inset 0 0 60px 10px rgba(255,20,20,0.10); }
     30%  { box-shadow: inset 0 0 90px 20px rgba(255,20,20,0.28); }
     100% { box-shadow: inset 0 0 60px 10px rgba(255,20,20,0.10); }
-  }
-  body.st-theme.beat-pulse::after {
-    content: '';
-    position: fixed; inset: 0; z-index: 1; pointer-events: none;
-    animation: beatVignette 0.5s ease-out;
   }
   @keyframes beatBorderPulse {
     0%   { border-color: rgba(255,20,20,0.45); }
@@ -544,12 +539,6 @@
     30%  { text-shadow: 0 0 22px rgba(255,90,60,0.95), 0 0 6px #000; }
     100% { text-shadow: 0 0 12px rgba(255,26,26,0.65), 0 0 3px #000; }
   }
-  body.st-theme.beat-pulse header {
-    animation: beatBorderPulse 0.5s ease-out;
-  }
-  body.st-theme.beat-pulse header h1 {
-    animation: beatTextGlow 0.5s ease-out;
-  }
 
   body.st-theme header {
     background: rgba(20,10,10,0.65);
@@ -560,6 +549,17 @@
     font-family: 'Jost', 'Playfair Display', sans-serif;
     letter-spacing: 2px; color: #f2e9df;
     text-shadow: 0 0 12px rgba(255,26,26,0.65), 0 0 3px #000;
+  }
+  body.st-theme.beat-pulse::after {
+    content: '';
+    position: fixed; inset: 0; z-index: 1; pointer-events: none;
+    animation: beatVignette 0.5s ease-out;
+  }
+  body.st-theme.beat-pulse header {
+    animation: beatBorderPulse 0.5s ease-out;
+  }
+  body.st-theme.beat-pulse header h1 {
+    animation: beatTextGlow 0.5s ease-out;
   }
   body.st-theme header h1 span { color: #ff1a1a; text-shadow: 0 0 16px rgba(255,26,26,0.9); }
   body.st-theme header p { color: #c9bdb2; text-shadow: none; }
