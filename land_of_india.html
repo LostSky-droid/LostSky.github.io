@@ -1600,20 +1600,57 @@
   lofiAudio.preload = 'auto';
   lofiAudio.load();
 
-  /* ── BPM-BASED BEAT PULSE (112 BPM, fixed timing — reliable, no audio analysis needed) ── */
-  const BEAT_MS = (60 / 112) * 1000; // ≈ 535.7ms per beat
-  let beatTimer = null;
-  function startBeatPulse() {
-    if (beatTimer) return; // already running
-    beatTimer = setInterval(() => {
+  /* ── REAL AUDIO-ANALYSIS BEAT DETECTION (reacts to actual bass hits in lofi.m4a) ── */
+  let beatAnalyser = null, beatDataArray = null, beatSourceNode = null, beatRAF = null;
+  let beatRunning = false;
+  let lastBeatTime = 0;
+  const BEAT_COOLDOWN_MS = 250; // prevents double-triggering on a single sustained hit
+
+  function setupBeatSync() {
+    if (beatAnalyser) return true; // already set up
+    try {
+      if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      beatSourceNode = audioCtx.createMediaElementSource(lofiAudio);
+      beatAnalyser = audioCtx.createAnalyser();
+      beatAnalyser.fftSize = 512;
+      beatSourceNode.connect(beatAnalyser);
+      beatAnalyser.connect(audioCtx.destination);
+      beatDataArray = new Uint8Array(beatAnalyser.frequencyBinCount);
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  function beatDetectLoop() {
+    beatRAF = requestAnimationFrame(beatDetectLoop);
+    if (!beatAnalyser) return;
+    beatAnalyser.getByteFrequencyData(beatDataArray);
+    // Bass range: first ~8 bins of a 512-fft array covers roughly sub-200Hz
+    const bassBinCount = Math.max(4, Math.floor(beatDataArray.length * 0.06));
+    let sum = 0;
+    for (let i = 0; i < bassBinCount; i++) sum += beatDataArray[i];
+    const avgBass = sum / bassBinCount; // 0–255
+
+    const now = performance.now();
+    if (avgBass > 150 && (now - lastBeatTime) > BEAT_COOLDOWN_MS) {
+      lastBeatTime = now;
       document.body.classList.remove('beat-pulse');
-      // Force reflow so the animation can restart cleanly on next beat
       void document.body.offsetWidth;
       document.body.classList.add('beat-pulse');
-    }, BEAT_MS);
+    }
+  }
+
+  function startBeatPulse() {
+    if (beatRunning) return;
+    if (audioCtx && audioCtx.state === 'suspended') audioCtx.resume();
+    if (!setupBeatSync()) return;
+    beatRunning = true;
+    beatDetectLoop();
   }
   function stopBeatPulse() {
-    if (beatTimer) { clearInterval(beatTimer); beatTimer = null; }
+    beatRunning = false;
+    if (beatRAF) { cancelAnimationFrame(beatRAF); beatRAF = null; }
     document.body.classList.remove('beat-pulse');
   }
 
