@@ -87,8 +87,10 @@
     background: linear-gradient(90deg, #ffb7c5, #87ceeb, #ffb7c5, #e8839a, #87ceeb);
     background-size: 300% auto;
     -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    opacity: 1;
     animation: shimmer 2.8s linear infinite, fadeSlideIn 1s ease both;
   }
+  body.st-theme .coded-by { opacity: 1 !important; }
   @keyframes shimmer { 0% { background-position: 0% center; } 100% { background-position: 300% center; } }
   @keyframes fadeSlideIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
   .divider {
@@ -1508,14 +1510,11 @@
     if (isCorrect) {
       wrongStreak = 0;
       correctStreak++;
-      if (correctStreak === 5) return '🏙️ AAP MUMBAI AA RAHE HO!!';
-      if (correctStreak > 5)   return `🔥 ${correctStreak} streak — Mumbai pakki hai!`;
-      return '';  // no toast for regular correct — only streaks
+      return '';
     } else {
       correctStreak = 0;
       wrongStreak++;
-      if (wrongStreak === 2) return '🗣️ JALDI WAHA SE HATOOO!!';
-      return '';  // no toast beyond this — first wrong and 3+ wrong stay silent
+      return '';
     }
   }
 
@@ -1564,8 +1563,24 @@
   const progressLabel = document.getElementById('progressLabel');
   let answered = new Set();
 
+  let audioWarmedUp = false;
+  function warmUpAudio() {
+    if (audioWarmedUp) return;
+    audioWarmedUp = true;
+    [lofiAudio, slashAudio, mistakeAudio].forEach(a => {
+      const prevVol = a.volume;
+      a.volume = 0;
+      a.play().then(() => {
+        a.pause();
+        a.currentTime = 0;
+        a.volume = prevVol;
+      }).catch(() => { a.volume = prevVol; });
+    });
+  }
+
   document.querySelectorAll('input[type="radio"]').forEach(radio => {
     radio.addEventListener('change', () => {
+      warmUpAudio();
       const qName = radio.name;
       if (answered.has(qName)) return;
       answered.add(qName);
@@ -1588,11 +1603,18 @@
         card.classList.add('answered-correct');
         score.count++;
         spawnConfetti(card);
+        playCorrectDing();
         const msg = getToastMsg(true);
         if (msg) showToast(msg, true);
       } else {
         card.classList.add('answered-wrong');
         const msg = getToastMsg(false);
+        if (wrongStreak >= 3) {
+          mistakeAudio.currentTime = 0;
+          mistakeAudio.play().catch(() => {});
+        } else {
+          playWrongBuzzer();
+        }
         if (msg) showToast(msg, false);
       }
 
@@ -1615,16 +1637,76 @@
   lofiAudio.preload = 'auto';
   lofiAudio.load();
 
+  /* ── SLASH (THEME SWITCH) AUDIO ── */
+  const slashAudio = new Audio('slash.m4a');
+  slashAudio.preload = 'auto';
+  slashAudio.load();
+
+  /* ── WRONG ANSWER BUZZER (Web Audio API, no file needed) ── */
+  function playWrongBuzzer() {
+    try {
+      if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      if (audioCtx.state === 'suspended') audioCtx.resume();
+
+      function playTone(freq, type, dur, vol) {
+        const now = audioCtx.currentTime;
+        const o = audioCtx.createOscillator(), g = audioCtx.createGain();
+        o.type = type; o.frequency.value = freq;
+        g.gain.setValueAtTime(0, now);
+        g.gain.linearRampToValueAtTime(vol, now + 0.01);
+        g.gain.exponentialRampToValueAtTime(0.001, now + dur);
+        o.connect(g); g.connect(audioCtx.destination);
+        o.start(); o.stop(now + dur + 0.05);
+      }
+      playTone(220, 'sawtooth', 0.22, 0.10);
+      setTimeout(() => playTone(185, 'sawtooth', 0.28, 0.07), 100);
+    } catch (e) { /* ignore if Web Audio unsupported */ }
+  }
+
+  /* ── TOAST (3-MISTAKE STREAK) AUDIO ── */
+  const mistakeAudio = new Audio('toast.m4a');
+  mistakeAudio.preload = 'auto';
+  mistakeAudio.load();
+
+  /* ── CORRECT ANSWER DING (Web Audio API, no file needed) ── */
+  let audioCtx = null;
+  function playCorrectDing() {
+    try {
+      if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      const now = audioCtx.currentTime;
+
+      const osc  = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(880, now);        // A5
+      osc.frequency.setValueAtTime(1318.5, now + 0.1); // E6 — quick two-note "ding"
+
+      gain.gain.setValueAtTime(0.0001, now);
+      gain.gain.exponentialRampToValueAtTime(0.3, now + 0.02);
+      gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.35);
+
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+      osc.start(now);
+      osc.stop(now + 0.4);
+    } catch (e) { /* ignore if Web Audio unsupported */ }
+  }
+
   /* ── STRANGER THINGS TRANSITION SEQUENCE (Torn Reality) ── */
   function triggerStrangerThingsTransition() {
     const overlay = document.getElementById('stOverlay');
 
     lofiAudio.currentTime = 0;
-    lofiAudio.play().catch(() => {});
+    lofiAudio.volume = 1.0;
+    slashAudio.onended = () => {
+      lofiAudio.play().catch(() => {});
+    };
 
     setTimeout(() => {
       // 1) Jagged tear rips open with a shake
       overlay.classList.add('active', 'tear');
+      slashAudio.currentTime = 0;
+      slashAudio.play().catch(() => {});
 
       // 2) Tear expands to cover full screen with static texture
       setTimeout(() => {
@@ -1652,6 +1734,10 @@
   document.getElementById('submitBtn').addEventListener('click', () => {
     lofiAudio.pause();
     lofiAudio.currentTime = 0;
+    slashAudio.pause();
+    slashAudio.currentTime = 0;
+    mistakeAudio.pause();
+    mistakeAudio.currentTime = 0;
 
     for (let q in answers) {
       if (answered.has(q)) continue;
